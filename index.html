@@ -164,7 +164,7 @@ body.dimmed {
   font-size: 2.3vmin;
   font-weight: 300;
   color: #8a847b;
-  margin: 1.2vmin 0 0;
+  margin: 2.4vmin 0 0;
 }
 
 .notice {
@@ -253,12 +253,13 @@ body.dimmed {
     detail.appendChild(subtitle);
     detail.appendChild(author);
     detail.appendChild(series);
-    detail.appendChild(rating);
-    detail.appendChild(date);
 
     var pages = document.createElement("p");
     pages.className = "pages";
     detail.appendChild(pages);
+
+    detail.appendChild(rating);
+    detail.appendChild(date);
 
     slide.appendChild(cover);
     slide.appendChild(detail);
