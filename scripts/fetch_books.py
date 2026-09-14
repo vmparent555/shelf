@@ -142,17 +142,7 @@ def books_for(reader):
         return None
 
     found = []
-    first = True
     for item in root.iter("item"):
-        if first:
-            first = False
-            tags = sorted({child.tag for child in item.iter() if child is not item})
-            print("FIELDS AVAILABLE: " + ", ".join(tags))
-            for probe in ("num_pages", "numPages", "pages", "book"):
-                node = item.find(".//" + probe)
-                found_text = node.text.strip() if node is not None and node.text else "(empty)"
-                print("  {} -> {}".format(probe, found_text if node is not None else "(missing)"))
-
         title, subtitle, series = split_title(text_of(item, "title"))
         if not title:
             continue
