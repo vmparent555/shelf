@@ -95,7 +95,8 @@ def date_label(reader, read_at, date_added):
 
 def page_count(item):
     """Return pages as an integer, or 0 when Goodreads doesn't supply one."""
-    raw = text_of(item, "num_pages")
+        raw = text_of(item, ".//num_pages")
+
     if raw.isdigit():
         return int(raw)
     return 0
