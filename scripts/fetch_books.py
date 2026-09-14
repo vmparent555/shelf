@@ -19,6 +19,7 @@ READERS = [
 ]
 
 SHELF = "read"
+
 FEED_TEMPLATE = "https://www.goodreads.com/review/list_rss/{}?shelf={}"
 OUTPUT_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "books.json"
@@ -92,6 +93,14 @@ def date_label(reader, read_at, date_added):
     return reader
 
 
+def page_count(item):
+    """Return pages as an integer, or 0 when Goodreads doesn't supply one."""
+    raw = text_of(item, "num_pages")
+    if raw.isdigit():
+        return int(raw)
+    return 0
+
+
 def best_cover(item):
     """The large image is full resolution. Fall back down the sizes if absent."""
     for tag in (
@@ -142,8 +151,8 @@ def books_for(reader):
             rating = int(text_of(item, "user_rating") or 0)
         except ValueError:
             rating = 0
-            pages = text_of(item, "num_pages")
-        pages = pages + " pages" if pages.isdigit() and pages != "0" else ""
+
+        pages = page_count(item)
 
         found.append(
             {
@@ -154,12 +163,12 @@ def books_for(reader):
                 "series": series,
                 "author": text_of(item, "author_name"),
                 "rating": rating,
-                "pages": pages,
                 "date": date_label(
                     reader["name"],
                     text_of(item, "user_read_at"),
                     text_of(item, "user_date_added"),
                 ),
+                "pages": "{} pages".format(pages) if pages else "",
                 "cover": best_cover(item),
             }
         )
