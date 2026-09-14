@@ -142,6 +142,8 @@ def books_for(reader):
             rating = int(text_of(item, "user_rating") or 0)
         except ValueError:
             rating = 0
+            pages = text_of(item, "num_pages")
+        pages = pages + " pages" if pages.isdigit() and pages != "0" else ""
 
         found.append(
             {
@@ -152,6 +154,7 @@ def books_for(reader):
                 "series": series,
                 "author": text_of(item, "author_name"),
                 "rating": rating,
+                "pages": pages,
                 "date": date_label(
                     reader["name"],
                     text_of(item, "user_read_at"),
