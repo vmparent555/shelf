@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Shelf</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #f6f5f1;
+}
+
+body {
+  font-family: Spectral, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  color: #262320;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-transition: -webkit-filter 4s linear;
+  transition: filter 4s linear;
+}
+
+body.dimmed {
+  -webkit-filter: brightness(0.42);
+  filter: brightness(0.42);
+}
+
+.stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 6vmin 7vmin;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  opacity: 0;
+  -webkit-transition: opacity 1.1s ease-in-out;
+  transition: opacity 1.1s ease-in-out;
+}
+
+.slide.showing {
+  opacity: 1;
+}
+
+.cover {
+  display: block;
+  max-height: 74vh;
+  max-width: 32vw;
+  width: auto;
+  height: auto;
+  border: 1px solid #dcd8d0;
+  margin-right: 5.5vmin;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+}
+
+.cover.hidden {
+  display: none;
+  margin-right: 0;
+}
+
+.detail {
+  max-width: 50vw;
+  min-width: 0;
+}
+
+.detail.wide {
+  max-width: 74vw;
+  text-align: center;
+}
+
+.title {
+  font-size: 6.8vmin;
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.008em;
+  margin: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.subtitle {
+  font-size: 2.7vmin;
+  font-weight: 300;
+  line-height: 1.35;
+  color: #6d675f;
+  margin: 1.6vmin 0 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.author {
+  font-size: 3.3vmin;
+  font-style: italic;
+  font-weight: 400;
+  margin: 2.6vmin 0 0;
+  color: #3d3a35;
+}
+
+.series {
+  font-size: 2.4vmin;
+  font-style: italic;
+  font-weight: 300;
+  color: #8a847b;
+  margin: 1vmin 0 0;
+}
+
+.rating {
+  margin: 4.4vmin 0 0;
+  height: 4.4vmin;
+  line-height: 0;
+}
+
+.rating svg {
+  height: 4.4vmin;
+  width: 4.4vmin;
+  margin-right: 1.1vmin;
+  vertical-align: top;
+}
+
+.rating.empty {
+  display: none;
+}
+
+.date {
+  font-size: 2.3vmin;
+  font-weight: 300;
+  color: #8a847b;
+  margin: 4vmin 0 0;
+  letter-spacing: 0.02em;
+}
+
+.notice {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin-top: -3vmin;
+  text-align: center;
+  font-size: 3vmin;
+  font-style: italic;
+  color: #8a847b;
+  padding: 0 10vmin;
+}
+
+.notice.gone {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide {
+    -webkit-transition: none;
+    transition: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="stage" id="stage"></div>
+<p class="notice" id="notice">Loading the shelf</p>
+
+<script>
+(function () {
+  var DATA_URL = "books.json";
+  var SLIDE_MS = 30000;
+  var REFETCH_MS = 6 * 60 * 60 * 1000;
+  var DIM_START_HOUR = 21;
+  var DIM_END_HOUR = 6;
+
+  var STAR_PATH = "M12 2.2l3.05 6.18 6.82 1-4.94 4.81 1.17 6.79L12 17.77 5.9 20.98l1.17-6.79L2.13 9.38l6.82-1z";
+
+  var stage = document.getElementById("stage");
+  var notice = document.getElementById("notice");
+
+  var books = [];
+  var deck = [];
+  var current = 0;
+  var layers = [];
+  var timer = null;
+
+  function makeLayer() {
+    var slide = document.createElement("div");
+    slide.className = "slide";
+
+    var cover = document.createElement("img");
+    cover.className = "cover";
+    cover.setAttribute("alt", "");
+    cover.onerror = function () {
+      cover.className = "cover hidden";
+      detail.className = "detail wide";
+    };
+
+    var detail = document.createElement("div");
+    detail.className = "detail";
+
+    var title = document.createElement("h1");
+    title.className = "title";
+
+    var subtitle = document.createElement("p");
+    subtitle.className = "subtitle";
+
+    var author = document.createElement("p");
+    author.className = "author";
+
+    var series = document.createElement("p");
+    series.className = "series";
+
+    var rating = document.createElement("div");
+    rating.className = "rating";
+
+    var date = document.createElement("p");
+    date.className = "date";
+
+    detail.appendChild(title);
+    detail.appendChild(subtitle);
+    detail.appendChild(author);
+    detail.appendChild(series);
+    detail.appendChild(rating);
+    detail.appendChild(date);
+
+    slide.appendChild(cover);
+    slide.appendChild(detail);
+    stage.appendChild(slide);
+
+    return {
+      slide: slide,
+      cover: cover,
+      detail: detail,
+      title: title,
+      subtitle: subtitle,
+      author: author,
+      series: series,
+      rating: rating,
+      date: date
+    };
+  }
+
+  function starsFor(count) {
+    var markup = "";
+    var i;
+    for (i = 1; i <= 5; i++) {
+      markup +=
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' +
+        STAR_PATH +
+        '" fill="' +
+        (i <= count ? "#262320" : "#d7d2c8") +
+        '"/></svg>';
+    }
+    return markup;
+  }
+
+  function render(layer, book) {
+    layer.title.textContent = book.title || "";
+    layer.subtitle.textContent = book.subtitle || "";
+    layer.subtitle.style.display = book.subtitle ? "" : "none";
+    layer.author.textContent = book.author || "";
+    layer.author.style.display = book.author ? "" : "none";
+    layer.series.textContent = book.series || "";
+    layer.series.style.display = book.series ? "" : "none";
+    layer.date.textContent = book.date || "";
+    layer.date.style.display = book.date ? "" : "none";
+
+    if (book.rating > 0) {
+      layer.rating.className = "rating";
+      layer.rating.innerHTML = starsFor(book.rating);
+    } else {
+      layer.rating.className = "rating empty";
+      layer.rating.innerHTML = "";
+    }
+
+    if (book.cover) {
+      layer.cover.className = "cover";
+      layer.cover.src = book.cover;
+      layer.detail.className = "detail";
+    } else {
+      layer.cover.className = "cover hidden";
+      layer.cover.removeAttribute("src");
+      layer.detail.className = "detail wide";
+    }
+  }
+
+  function shuffle(list) {
+    var copy = list.slice();
+    var i, j, swap;
+    for (i = copy.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      swap = copy[i];
+      copy[i] = copy[j];
+      copy[j] = swap;
+    }
+    return copy;
+  }
+
+  function preload(book) {
+    if (book && book.cover) {
+      var ghost = new Image();
+      ghost.src = book.cover;
+    }
+  }
+
+  function advance() {
+    if (!deck.length) {
+      return;
+    }
+
+    if (current >= deck.length) {
+      deck = shuffle(books);
+      current = 0;
+    }
+
+    var book = deck[current];
+    var incoming = layers[0];
+    var outgoing = layers[1];
+
+    render(incoming, book);
+    incoming.slide.className = "slide showing";
+    if (outgoing) {
+      outgoing.slide.className = "slide";
+    }
+
+    layers.reverse();
+    current++;
+    preload(deck[current]);
+
+    notice.className = "notice gone";
+  }
+
+  function checkDimming() {
+    var hour = new Date().getHours();
+    var dim = hour >= DIM_START_HOUR || hour < DIM_END_HOUR;
+    document.body.className = dim ? "dimmed" : "";
+  }
+
+  function start() {
+    if (timer) {
+      window.clearInterval(timer);
+    }
+    advance();
+    timer = window.setInterval(advance, SLIDE_MS);
+  }
+
+  function load(isFirstRun) {
+    var request = new XMLHttpRequest();
+    var url = DATA_URL + "?v=" + new Date().getTime();
+
+    request.open("GET", url, true);
+
+    request.onreadystatechange = function () {
+      if (request.readyState !== 4) {
+        return;
+      }
+
+      var payload = null;
+      if (request.status >= 200 && request.status < 300) {
+        try {
+          payload = JSON.parse(request.responseText);
+        } catch (error) {
+          payload = null;
+        }
+      }
+
+      if (payload && payload.books && payload.books.length) {
+        books = payload.books;
+        if (isFirstRun) {
+          deck = shuffle(books);
+          current = 0;
+          start();
+        }
+      } else if (isFirstRun) {
+        notice.className = "notice";
+        notice.textContent =
+          "No shelf data yet. Check that books.json is published alongside this page.";
+      }
+    };
+
+    request.onerror = function () {
+      if (isFirstRun) {
+        notice.className = "notice";
+        notice.textContent = "Could not load the shelf. Check the network connection.";
+      }
+    };
+
+    request.send();
+  }
+
+  layers.push(makeLayer());
+  layers.push(makeLayer());
+
+  checkDimming();
+  window.setInterval(checkDimming, 5 * 60 * 1000);
+
+  load(true);
+  window.setInterval(function () {
+    load(false);
+  }, REFETCH_MS);
+
+  document.addEventListener("click", function () {
+    advance();
+    start();
+  }, false);
+})();
+</script>
+
+</body>
+</html>
