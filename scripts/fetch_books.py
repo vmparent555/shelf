@@ -95,7 +95,7 @@ def date_label(reader, read_at, date_added):
 
 def page_count(item):
     """Return pages as an integer, or 0 when Goodreads doesn't supply one."""
-    raw = text_of(item, "num_pages")
+    raw = text_of(item, ".//num_pages")
     if raw.isdigit():
         return int(raw)
     return 0
@@ -142,7 +142,17 @@ def books_for(reader):
         return None
 
     found = []
+    first = True
     for item in root.iter("item"):
+        if first:
+            first = False
+            tags = sorted({child.tag for child in item.iter() if child is not item})
+            print("FIELDS AVAILABLE: " + ", ".join(tags))
+            for probe in ("num_pages", "numPages", "pages", "book"):
+                node = item.find(".//" + probe)
+                found_text = node.text.strip() if node is not None and node.text else "(empty)"
+                print("  {} -> {}".format(probe, found_text if node is not None else "(missing)"))
+
         title, subtitle, series = split_title(text_of(item, "title"))
         if not title:
             continue
