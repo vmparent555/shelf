@@ -1,7 +1,17 @@
 {
- "updated": "seed",
- "count": 10,
+ "updated": "2026-09-14T02:40:02Z",
+ "count": 59,
  "books": [
+  {
+   "id": "212393364",
+   "title": "Carl's Doomsday Scenario",
+   "subtitle": "",
+   "series": "Dungeon Crawler Carl, #2",
+   "author": "Matt Dinniman",
+   "rating": 4,
+   "date": "Read September 2026",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1719949673l/212393364._SY475_.jpg"
+  },
   {
    "id": "56791389",
    "title": "Dungeon Crawler Carl",
@@ -33,44 +43,24 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1639969375l/4406.jpg"
   },
   {
-   "id": "17332218",
-   "title": "Words of Radiance",
+   "id": "110650715",
+   "title": "Frankenstein or, The Modern Prometheus",
    "subtitle": "",
-   "series": "The Stormlight Archive, #2",
-   "author": "Brandon Sanderson",
-   "rating": 5,
-   "date": "Read April 2026",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1728768241l/17332218.jpg"
-  },
-  {
-   "id": "14743",
-   "title": "The God Delusion",
-   "subtitle": "A Study of Religious Belief and Skepticism",
    "series": "",
-   "author": "Richard Dawkins",
+   "author": "Mary Wollstonecraft Shelley",
    "rating": 5,
-   "date": "Read December 2023",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1347220693l/14743.jpg"
+   "date": "Read July 2026",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1680417064l/110650715._SY475_.jpg"
   },
   {
-   "id": "65154375",
-   "title": "Edna St. Vincent Millay Poetry Collection, Early Poems 1912-1923",
-   "subtitle": "Renascence, Second April, A Few Figs from Thistles, The Harp-Weaver and Other Poems",
-   "series": "",
-   "author": "Edna St. Vincent Millay",
-   "rating": 4,
-   "date": "Read July 2024",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1670752215l/65154375._SY475_.jpg"
-  },
-  {
-   "id": "31140332",
-   "title": "Thrawn",
+   "id": "9673436",
+   "title": "The Invention of Hugo Cabret",
    "subtitle": "",
-   "series": "Star Wars: Thrawn, #1",
-   "author": "Timothy Zahn",
+   "series": "",
+   "author": "Brian Selznick",
    "rating": 5,
-   "date": "Added June 2023",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1468787895l/31140332._SY475_.jpg"
+   "date": "Read July 2026",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1422312376l/9673436.jpg"
   },
   {
    "id": "256008",
@@ -83,6 +73,446 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1559668037l/256008.jpg"
   },
   {
+   "id": "17332218",
+   "title": "Words of Radiance",
+   "subtitle": "",
+   "series": "The Stormlight Archive, #2",
+   "author": "Brandon Sanderson",
+   "rating": 5,
+   "date": "Read April 2026",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1728768241l/17332218.jpg"
+  },
+  {
+   "id": "7235533",
+   "title": "The Way of Kings",
+   "subtitle": "",
+   "series": "The Stormlight Archive, #1",
+   "author": "Brandon Sanderson",
+   "rating": 5,
+   "date": "Read January 2026",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1659905828l/7235533._SY475_.jpg"
+  },
+  {
+   "id": "5",
+   "title": "Harry Potter and the Prisoner of Azkaban",
+   "subtitle": "",
+   "series": "Harry Potter, #3",
+   "author": "J.K. Rowling",
+   "rating": 4,
+   "date": "Read November 2025",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1630547330l/5._SY475_.jpg"
+  },
+  {
+   "id": "37186",
+   "title": "The Miraculous Journey of Edward Tulane",
+   "subtitle": "",
+   "series": "",
+   "author": "Kate DiCamillo",
+   "rating": 4,
+   "date": "Read September 2025",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1361121815l/37186.jpg"
+  },
+  {
+   "id": "45064996",
+   "title": "Hyperion",
+   "subtitle": "",
+   "series": "Hyperion Cantos, #1",
+   "author": "Dan Simmons",
+   "rating": 4,
+   "date": "Read July 2025",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1592234429l/45064996._SY475_.jpg"
+  },
+  {
+   "id": "24490481",
+   "title": "Harry Potter and the Sorcerer's Stone",
+   "subtitle": "",
+   "series": "Harry Potter, #1",
+   "author": "J.K. Rowling",
+   "rating": 5,
+   "date": "Read May 2025",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1427663334l/24490481.jpg"
+  },
+  {
+   "id": "29241319",
+   "title": "Harry Potter and the Chamber of Secrets",
+   "subtitle": "",
+   "series": "Harry Potter, #2",
+   "author": "J.K. Rowling",
+   "rating": 4,
+   "date": "Read July 2025",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1459368456l/29241319._SX318_.jpg"
+  },
+  {
+   "id": "44073130",
+   "title": "Colony Three Mars",
+   "subtitle": "",
+   "series": "Colony Mars #3",
+   "author": "Gerald M. Kilby",
+   "rating": 4,
+   "date": "Read July 2025",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1550663102l/44073130._SY475_.jpg"
+  },
+  {
+   "id": "32617148",
+   "title": "Star Wars: Rebel Rising",
+   "subtitle": "",
+   "series": "",
+   "author": "Beth Revis",
+   "rating": 5,
+   "date": "Read June 2025",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1485379708l/32617148._SY475_.jpg"
+  },
+  {
+   "id": "44073124",
+   "title": "Colony Two Mars",
+   "subtitle": "",
+   "series": "Colony Mars #2",
+   "author": "Gerald M. Kilby",
+   "rating": 4,
+   "date": "Read May 2025",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1550662996l/44073124._SY475_.jpg"
+  },
+  {
+   "id": "44073117",
+   "title": "Colony One Mars",
+   "subtitle": "",
+   "series": "Colony Mars #1",
+   "author": "Gerald M. Kilby",
+   "rating": 4,
+   "date": "Read April 2025",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1550662852l/44073117._SY475_.jpg"
+  },
+  {
+   "id": "29777936",
+   "title": "Catalyst: A Rogue One Novel",
+   "subtitle": "",
+   "series": "Star Wars",
+   "author": "James Luceno",
+   "rating": 3,
+   "date": "Read April 2025",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1479133983l/29777936._SY475_.jpg"
+  },
+  {
+   "id": "5043",
+   "title": "The Pillars of the Earth",
+   "subtitle": "",
+   "series": "Kingsbridge, #1",
+   "author": "Ken Follett",
+   "rating": 5,
+   "date": "Read March 2025",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1576956100l/5043.jpg"
+  },
+  {
+   "id": "205213487",
+   "title": "Learning Evolution",
+   "subtitle": "The New Era of AI in the Classroom",
+   "series": "",
+   "author": "Carl Hooker",
+   "rating": 3,
+   "date": "Read October 2024",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1705001189l/205213487._SY475_.jpg"
+  },
+  {
+   "id": "171681821",
+   "title": "The Anxious Generation",
+   "subtitle": "How the Great Rewiring of Childhood Caused an Epidemic of Mental Illness",
+   "series": "",
+   "author": "Jonathan Haidt",
+   "rating": 5,
+   "date": "Read October 2024",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1711573377l/171681821._SY475_.jpg"
+  },
+  {
+   "id": "124019528",
+   "title": "The Eye of Darkness",
+   "subtitle": "",
+   "series": "",
+   "author": "George Mann",
+   "rating": 5,
+   "date": "Read October 2024",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1688639368l/124019528._SY475_.jpg"
+  },
+  {
+   "id": "20170404",
+   "title": "Station Eleven",
+   "subtitle": "",
+   "series": "",
+   "author": "Emily St. John Mandel",
+   "rating": 4,
+   "date": "Read September 2024",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1680459872l/20170404._SX318_.jpg"
+  },
+  {
+   "id": "62921620",
+   "title": "Tales of Light and Life",
+   "subtitle": "",
+   "series": "Star Wars: The High Republic",
+   "author": "Zoraida Córdova",
+   "rating": 4,
+   "date": "Read September 2024",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1678208002l/62921620.jpg"
+  },
+  {
+   "id": "61176500",
+   "title": "Path of Vengeance",
+   "subtitle": "",
+   "series": "Star Wars: The High Republic: Phase II: Quest of the Jedi #2",
+   "author": "Cavan Scott",
+   "rating": 4,
+   "date": "Read September 2024",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1665326764l/61176500.jpg"
+  },
+  {
+   "id": "61213099",
+   "title": "Cataclysm",
+   "subtitle": "",
+   "series": "Star Wars: The High Republic",
+   "author": "Lydia Kang",
+   "rating": 4,
+   "date": "Read August 2024",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1665326677l/61213099.jpg"
+  },
+  {
+   "id": "38709",
+   "title": "Holes",
+   "subtitle": "",
+   "series": "Holes, #1",
+   "author": "Louis Sachar",
+   "rating": 3,
+   "date": "Read August 2024",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1618269830l/38709._SX318_.jpg"
+  },
+  {
+   "id": "65154375",
+   "title": "Edna St. Vincent Millay Poetry Collection, Early Poems 1912-1923",
+   "subtitle": "Renascence, Second April, A Few Figs from Thistles, The Harp-Weaver and Other Poems",
+   "series": "",
+   "author": "Edna St. Vincent Millay",
+   "rating": 4,
+   "date": "Read July 2024",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1670752215l/65154375._SY475_.jpg"
+  },
+  {
+   "id": "21787",
+   "title": "The Princess Bride",
+   "subtitle": "",
+   "series": "",
+   "author": "William Goldman",
+   "rating": 5,
+   "date": "Read July 2024",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1327903636l/21787.jpg"
+  },
+  {
+   "id": "54493401",
+   "title": "Project Hail Mary",
+   "subtitle": "",
+   "series": "",
+   "author": "Andy Weir",
+   "rating": 5,
+   "date": "Read July 2024",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1764703833l/54493401._SY475_.jpg"
+  },
+  {
+   "id": "61153770",
+   "title": "The Battle of Jedha",
+   "subtitle": "",
+   "series": "Star Wars: The High Republic",
+   "author": "George Mann",
+   "rating": 3,
+   "date": "Read March 2024",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1659552912l/61153770.jpg"
+  },
+  {
+   "id": "60353769",
+   "title": "Convergence",
+   "subtitle": "",
+   "series": "Star Wars: The High Republic",
+   "author": "Zoraida Córdova",
+   "rating": 3,
+   "date": "Read February 2024",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1655696614l/60353769.jpg"
+  },
+  {
+   "id": "3869",
+   "title": "A Brief History of Time",
+   "subtitle": "",
+   "series": "",
+   "author": "Stephen W. Hawking",
+   "rating": 5,
+   "date": "Read January 2024",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1333578746l/3869.jpg"
+  },
+  {
+   "id": "57600821",
+   "title": "Tempest Runner",
+   "subtitle": "",
+   "series": "Star Wars: The High Republic",
+   "author": "Cavan Scott",
+   "rating": 5,
+   "date": "Read January 2024",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1629412514l/57600821.jpg"
+  },
+  {
+   "id": "60420362",
+   "title": "Path of Deceit",
+   "subtitle": "",
+   "series": "Star Wars: The High Republic: Phase II: Quest of the Jedi #1",
+   "author": "Tessa  Gratton",
+   "rating": 4,
+   "date": "Read January 2024",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1649876989l/60420362.jpg"
+  },
+  {
+   "id": "14743",
+   "title": "The God Delusion",
+   "subtitle": "A Study of Religious Belief and Skepticism",
+   "series": "",
+   "author": "Richard Dawkins",
+   "rating": 5,
+   "date": "Read December 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1347220693l/14743.jpg"
+  },
+  {
+   "id": "43369",
+   "title": "God Is Not Great",
+   "subtitle": "How Religion Poisons Everything",
+   "series": "",
+   "author": "Christopher Hitchens",
+   "rating": 4,
+   "date": "Read December 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1411218313l/43369.jpg"
+  },
+  {
+   "id": "32191710",
+   "title": "Astrophysics for People in a Hurry",
+   "subtitle": "",
+   "series": "",
+   "author": "Neil deGrasse Tyson",
+   "rating": 5,
+   "date": "Added November 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562761669l/32191710._SY475_.jpg"
+  },
+  {
+   "id": "58640333",
+   "title": "Midnight Horizon",
+   "subtitle": "",
+   "series": "Star Wars: The High Republic",
+   "author": "Daniel José Older",
+   "rating": 5,
+   "date": "Read November 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1633476423l/58640333.jpg"
+  },
+  {
+   "id": "58640884",
+   "title": "The Fallen Star",
+   "subtitle": "",
+   "series": "Star Wars: The High Republic",
+   "author": "Claudia Gray",
+   "rating": 4,
+   "date": "Read October 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1632343524l/58640884._SY475_.jpg"
+  },
+  {
+   "id": "8753495",
+   "title": "The Fiery Trial",
+   "subtitle": "Abraham Lincoln and American Slavery",
+   "series": "",
+   "author": "Eric Foner",
+   "rating": 5,
+   "date": "Read October 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1348470645l/8753495.jpg"
+  },
+  {
+   "id": "111209",
+   "title": "Unconditional Parenting",
+   "subtitle": "Moving from Rewards and Punishments to Love and Reason",
+   "series": "",
+   "author": "Alfie Kohn",
+   "rating": 5,
+   "date": "Read September 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1406525749l/111209.jpg"
+  },
+  {
+   "id": "55644027",
+   "title": "The Rising Storm",
+   "subtitle": "",
+   "series": "Star Wars: The High Republic",
+   "author": "Cavan Scott",
+   "rating": 4,
+   "date": "Read July 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1607094743l/55644027.jpg"
+  },
+  {
+   "id": "51734016",
+   "title": "A Test of Courage",
+   "subtitle": "",
+   "series": "Star Wars: The High Republic",
+   "author": "Justina Ireland",
+   "rating": 3,
+   "date": "Added July 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1582737315l/51734016.jpg"
+  },
+  {
+   "id": "51733546",
+   "title": "Into the Dark",
+   "subtitle": "",
+   "series": "Star Wars: The High Republic",
+   "author": "Claudia Gray",
+   "rating": 4,
+   "date": "Read July 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1582663291l/51733546.jpg"
+  },
+  {
+   "id": "53112442",
+   "title": "Chaos Rising",
+   "subtitle": "",
+   "series": "Star Wars: Thrawn Ascendancy, #1",
+   "author": "Timothy Zahn",
+   "rating": 5,
+   "date": "Added June 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1574793053l/53112442._SX318_SY475_.jpg"
+  },
+  {
+   "id": "1617",
+   "title": "Night",
+   "subtitle": "",
+   "series": "",
+   "author": "Elie Wiesel",
+   "rating": 5,
+   "date": "Added June 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1709507006l/1617._SY475_.jpg"
+  },
+  {
+   "id": "21",
+   "title": "A Short History of Nearly Everything",
+   "subtitle": "",
+   "series": "",
+   "author": "Bill  Bryson",
+   "rating": 5,
+   "date": "Added June 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1433086293l/21._SY475_.jpg"
+  },
+  {
+   "id": "541132",
+   "title": "Punished by Rewards",
+   "subtitle": "The Trouble with Gold Stars, Incentive Plans, A's, Praise and Other Bribes",
+   "series": "",
+   "author": "Alfie Kohn",
+   "rating": 5,
+   "date": "Added June 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1422456630l/541132.jpg"
+  },
+  {
+   "id": "51637946",
+   "title": "Light of the Jedi",
+   "subtitle": "",
+   "series": "Star Wars: The High Republic",
+   "author": "Charles Soule",
+   "rating": 5,
+   "date": "Read June 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1582619576l/51637946.jpg"
+  },
+  {
    "id": "51853",
    "title": "Making Sense",
    "subtitle": "Teaching and Learning Mathematics with Understanding",
@@ -93,14 +523,74 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1347516491l/51853.jpg"
   },
   {
-   "id": "110650715",
-   "title": "Frankenstein or, The Modern Prometheus",
+   "id": "111210",
+   "title": "The Homework Myth",
    "subtitle": "",
    "series": "",
-   "author": "Mary Wollstonecraft Shelley",
+   "author": "Alfie Kohn",
    "rating": 5,
-   "date": "Read July 2026",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1680417064l/110650715._SY475_.jpg"
+   "date": "Added June 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1387736354l/111210.jpg"
+  },
+  {
+   "id": "58539346",
+   "title": "Blood in the Garden",
+   "subtitle": "The Flagrant History of the 1990s New York Knicks",
+   "series": "",
+   "author": "Chris  Herring",
+   "rating": 5,
+   "date": "Added June 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1633370523l/58539346.jpg"
+  },
+  {
+   "id": "55213763",
+   "title": "Lesser Evil",
+   "subtitle": "",
+   "series": "Star Wars: Thrawn Ascendancy, #3",
+   "author": "Timothy Zahn",
+   "rating": 5,
+   "date": "Added June 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1617449776l/55213763._SX318_.jpg"
+  },
+  {
+   "id": "55213748",
+   "title": "Greater Good",
+   "subtitle": "",
+   "series": "Star Wars: Thrawn Ascendancy, #2",
+   "author": "Timothy Zahn",
+   "rating": 5,
+   "date": "Added June 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1603988845l/55213748._SY475_.jpg"
+  },
+  {
+   "id": "43160651",
+   "title": "Thrawn: Treason",
+   "subtitle": "",
+   "series": "Star Wars: Thrawn, #3",
+   "author": "Timothy Zahn",
+   "rating": 5,
+   "date": "Added June 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1545447248l/43160651.jpg"
+  },
+  {
+   "id": "36385830",
+   "title": "Thrawn: Alliances",
+   "subtitle": "",
+   "series": "Star Wars: Thrawn, #2",
+   "author": "Timothy Zahn",
+   "rating": 5,
+   "date": "Added June 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1511385584l/36385830.jpg"
+  },
+  {
+   "id": "31140332",
+   "title": "Thrawn",
+   "subtitle": "",
+   "series": "Star Wars: Thrawn, #1",
+   "author": "Timothy Zahn",
+   "rating": 5,
+   "date": "Added June 2023",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1468787895l/31140332._SY475_.jpg"
   }
  ]
 }
