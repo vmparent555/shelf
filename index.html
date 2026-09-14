@@ -159,7 +159,12 @@ body.dimmed {
   margin: 4vmin 0 0;
   letter-spacing: 0.02em;
 }
-
+.pages {
+  font-size: 2.3vmin;
+  font-weight: 300;
+  color: #8a847b;
+  margin: 1.2vmin 0 0;
+}
 .notice {
   position: absolute;
   top: 50%;
@@ -249,6 +254,10 @@ body.dimmed {
     detail.appendChild(rating);
     detail.appendChild(date);
 
+    var pages = document.createElement("p");
+    pages.className = "pages";
+    detail.appendChild(pages);
+
     slide.appendChild(cover);
     slide.appendChild(detail);
     stage.appendChild(slide);
@@ -262,7 +271,8 @@ body.dimmed {
       author: author,
       series: series,
       rating: rating,
-      date: date
+      date: date,
+      pages: pages
     };
   }
 
@@ -290,6 +300,8 @@ body.dimmed {
     layer.series.style.display = book.series ? "" : "none";
     layer.date.textContent = book.date || "";
     layer.date.style.display = book.date ? "" : "none";
+    layer.pages.textContent = book.pages || "";
+    layer.pages.style.display = book.pages ? "" : "none";
 
     if (book.rating > 0) {
       layer.rating.className = "rating";
