@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch a Goodreads shelf RSS feed and write a clean books.json for the display page.
+"""Fetch Goodreads shelf RSS feeds and write a clean books.json for the display page.
 
 Standard library only. No dependencies to install.
 """
@@ -12,11 +12,14 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime
 
-GOODREADS_USER_ID = "166663242"
+# Add or remove people here. The name is what appears on screen.
+READERS = [
+    {"name": "Vince", "user_id": "166663242"},
+    {"name": "Missy", "user_id": "78748822"},
+]
+
 SHELF = "read"
-FEED_URL = "https://www.goodreads.com/review/list_rss/{}?shelf={}".format(
-    GOODREADS_USER_ID, SHELF
-)
+FEED_TEMPLATE = "https://www.goodreads.com/review/list_rss/{}?shelf={}"
 OUTPUT_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "books.json"
 )
@@ -76,17 +79,17 @@ def parse_date(value):
     return None
 
 
-def date_label(read_at, date_added):
+def date_label(reader, read_at, date_added):
     """Prefer the date read. Fall back to the date added, labelled honestly."""
     read = parse_date(read_at)
     if read:
-        return "Read {} {}".format(MONTHS[read.month - 1], read.year)
+        return "{} read {} {}".format(reader, MONTHS[read.month - 1], read.year)
 
     added = parse_date(date_added)
     if added:
-        return "Added {} {}".format(MONTHS[added.month - 1], added.year)
+        return "{} added {} {}".format(reader, MONTHS[added.month - 1], added.year)
 
-    return ""
+    return reader
 
 
 def best_cover(item):
@@ -111,20 +114,25 @@ def fetch(url):
         return response.read()
 
 
-def main():
+def books_for(reader):
+    """Return every book on one person's shelf, or None if the feed failed."""
+    url = FEED_TEMPLATE.format(reader["user_id"], SHELF)
+
     try:
-        raw = fetch(FEED_URL)
+        raw = fetch(url)
     except Exception as error:
-        print("Could not reach the feed: {}".format(error), file=sys.stderr)
-        return 1
+        print("Could not reach {}'s feed: {}".format(reader["name"], error),
+              file=sys.stderr)
+        return None
 
     try:
         root = ET.fromstring(raw)
     except ET.ParseError as error:
-        print("Feed was not valid XML: {}".format(error), file=sys.stderr)
-        return 1
+        print("{}'s feed was not valid XML: {}".format(reader["name"], error),
+              file=sys.stderr)
+        return None
 
-    books = []
+    found = []
     for item in root.iter("item"):
         title, subtitle, series = split_title(text_of(item, "title"))
         if not title:
@@ -135,25 +143,47 @@ def main():
         except ValueError:
             rating = 0
 
-        books.append(
+        found.append(
             {
-                "id": text_of(item, "book_id"),
+                "id": "{}-{}".format(reader["user_id"], text_of(item, "book_id")),
+                "reader": reader["name"],
                 "title": title,
                 "subtitle": subtitle,
                 "series": series,
                 "author": text_of(item, "author_name"),
                 "rating": rating,
                 "date": date_label(
-                    text_of(item, "user_read_at"), text_of(item, "user_date_added")
+                    reader["name"],
+                    text_of(item, "user_read_at"),
+                    text_of(item, "user_date_added"),
                 ),
                 "cover": best_cover(item),
             }
         )
 
-    if not books:
-        print("Feed parsed but contained no books. Leaving books.json alone.",
-              file=sys.stderr)
-        return 1
+    if not found:
+        print(
+            "{}'s feed came back empty. Is the profile set to public?".format(
+                reader["name"]
+            ),
+            file=sys.stderr,
+        )
+        return None
+
+    print("{}: {} books".format(reader["name"], len(found)))
+    return found
+
+
+def main():
+    books = []
+
+    for reader in READERS:
+        found = books_for(reader)
+        if found is None:
+            # Bail out rather than publish half a shelf.
+            print("Leaving books.json alone.", file=sys.stderr)
+            return 1
+        books.extend(found)
 
     payload = {
         "updated": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
