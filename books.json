@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-17T12:10:54Z",
+ "updated": "2026-09-18T12:10:16Z",
  "count": 161,
  "books": [
   {
@@ -733,6 +733,18 @@
    "date": "Vince added June 2023",
    "pages": "427 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1468787895l/31140332._SY475_.jpg"
+  },
+  {
+   "id": "78748822-62984906",
+   "reader": "Missy",
+   "title": "Those Empty Eyes",
+   "subtitle": "",
+   "series": "",
+   "author": "Charlie Donlea",
+   "rating": 5,
+   "date": "Missy read September 2026",
+   "pages": "432 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1679436071l/62984906._SY475_.jpg"
   },
   {
    "id": "78748822-231249727",
@@ -1921,18 +1933,6 @@
    "date": "Missy read July 2025",
    "pages": "302 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1637059607l/58724801.jpg"
-  },
-  {
-   "id": "78748822-112978985",
-   "reader": "Missy",
-   "title": "Bright Young Women",
-   "subtitle": "",
-   "series": "",
-   "author": "Jessica Knoll",
-   "rating": 5,
-   "date": "Missy read July 2025",
-   "pages": "384 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1676286154l/112978985.jpg"
   }
  ]
 }
