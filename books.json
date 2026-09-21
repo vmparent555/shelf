@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-20T12:09:52Z",
+ "updated": "2026-09-21T12:09:48Z",
  "count": 161,
  "books": [
   {
@@ -733,6 +733,30 @@
    "date": "Vince added June 2023",
    "pages": "427 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1468787895l/31140332._SY475_.jpg"
+  },
+  {
+   "id": "78748822-59911060",
+   "reader": "Missy",
+   "title": "Artemis",
+   "subtitle": "",
+   "series": "",
+   "author": "Andy Weir",
+   "rating": 5,
+   "date": "Missy read September 2026",
+   "pages": "335 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1780806627l/59911060._SY475_.jpg"
+  },
+  {
+   "id": "78748822-42046112",
+   "reader": "Missy",
+   "title": "Recursion",
+   "subtitle": "",
+   "series": "",
+   "author": "Blake Crouch",
+   "rating": 5,
+   "date": "Missy read September 2026",
+   "pages": "329 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1750526564l/42046112._SX318_.jpg"
   },
   {
    "id": "78748822-62984906",
@@ -1909,30 +1933,6 @@
    "date": "Missy read July 2025",
    "pages": "352 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1718971111l/211867349._SY475_.jpg"
-  },
-  {
-   "id": "78748822-56269064",
-   "reader": "Missy",
-   "title": "Rock Paper Scissors",
-   "subtitle": "",
-   "series": "",
-   "author": "Alice Feeney",
-   "rating": 5,
-   "date": "Missy read July 2025",
-   "pages": "294 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1612020952l/56269064.jpg"
-  },
-  {
-   "id": "78748822-58724801",
-   "reader": "Missy",
-   "title": "The Bodyguard",
-   "subtitle": "",
-   "series": "",
-   "author": "Katherine Center",
-   "rating": 5,
-   "date": "Missy read July 2025",
-   "pages": "302 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1637059607l/58724801.jpg"
   }
  ]
 }
