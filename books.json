@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-23T12:10:38Z",
+ "updated": "2026-09-24T12:10:26Z",
  "count": 161,
  "books": [
   {
@@ -733,6 +733,18 @@
    "date": "Vince added June 2023",
    "pages": "427 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1468787895l/31140332._SY475_.jpg"
+  },
+  {
+   "id": "78748822-236071680",
+   "reader": "Missy",
+   "title": "The Caretaker",
+   "subtitle": "",
+   "series": "",
+   "author": "Marcus Kliewer",
+   "rating": 5,
+   "date": "Missy read September 2026",
+   "pages": "320 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1752244772l/236071680._SY475_.jpg"
   },
   {
    "id": "78748822-59911060",
@@ -1921,18 +1933,6 @@
    "date": "Missy read August 2025",
    "pages": "370 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1723652503l/217245639._SY475_.jpg"
-  },
-  {
-   "id": "78748822-211867349",
-   "reader": "Missy",
-   "title": "Head Cases",
-   "subtitle": "",
-   "series": "Head Cases, #1",
-   "author": "John  McMahon",
-   "rating": 5,
-   "date": "Missy read July 2025",
-   "pages": "352 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1718971111l/211867349._SY475_.jpg"
   }
  ]
 }
