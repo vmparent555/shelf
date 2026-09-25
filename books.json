@@ -1,7 +1,19 @@
 {
- "updated": "2026-09-24T12:10:26Z",
- "count": 161,
+ "updated": "2026-09-25T12:10:37Z",
+ "count": 162,
  "books": [
+  {
+   "id": "166663242-214565614",
+   "reader": "Vince",
+   "title": "The Buffalo Hunter Hunter",
+   "subtitle": "",
+   "series": "",
+   "author": "Stephen Graham Jones",
+   "rating": 5,
+   "date": "Vince read September 2026",
+   "pages": "448 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1779114576l/214565614._SY475_.jpg"
+  },
   {
    "id": "166663242-16280",
    "reader": "Vince",
