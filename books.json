@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-25T12:10:37Z",
+ "updated": "2026-09-26T12:09:49Z",
  "count": 162,
  "books": [
   {
@@ -745,6 +745,18 @@
    "date": "Vince added June 2023",
    "pages": "427 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1468787895l/31140332._SY475_.jpg"
+  },
+  {
+   "id": "78748822-34845440",
+   "reader": "Missy",
+   "title": "Can You Keep a Secret?",
+   "subtitle": "",
+   "series": "",
+   "author": "Sophie Kinsella",
+   "rating": 5,
+   "date": "Missy read September 2026",
+   "pages": "384 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1492011573l/34845440._SY475_.jpg"
   },
   {
    "id": "78748822-236071680",
@@ -1933,18 +1945,6 @@
    "date": "Missy read August 2025",
    "pages": "306 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1722587059l/211004123._SY475_.jpg"
-  },
-  {
-   "id": "78748822-217245639",
-   "reader": "Missy",
-   "title": "One Golden Summer",
-   "subtitle": "",
-   "series": "Barry's Bay, #2",
-   "author": "Carley Fortune",
-   "rating": 3,
-   "date": "Missy read August 2025",
-   "pages": "370 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1723652503l/217245639._SY475_.jpg"
   }
  ]
 }
