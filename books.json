@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-29T12:11:16Z",
+ "updated": "2026-09-30T12:11:39Z",
  "count": 162,
  "books": [
   {
@@ -745,6 +745,18 @@
    "date": "Vince added June 2023",
    "pages": "427 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1468787895l/31140332._SY475_.jpg"
+  },
+  {
+   "id": "78748822-220213961",
+   "reader": "Missy",
+   "title": "Don't Let Him In",
+   "subtitle": "",
+   "series": "",
+   "author": "Lisa Jewell",
+   "rating": 5,
+   "date": "Missy read September 2026",
+   "pages": "368 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1730217004l/220213961._SY475_.jpg"
   },
   {
    "id": "78748822-60666845",
@@ -1933,18 +1945,6 @@
    "date": "Missy read August 2025",
    "pages": "320 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1697755708l/199898250._SY475_.jpg"
-  },
-  {
-   "id": "78748822-208894791",
-   "reader": "Missy",
-   "title": "Here One Moment",
-   "subtitle": "",
-   "series": "",
-   "author": "Liane Moriarty",
-   "rating": 5,
-   "date": "Missy read August 2025",
-   "pages": "505 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1712781753l/208894791._SY475_.jpg"
   }
  ]
 }
