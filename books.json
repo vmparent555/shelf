@@ -1,7 +1,19 @@
 {
- "updated": "2026-09-30T12:11:39Z",
- "count": 162,
+ "updated": "2026-10-01T12:12:51Z",
+ "count": 163,
  "books": [
+  {
+   "id": "166663242-211721809",
+   "reader": "Vince",
+   "title": "The Dungeon Anarchist's Cookbook",
+   "subtitle": "",
+   "series": "Dungeon Crawler Carl, #3",
+   "author": "Matt Dinniman",
+   "rating": 4,
+   "date": "Vince read September 2026",
+   "pages": "532 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1719949594l/211721809._SY475_.jpg"
+  },
   {
    "id": "166663242-214565614",
    "reader": "Vince",
