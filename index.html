@@ -202,6 +202,7 @@ body.dimmed {
   var DATA_URL = "books.json";
   var SLIDE_MS = 18000;
   var REFETCH_MS = 6 * 60 * 60 * 1000;
+  var STORAGE_KEY = "shelf-progress-v1";
   var DIM_START_HOUR = 21;
   var DIM_END_HOUR = 6;
 
@@ -325,6 +326,88 @@ body.dimmed {
     }
   }
 
+  function saveProgress() {
+    try {
+      var order = [];
+      var i;
+      for (i = 0; i < deck.length; i++) {
+        order.push(deck[i].id);
+      }
+      window.localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({ order: order, index: current })
+      );
+    } catch (error) {
+      // Storage unavailable. The deck still works, it just won't resume.
+    }
+  }
+
+  function readProgress() {
+    try {
+      var stored = window.localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        var parsed = JSON.parse(stored);
+        if (parsed && parsed.order && parsed.order.length) {
+          return parsed;
+        }
+      }
+    } catch (error) {
+      // Unreadable. Start fresh.
+    }
+    return null;
+  }
+
+  function buildDeck() {
+    var byId = {};
+    var i;
+    for (i = 0; i < books.length; i++) {
+      byId[books[i].id] = books[i];
+    }
+
+    var saved = readProgress();
+    if (!saved) {
+      deck = shuffle(books);
+      current = 0;
+      saveProgress();
+      return;
+    }
+
+    // Keep the saved order, dropping anything no longer on the shelves.
+    var order = [];
+    var seen = {};
+    for (i = 0; i < saved.order.length; i++) {
+      var id = saved.order[i];
+      if (byId[id] && !seen[id]) {
+        seen[id] = true;
+        order.push(byId[id]);
+      }
+    }
+
+    var position = saved.index;
+    if (position > order.length) {
+      position = order.length;
+    }
+
+    // Books added since last time drop into the part of the deck that hasn't
+    // played yet, so a new book doesn't have to wait out a whole cycle.
+    for (i = 0; i < books.length; i++) {
+      if (!seen[books[i].id]) {
+        var slot =
+          position + Math.floor(Math.random() * (order.length - position + 1));
+        order.splice(slot, 0, books[i]);
+      }
+    }
+
+    if (order.length) {
+      deck = order;
+      current = position;
+    } else {
+      deck = shuffle(books);
+      current = 0;
+    }
+    saveProgress();
+  }
+
   function shuffle(list) {
     var copy = list.slice();
     var i, j, swap;
@@ -366,6 +449,7 @@ body.dimmed {
 
     layers.reverse();
     current++;
+    saveProgress();
     preload(deck[current]);
 
     notice.className = "notice gone";
@@ -408,8 +492,7 @@ body.dimmed {
       if (payload && payload.books && payload.books.length) {
         books = payload.books;
         if (isFirstRun) {
-          deck = shuffle(books);
-          current = 0;
+          buildDeck();
           start();
         }
       } else if (isFirstRun) {
@@ -441,7 +524,6 @@ body.dimmed {
   }, REFETCH_MS);
 
   document.addEventListener("click", function () {
-    advance();
     start();
   }, false);
 })();
