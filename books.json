@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-04T18:11:40Z",
+ "updated": "2026-10-05T12:12:19Z",
  "count": 163,
  "books": [
   {
@@ -757,6 +757,18 @@
    "date": "Vince added June 2023",
    "pages": "427 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1468787895l/31140332._SY475_.jpg"
+  },
+  {
+   "id": "78748822-242975756",
+   "reader": "Missy",
+   "title": "The Death Row Club",
+   "subtitle": "",
+   "series": "",
+   "author": "V.A. Vazquez",
+   "rating": 4,
+   "date": "Missy read October 2026",
+   "pages": "323 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1760888039l/242975756._SY475_.jpg"
   },
   {
    "id": "78748822-220213961",
@@ -1945,18 +1957,6 @@
    "date": "Missy read August 2025",
    "pages": "336 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1727715832l/216351856._SY475_.jpg"
-  },
-  {
-   "id": "78748822-199898250",
-   "reader": "Missy",
-   "title": "We Used to Live Here",
-   "subtitle": "",
-   "series": "",
-   "author": "Marcus Kliewer",
-   "rating": 5,
-   "date": "Missy read August 2025",
-   "pages": "320 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1697755708l/199898250._SY475_.jpg"
   }
  ]
 }
