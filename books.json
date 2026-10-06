@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-05T12:12:19Z",
+ "updated": "2026-10-06T12:11:08Z",
  "count": 163,
  "books": [
   {
@@ -757,6 +757,18 @@
    "date": "Vince added June 2023",
    "pages": "427 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1468787895l/31140332._SY475_.jpg"
+  },
+  {
+   "id": "78748822-242765436",
+   "reader": "Missy",
+   "title": "Into the Blue",
+   "subtitle": "",
+   "series": "",
+   "author": "Emma Brodie",
+   "rating": 3,
+   "date": "Missy read October 2026",
+   "pages": "433 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1761401518l/242765436._SY475_.jpg"
   },
   {
    "id": "78748822-242975756",
@@ -1945,18 +1957,6 @@
    "date": "Missy read August 2025",
    "pages": "433 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1479870337l/32674134._SY475_.jpg"
-  },
-  {
-   "id": "78748822-216351856",
-   "reader": "Missy",
-   "title": "The Maid's Secret",
-   "subtitle": "",
-   "series": "Molly the Maid, #3",
-   "author": "Nita Prose",
-   "rating": 5,
-   "date": "Missy read August 2025",
-   "pages": "336 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1727715832l/216351856._SY475_.jpg"
   }
  ]
 }
