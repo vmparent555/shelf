@@ -1,54 +1,18 @@
 {
- "updated": "2026-10-08T12:12:34Z",
- "count": 163,
+ "updated": "2026-10-09T12:11:38Z",
+ "count": 164,
  "books": [
   {
-   "id": "166663242-211721809",
+   "id": "166663242-56791389",
    "reader": "Vince",
-   "title": "The Dungeon Anarchist's Cookbook",
+   "title": "Dungeon Crawler Carl",
    "subtitle": "",
-   "series": "Dungeon Crawler Carl, #3",
+   "series": "Dungeon Crawler Carl, #1",
    "author": "Matt Dinniman",
    "rating": 4,
-   "date": "Vince read September 2026",
-   "pages": "532 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1719949594l/211721809._SY475_.jpg"
-  },
-  {
-   "id": "166663242-214565614",
-   "reader": "Vince",
-   "title": "The Buffalo Hunter Hunter",
-   "subtitle": "",
-   "series": "",
-   "author": "Stephen Graham Jones",
-   "rating": 5,
-   "date": "Vince read September 2026",
-   "pages": "448 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1779114576l/214565614._SY475_.jpg"
-  },
-  {
-   "id": "166663242-16280",
-   "reader": "Vince",
-   "title": "Why Are All The Black Kids Sitting Together in the Cafeteria?",
-   "subtitle": "",
-   "series": "",
-   "author": "Beverly Daniel Tatum",
-   "rating": 2,
-   "date": "Vince read July 2024",
+   "date": "Vince read August 2026",
    "pages": "464 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1404866456l/16280.jpg"
-  },
-  {
-   "id": "166663242-55660422",
-   "reader": "Vince",
-   "title": "Out of the Shadows",
-   "subtitle": "",
-   "series": "Star Wars: The High Republic",
-   "author": "Justina Ireland",
-   "rating": 2,
-   "date": "Vince read August 2023",
-   "pages": "432 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1623669656l/55660422.jpg"
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1734203042l/56791389._SY475_.jpg"
   },
   {
    "id": "166663242-212393364",
@@ -63,16 +27,64 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1719949673l/212393364._SY475_.jpg"
   },
   {
-   "id": "166663242-56791389",
+   "id": "166663242-16280",
    "reader": "Vince",
-   "title": "Dungeon Crawler Carl",
+   "title": "Why Are All The Black Kids Sitting Together in the Cafeteria?",
    "subtitle": "",
-   "series": "Dungeon Crawler Carl, #1",
+   "series": "",
+   "author": "Beverly Daniel Tatum",
+   "rating": 1,
+   "date": "Vince read July 2024",
+   "pages": "464 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1404866456l/16280.jpg"
+  },
+  {
+   "id": "166663242-214565614",
+   "reader": "Vince",
+   "title": "The Buffalo Hunter Hunter",
+   "subtitle": "",
+   "series": "",
+   "author": "Stephen Graham Jones",
+   "rating": 4,
+   "date": "Vince read September 2026",
+   "pages": "448 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1779114576l/214565614._SY475_.jpg"
+  },
+  {
+   "id": "166663242-211721809",
+   "reader": "Vince",
+   "title": "The Dungeon Anarchist's Cookbook",
+   "subtitle": "",
+   "series": "Dungeon Crawler Carl, #3",
    "author": "Matt Dinniman",
    "rating": 4,
-   "date": "Vince read August 2026",
-   "pages": "464 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1734203042l/56791389._SY475_.jpg"
+   "date": "Vince read September 2026",
+   "pages": "532 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1719949594l/211721809._SY475_.jpg"
+  },
+  {
+   "id": "166663242-905",
+   "reader": "Vince",
+   "title": "The Inner Game of Tennis",
+   "subtitle": "The Classic Guide to the Mental Side of Peak Performance",
+   "series": "",
+   "author": "W. Timothy Gallwey",
+   "rating": 4,
+   "date": "Vince read October 2026",
+   "pages": "134 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1750018611l/905._SY475_.jpg"
+  },
+  {
+   "id": "166663242-55660422",
+   "reader": "Vince",
+   "title": "Out of the Shadows",
+   "subtitle": "",
+   "series": "Star Wars: The High Republic",
+   "author": "Justina Ireland",
+   "rating": 2,
+   "date": "Vince read August 2023",
+   "pages": "432 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1623669656l/55660422.jpg"
   },
   {
    "id": "166663242-8143909",
