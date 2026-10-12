@@ -1,7 +1,19 @@
 {
- "updated": "2026-10-11T17:15:52Z",
- "count": 164,
+ "updated": "2026-10-12T20:50:34Z",
+ "count": 165,
  "books": [
+  {
+   "id": "166663242-133518",
+   "reader": "Vince",
+   "title": "The Things They Carried",
+   "subtitle": "",
+   "series": "",
+   "author": "Tim O'Brien",
+   "rating": 4,
+   "date": "Vince read October 2026",
+   "pages": "246 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1424663847l/133518.jpg"
+  },
   {
    "id": "166663242-56791389",
    "reader": "Vince",
@@ -771,6 +783,18 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1468787895l/31140332._SY475_.jpg"
   },
   {
+   "id": "78748822-229005082",
+   "reader": "Missy",
+   "title": "The Widow",
+   "subtitle": "",
+   "series": "",
+   "author": "John Grisham",
+   "rating": 5,
+   "date": "Missy read October 2026",
+   "pages": "407 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1743131057l/229005082._SY475_.jpg"
+  },
+  {
    "id": "78748822-242765436",
    "reader": "Missy",
    "title": "Into the Blue",
@@ -1320,7 +1344,7 @@
    "rating": 3,
    "date": "Missy read April 2026",
    "pages": "466 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1576078837l/49204894._SY475_.jpg"
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1791837318l/49204894._SY475_.jpg"
   },
   {
    "id": "78748822-54493401",
@@ -1957,18 +1981,6 @@
    "date": "Missy read September 2025",
    "pages": "353 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1664226759l/59815561._SY475_.jpg"
-  },
-  {
-   "id": "78748822-32674134",
-   "reader": "Missy",
-   "title": "The Identicals",
-   "subtitle": "",
-   "series": "",
-   "author": "Elin Hilderbrand",
-   "rating": 3,
-   "date": "Missy read August 2025",
-   "pages": "433 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1479870337l/32674134._SY475_.jpg"
   }
  ]
 }
