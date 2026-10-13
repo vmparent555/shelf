@@ -1,7 +1,19 @@
 {
- "updated": "2026-10-12T20:50:34Z",
- "count": 165,
+ "updated": "2026-10-13T18:49:05Z",
+ "count": 166,
  "books": [
+  {
+   "id": "166663242-170448",
+   "reader": "Vince",
+   "title": "Animal Farm",
+   "subtitle": "",
+   "series": "",
+   "author": "George Orwell",
+   "rating": 2,
+   "date": "Vince read October 2026",
+   "pages": "141 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1325861570l/170448.jpg"
+  },
   {
    "id": "166663242-133518",
    "reader": "Vince",
