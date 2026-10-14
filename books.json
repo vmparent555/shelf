@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-13T18:49:05Z",
+ "updated": "2026-10-14T16:26:15Z",
  "count": 166,
  "books": [
   {
@@ -793,6 +793,18 @@
    "date": "Vince added June 2023",
    "pages": "427 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1468787895l/31140332._SY475_.jpg"
+  },
+  {
+   "id": "78748822-238226942",
+   "reader": "Missy",
+   "title": "Yesteryear",
+   "subtitle": "",
+   "series": "",
+   "author": "Caro Claire Burke",
+   "rating": 4,
+   "date": "Missy read October 2026",
+   "pages": "400 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1753932705l/238226942._SY475_.jpg"
   },
   {
    "id": "78748822-229005082",
@@ -1981,18 +1993,6 @@
    "date": "Missy read September 2025",
    "pages": "320 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1717516305l/199791337._SY475_.jpg"
-  },
-  {
-   "id": "78748822-59815561",
-   "reader": "Missy",
-   "title": "Station Eleven",
-   "subtitle": "",
-   "series": "",
-   "author": "Emily St. John Mandel",
-   "rating": 5,
-   "date": "Missy read September 2025",
-   "pages": "353 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1664226759l/59815561._SY475_.jpg"
   }
  ]
 }
