@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-18T15:18:39Z",
+ "updated": "2026-10-19T18:16:26Z",
  "count": 166,
  "books": [
   {
@@ -793,6 +793,18 @@
    "date": "Vince added June 2023",
    "pages": "427 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1468787895l/31140332._SY475_.jpg"
+  },
+  {
+   "id": "78748822-233013304",
+   "reader": "Missy",
+   "title": "The Heir Apparent",
+   "subtitle": "",
+   "series": "",
+   "author": "Rebecca Armitage",
+   "rating": 3,
+   "date": "Missy read October 2026",
+   "pages": "409 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1754507123l/233013304._SY475_.jpg"
   },
   {
    "id": "78748822-238226942",
@@ -1981,18 +1993,6 @@
    "date": "Missy read September 2025",
    "pages": "432 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1729209781l/218572920._SY475_.jpg"
-  },
-  {
-   "id": "78748822-199791337",
-   "reader": "Missy",
-   "title": "The Midnight Feast",
-   "subtitle": "",
-   "series": "",
-   "author": "Lucy Foley",
-   "rating": 5,
-   "date": "Missy read September 2025",
-   "pages": "320 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1717516305l/199791337._SY475_.jpg"
   }
  ]
 }
