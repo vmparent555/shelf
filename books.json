@@ -1,7 +1,31 @@
 {
- "updated": "2026-10-20T16:17:12Z",
- "count": 166,
+ "updated": "2026-10-21T16:31:57Z",
+ "count": 168,
  "books": [
+  {
+   "id": "166663242-58662236",
+   "reader": "Vince",
+   "title": "Small Things Like These",
+   "subtitle": "",
+   "series": "",
+   "author": "Claire Keegan",
+   "rating": 5,
+   "date": "Vince read October 2026",
+   "pages": "118 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1734631773l/58662236._SX318_.jpg"
+  },
+  {
+   "id": "166663242-6288",
+   "reader": "Vince",
+   "title": "The Road",
+   "subtitle": "",
+   "series": "",
+   "author": "Cormac McCarthy",
+   "rating": 3,
+   "date": "Vince read October 2026",
+   "pages": "241 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1600241424l/6288.jpg"
+  },
   {
    "id": "166663242-170448",
    "reader": "Vince",
@@ -1307,7 +1331,7 @@
    "author": "Rebecca Yarros",
    "rating": 5,
    "date": "Missy read May 2026",
-   "pages": "517 pages",
+   "pages": "528 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1761312598l/61431922._SY475_.jpg"
   },
   {
