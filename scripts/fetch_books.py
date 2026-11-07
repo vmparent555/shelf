@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
-"""Fetch Goodreads shelf RSS feeds and write a clean books.json for the display page.
+"""Fetch Goodreads shelves and write a clean books.json for the display page.
+
+Goodreads retired its RSS feeds in October 2026, so this reads each person's
+public shelf widget instead (the embeddable shelf Goodreads still serves).
+
+The widget has no read dates and no page counts, so books already in
+books.json keep the date and page count they had. New books get a read date
+from Goodreads' public "recent updates" widget when it has one, and an
+honest "added <month>" label when it doesn't.
 
 Standard library only. No dependencies to install.
 """
@@ -8,9 +16,11 @@ import json
 import os
 import re
 import sys
+import time
+import urllib.parse
 import urllib.request
-import xml.etree.ElementTree as ET
-from datetime import datetime
+from datetime import datetime, timezone
+from html.parser import HTMLParser
 
 # Add or remove people here. The name is what appears on screen.
 READERS = [
@@ -19,10 +29,18 @@ READERS = [
 ]
 
 SHELF = "read"
+NUM_BOOKS = 100          # the widget returns at most about this many
+KEEP_OLD_BOOKS = True    # keep books that are in books.json but past the widget's cap
 
-FEED_TEMPLATE = "https://www.goodreads.com/review/list_rss/{}?shelf={}"
+WIDGET_URL = "https://www.goodreads.com/review/custom_widget/{}"
+UPDATES_URL = "https://www.goodreads.com/widgets/user_update_widget"
 OUTPUT_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "books.json"
+)
+
+USER_AGENT = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 "
+    "(KHTML, like Gecko) Version/17.0 Safari/605.1.15"
 )
 
 # A trailing parenthetical is nearly always series information on Goodreads:
@@ -40,12 +58,7 @@ MONTHS = [
 ]
 
 
-def text_of(item, tag):
-    node = item.find(tag)
-    if node is None or node.text is None:
-        return ""
-    return node.text.strip()
-
+# ---------------------------------------------------------------- titles
 
 def split_title(raw):
     """Return (title, subtitle, series) from a raw Goodreads title string."""
@@ -67,130 +80,311 @@ def split_title(raw):
     return title, subtitle, series
 
 
-def parse_date(value):
-    """Goodreads emits RFC-822-ish dates. Return a datetime or None."""
-    if not value:
-        return None
-    cleaned = re.sub(r"\s*[-+]\d{4}$", "", value).strip()
-    for fmt in ("%a, %d %b %Y %H:%M:%S", "%a, %d %b %Y"):
+def tidy_author(name):
+    """Widgets sometimes show 'Last, First'. Flip that to 'First Last'."""
+    name = name.strip()
+    match = re.match(r"^([^,]+),\s*([^,]+)$", name)
+    if match:
+        return "{} {}".format(match.group(2).strip(), match.group(1).strip())
+    return name
+
+
+def norm_key(title, author):
+    """Same book, however the title or author happens to be punctuated."""
+    t = " ".join(re.findall(r"[a-z0-9]+", title.lower()))
+    a = " ".join(sorted(re.findall(r"[a-z0-9]+", author.lower())))
+    return (t, a)
+
+
+# ---------------------------------------------------------------- dates
+
+def month_label(reader, verb, month, year):
+    return "{} {} {} {}".format(reader, verb, MONTHS[month - 1], year)
+
+
+def parse_update_date(text, now):
+    """'October 29' or 'December 12, 2025' from the updates widget."""
+    text = text.strip()
+    has_year = re.search(r"\d{4}", text) is not None
+    for fmt in ("%B %d, %Y", "%B %d %Y"):
         try:
-            return datetime.strptime(cleaned, fmt)
+            d = datetime.strptime(text, fmt)
+            return d.month, d.year
         except ValueError:
-            continue
-    return None
+            pass
+    try:
+        d = datetime.strptime("{} {}".format(text, now.year), "%B %d %Y")
+    except ValueError:
+        return None
+    if not has_year and d > now.replace(tzinfo=None):
+        # a yearless date can't be in the future, so it's from last year
+        d = d.replace(year=d.year - 1)
+    return d.month, d.year
 
 
-def date_label(reader, read_at, date_added):
-    """Prefer the date read. Fall back to the date added, labelled honestly."""
-    read = parse_date(read_at)
-    if read:
-        return "{} read {} {}".format(reader, MONTHS[read.month - 1], read.year)
-
-    added = parse_date(date_added)
-    if added:
-        return "{} added {} {}".format(reader, MONTHS[added.month - 1], added.year)
-
-    return reader
-
-
-def page_count(item):
-    """Return pages as an integer, or 0 when Goodreads doesn't supply one."""
-    raw = text_of(item, ".//num_pages")
-    if raw.isdigit():
-        return int(raw)
-    return 0
-
-
-def best_cover(item):
-    """The large image is full resolution. Fall back down the sizes if absent."""
-    for tag in (
-        "book_large_image_url",
-        "book_medium_image_url",
-        "book_image_url",
-        "book_small_image_url",
-    ):
-        url = text_of(item, tag)
-        if url and "nophoto" not in url:
-            return url
-    return ""
-
+# ---------------------------------------------------------------- network
 
 def fetch(url):
-    request = urllib.request.Request(
-        url, headers={"User-Agent": "shelf-display/1.0"}
-    )
+    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     with urllib.request.urlopen(request, timeout=45) as response:
-        return response.read()
+        return response.read().decode("utf-8", "replace")
 
 
-def books_for(reader):
-    """Return every book on one person's shelf, or None if the feed failed."""
-    url = FEED_TEMPLATE.format(reader["user_id"], SHELF)
+def widget_html(script):
+    """The widget is a script holding the shelf HTML as an escaped string."""
+    match = re.search(r"var widget_code = '([\s\S]*?)'(?:\r?\n|\s*$)", script)
+    if not match:
+        return None
+    text = match.group(1).replace("\\n", "\n")
+    return re.sub(r"\\(.)", r"\1", text, flags=re.S)
 
+
+# ---------------------------------------------------------------- shelf parsing
+
+VOID_TAGS = {"img", "br", "hr", "input", "meta", "link", "area", "base", "col", "wbr"}
+
+
+class ShelfParser(HTMLParser):
+    """Collect one record per book from the widget's HTML."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.items = []
+        self.cur = None
+        self.stack = []
+        self.in_author_link = False
+
+    def _inside(self, flag):
+        return any(flag in flags for _, flags in self.stack)
+
+    def handle_starttag(self, tag, attrs):
+        a = dict(attrs)
+        classes = (a.get("class") or "").split()
+
+        def has(prefix):
+            return any(c.startswith(prefix) for c in classes)
+
+        if tag not in VOID_TAGS:
+            flags = set()
+            if has("gr_custom_each_container"):
+                flags.add("item")
+                self.cur = {"title": "", "href": "", "img": "", "author": "", "stars": 0}
+                self.items.append(self.cur)
+            if has("gr_custom_book_container"):
+                flags.add("book")
+            if has("gr_custom_author"):
+                flags.add("author")
+            self.stack.append((tag, flags))
+
+        if self.cur is None:
+            return
+
+        if tag == "a" and self._inside("book") and not self.cur["href"]:
+            self.cur["href"] = a.get("href") or ""
+            self.cur["title"] = (a.get("title") or "").strip()
+        elif tag == "a" and self._inside("author"):
+            self.in_author_link = True
+        elif tag == "img":
+            src = a.get("src") or ""
+            if "star_active" in src:
+                self.cur["stars"] += 1
+            elif self._inside("book") and not self.cur["img"]:
+                self.cur["img"] = src
+
+    def handle_endtag(self, tag):
+        if tag == "a":
+            self.in_author_link = False
+        for i in range(len(self.stack) - 1, -1, -1):
+            if self.stack[i][0] == tag:
+                del self.stack[i:]
+                break
+
+    def handle_data(self, data):
+        if self.in_author_link and self.cur is not None:
+            self.cur["author"] += data
+
+
+def parse_shelf(html):
+    parser = ShelfParser()
+    parser.feed(html)
+    return [
+        item for item in parser.items
+        if item["title"] and item["img"] and "nophoto" not in item["img"]
+    ]
+
+
+def cover_id(url):
+    """Book ID from a cover URL like .../books/1761194644l/243042929._SX98_.jpg"""
+    match = re.search(r"/(\d+)(?:\._[^/]*)?\.\w+$", url)
+    return match.group(1) if match else None
+
+
+def full_cover(url):
+    """Drop the size suffix to get the full-resolution cover."""
+    return re.sub(r"\._S[XY]\d+_", "", url)
+
+
+# ---------------------------------------------------------------- updates widget
+
+def fetch_rating_dates(user_id, now):
+    """Return {book id: (month, year)} for recently rated books. Best effort."""
+    url = UPDATES_URL + "?" + urllib.parse.urlencode(
+        {"user": user_id, "num_updates": "10"}
+    )
     try:
-        raw = fetch(url)
+        html = fetch(url)
     except Exception as error:
-        print("Could not reach {}'s feed: {}".format(reader["name"], error),
-              file=sys.stderr)
-        return None
+        print("  (updates widget unavailable: {})".format(error), file=sys.stderr)
+        return {}
+
+    dates = {}
+    current = None  # only the first update of each day carries a date
+    chunks = re.split(r"(?=<div[^>]*class=[\"'][^\"']*\bupdate\b[^\"']*[\"'])", html)
+    for chunk in chunks[1:]:
+        day = re.search(
+            r"<p[^>]*>\s*([A-Z][a-z]+ \d{1,2}(?:,\s*\d{4})?)\s*</p>", chunk
+        )
+        if day:
+            current = parse_update_date(day.group(1), now)
+
+        action = re.search(r"class=[\"']updateAction[\"']", chunk)
+        action_text = ""
+        if action:
+            action_text = re.sub(r"<[^>]+>", " ", chunk[action.start():action.start() + 800])
+        image = re.search(
+            r"class=[\"']updateImage[\"'][\s\S]*?<img[^>]+src=[\"']([^\"']+)[\"']", chunk
+        )
+        book = cover_id(image.group(1)) if image else None
+
+        if current and book and "rated a book" in action_text and book not in dates:
+            dates[book] = current
+    return dates
+
+
+# ---------------------------------------------------------------- one reader
+
+def old_index(old_books):
+    by_id, by_key = {}, {}
+    for book in old_books:
+        by_id[book.get("id", "")] = book
+        by_key[norm_key(book.get("title", ""), book.get("author", ""))] = book
+    return by_id, by_key
+
+
+def books_for(reader, old_books, now):
+    """Return this person's books, or None if the widget couldn't be read."""
+    name, user_id = reader["name"], reader["user_id"]
+
+    params = urllib.parse.urlencode({
+        "shelf": SHELF,
+        "num_books": NUM_BOOKS,
+        "sort": "date_read",
+        "order": "d",
+        # Goodreads caches a widget by its ID and ignores other settings on a
+        # repeat request, so every run asks with a brand-new ID.
+        "widget_id": "{}-{}-{}".format(SHELF, user_id, int(time.time() * 1000)),
+    })
+    url = WIDGET_URL.format(user_id) + "?" + params
 
     try:
-        root = ET.fromstring(raw)
-    except ET.ParseError as error:
-        print("{}'s feed was not valid XML: {}".format(reader["name"], error),
+        script = fetch(url)
+    except Exception as error:
+        print("Could not reach {}'s shelf widget: {}".format(name, error),
               file=sys.stderr)
         return None
 
-    found = []
-    for item in root.iter("item"):
-        title, subtitle, series = split_title(text_of(item, "title"))
-        if not title:
-            continue
+    html = widget_html(script)
+    if not html:
+        print("{}'s shelf widget had no shelf in it.".format(name), file=sys.stderr)
+        return None
 
-        try:
-            rating = int(text_of(item, "user_rating") or 0)
-        except ValueError:
-            rating = 0
-
-        pages = page_count(item)
-
-        found.append(
-            {
-                "id": "{}-{}".format(reader["user_id"], text_of(item, "book_id")),
-                "reader": reader["name"],
-                "title": title,
-                "subtitle": subtitle,
-                "series": series,
-                "author": text_of(item, "author_name"),
-                "rating": rating,
-                "date": date_label(
-                    reader["name"],
-                    text_of(item, "user_read_at"),
-                    text_of(item, "user_date_added"),
-                ),
-                "pages": "{} pages".format(pages) if pages else "",
-                "cover": best_cover(item),
-            }
-        )
-
-    if not found:
+    parsed = parse_shelf(html)
+    if not parsed:
         print(
-            "{}'s feed came back empty. Is the profile set to public?".format(
-                reader["name"]
-            ),
+            "{}'s shelf widget had no books. Is the profile public?".format(name),
             file=sys.stderr,
         )
         return None
 
-    print("{}: {} books".format(reader["name"], len(found)))
-    return found
+    rating_dates = fetch_rating_dates(user_id, now)
+    by_id, by_key = old_index(old_books)
+
+    result, seen_ids = [], set()
+    matched = 0
+    for item in parsed:
+        title, subtitle, series = split_title(item["title"])
+        author = tidy_author(item["author"])
+        bid = cover_id(item["img"])
+        if not bid:
+            review = re.search(r"/review/show/(\d+)", item["href"])
+            bid = "r" + review.group(1) if review else ""
+        new_id = "{}-{}".format(user_id, bid)
+
+        old = by_id.get(new_id) or by_key.get(norm_key(title, author))
+        if old:
+            matched += 1
+            book = dict(old)
+            if item["stars"] > 0:
+                book["rating"] = item["stars"]
+        else:
+            if bid in rating_dates:
+                month, year = rating_dates[bid]
+                date = month_label(name, "read", month, year)
+            else:
+                date = month_label(name, "added", now.month, now.year)
+            book = {
+                "id": new_id,
+                "reader": name,
+                "title": title,
+                "subtitle": subtitle,
+                "series": series,
+                "author": author,
+                "rating": item["stars"],
+                "date": date,
+                "pages": "",
+                "cover": full_cover(item["img"]),
+            }
+
+        if book["id"] in seen_ids:
+            continue
+        seen_ids.add(book["id"])
+        result.append(book)
+
+    kept = 0
+    if KEEP_OLD_BOOKS:
+        for book in old_books:
+            if book.get("id") not in seen_ids:
+                result.append(book)
+                seen_ids.add(book.get("id"))
+                kept += 1
+
+    print("{}: {} from the widget ({} already known, {} new), {} kept from before".format(
+        name, len(parsed), matched, len(parsed) - matched, kept))
+    return result
+
+
+# ---------------------------------------------------------------- main
+
+def load_old_books():
+    """Books from the last successful run, grouped by reader name."""
+    try:
+        with open(OUTPUT_PATH, encoding="utf-8") as handle:
+            data = json.load(handle)
+    except (OSError, ValueError):
+        return {}
+    grouped = {}
+    for book in data.get("books", []):
+        grouped.setdefault(book.get("reader", ""), []).append(book)
+    return grouped
 
 
 def main():
+    now = datetime.now(timezone.utc)
+    old = load_old_books()
     books = []
 
     for reader in READERS:
-        found = books_for(reader)
+        found = books_for(reader, old.get(reader["name"], []), now)
         if found is None:
             # Bail out rather than publish half a shelf.
             print("Leaving books.json alone.", file=sys.stderr)
@@ -198,7 +392,7 @@ def main():
         books.extend(found)
 
     payload = {
-        "updated": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "updated": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "count": len(books),
         "books": books,
     }
