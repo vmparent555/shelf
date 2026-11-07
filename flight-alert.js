@@ -24,7 +24,7 @@
     debug: false,
     sound: true,                // two soft beeps when a new plane alert starts
     soundVolume: 0.18,          // 0 to 1; keep it low, it is meant to be subtle
-    soundQuietHours: null,      // e.g. [22, 7] = no beeps from 10 PM to 7 AM
+    soundQuietHours: [21, 9],   // silent from 9 PM until 9 AM; set to null for beeps at any hour
     maxAltFt: null,     // e.g. 40000 to ignore high overflights
     minAltFt: null,     // e.g. 500 to ignore ground-level noise
     minSpeedKt: 40,     // ignore helicopters hovering / slow stuff
@@ -538,7 +538,7 @@
 
   /* ---------- boot ---------- */
 
-  const api = { CFG, projectApproach, qualifies, aircraftName, airlineFromCallsign, fakeAircraft, poll, dbg, active, chime,
+  const api = { CFG, projectApproach, qualifies, aircraftName, airlineFromCallsign, fakeAircraft, poll, dbg, active, chime, inQuietHours,
     _setAudio(ctx) { audioCtx = ctx; } };
 
   if (typeof document === 'undefined') {            // node: export for tests
