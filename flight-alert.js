@@ -22,6 +22,9 @@
     searchNm: 10,       // feed search radius (nautical miles)
     apiKey: 'fia_VxmxxyDXgd4q9t-TODA-TC89-h1o09fuOCPCLLu_LWA',   // free FlyItalyADSB key
     debug: false,
+    sound: true,                // two soft beeps when a new plane alert starts
+    soundVolume: 0.18,          // 0 to 1; keep it low, it is meant to be subtle
+    soundQuietHours: null,      // e.g. [22, 7] = no beeps from 10 PM to 7 AM
     maxAltFt: null,     // e.g. 40000 to ignore high overflights
     minAltFt: null,     // e.g. 500 to ignore ground-level noise
     minSpeedKt: 40,     // ignore helicopters hovering / slow stuff
@@ -207,7 +210,7 @@
   }
 
   const dbg = { polls: 0, lastAt: 0, feed: '-', status: 'not polled yet', count: 0, nearest: '-',
-    pass: '-', route: '-', tries: [] };
+    pass: '-', route: '-', sound: '-', tries: [] };
 
   async function fetchAircraft() {
     if (CFG.test) { dbg.feed = 'test'; dbg.status = 'ghost plane'; return [fakeAircraft()]; }
@@ -268,6 +271,65 @@
     };
   }
 
+  /* ---------- sound ---------- */
+
+  // Browsers only allow audio after the page has been touched once. The tap that
+  // advances a slide counts, so after each reload tap the screen once.
+  let audioCtx = null;
+
+  function unlockAudio() {
+    try {
+      if (navigator.audioSession) navigator.audioSession.type = 'playback';   // play even on silent (iOS 16.4+)
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) { dbg.sound = 'not supported here'; return; }
+      if (!audioCtx) audioCtx = new AC();
+      if (audioCtx.state !== 'running') audioCtx.resume();
+      dbg.sound = audioCtx.state === 'running' ? 'ready' : 'waiting for a tap';
+    } catch (e) { dbg.sound = 'unavailable (' + explainError(e) + ')'; }
+  }
+
+  function beep(at, freq, dur, vol) {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.0001, at);
+    gain.gain.exponentialRampToValueAtTime(Math.max(vol, 0.0002), at + 0.015);
+    gain.gain.exponentialRampToValueAtTime(0.0001, at + dur);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(at);
+    osc.stop(at + dur + 0.03);
+  }
+
+  function inQuietHours() {
+    const q = CFG.soundQuietHours;
+    if (!q) return false;
+    const h = new Date().getHours();
+    return q[0] <= q[1] ? (h >= q[0] && h < q[1]) : (h >= q[0] || h < q[1]);
+  }
+
+  function chime() {
+    if (!CFG.sound) return;
+    if (inQuietHours()) { dbg.sound = 'quiet hours'; return; }
+    if (!audioCtx || audioCtx.state !== 'running') {
+      dbg.sound = 'blocked: tap the screen once, then it will beep';
+      return;
+    }
+    try {
+      const t = audioCtx.currentTime + 0.03;
+      beep(t, 880, 0.12, CFG.soundVolume);
+      beep(t + 0.2, 880, 0.12, CFG.soundVolume);
+      dbg.sound = 'played at ' + new Date().toLocaleTimeString();
+    } catch (e) { dbg.sound = 'failed (' + explainError(e) + ')'; }
+  }
+
+  function setupAudioUnlock() {
+    ['touchend', 'click', 'pointerdown', 'keydown'].forEach((name) => {
+      document.addEventListener(name, unlockAudio, { passive: true });
+    });
+  }
+
   /* ---------- state ---------- */
 
   const active = new Map();   // hex -> {ac, arriveAt, updatedAt}
@@ -292,6 +354,7 @@
           // once it's past closest approach, freeze the flyover time instead of sliding it forward
           const arriveAt = prev && proj.rawEta < 0 ? prev.arriveAt : now + proj.etaSec * 1000;
           active.set(ac.hex, { ac, arriveAt, updatedAt: now });
+          if (!prev) chime();                    // beep once per plane, when its alert starts
         } else if (was && !qualifies(ac, proj, true)) {
           active.delete(ac.hex);   // turned away or went out of range
         }
@@ -438,7 +501,8 @@
       'nearest: ' + dbg.nearest + '\n' +
       'next pass: ' + dbg.pass + '\n' +
       'alerts active: ' + active.size + '  banner ' + (shown ? 'ON' : 'off') + '\n' +
-      'route lookup: ' + dbg.route;
+      'route lookup: ' + dbg.route + '\n' +
+      'sound: ' + dbg.sound;
   }
 
   function tick() {
@@ -474,7 +538,8 @@
 
   /* ---------- boot ---------- */
 
-  const api = { CFG, projectApproach, qualifies, aircraftName, airlineFromCallsign, fakeAircraft, poll, dbg, active };
+  const api = { CFG, projectApproach, qualifies, aircraftName, airlineFromCallsign, fakeAircraft, poll, dbg, active, chime,
+    _setAudio(ctx) { audioCtx = ctx; } };
 
   if (typeof document === 'undefined') {            // node: export for tests
     if (typeof module !== 'undefined') module.exports = api;
@@ -484,6 +549,7 @@
   function start() {
     buildUi();
     setupTestTriggers();
+    setupAudioUnlock();
     poll();
     setInterval(poll, CFG.pollSec * 1000);
     setInterval(tick, 500);
