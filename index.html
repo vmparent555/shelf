@@ -280,16 +280,36 @@ body.dimmed {
     };
   }
 
-  function starsFor(count) {
+  var starCounter = 0;
+
+  // Draws five stars. A rating like 3.25 fills three stars and a quarter of
+  // the fourth, using a hard-edged gradient inside that one star.
+  function starsFor(rating) {
+    var value = parseFloat(rating) || 0;
     var markup = "";
-    var i;
+    var i, share, fill, defs, percent;
     for (i = 1; i <= 5; i++) {
+      share = Math.max(0, Math.min(1, value - (i - 1)));
+      defs = "";
+      if (share >= 0.99) {
+        fill = "#262320";
+      } else if (share <= 0.01) {
+        fill = "#d7d2c8";
+      } else {
+        starCounter++;
+        percent = Math.round(share * 100);
+        defs =
+          '<defs><linearGradient id="partial-star-' + starCounter +
+          '" x1="0" y1="0" x2="1" y2="0">' +
+          '<stop offset="' + percent + '%" stop-color="#262320"/>' +
+          '<stop offset="' + percent + '%" stop-color="#d7d2c8"/>' +
+          "</linearGradient></defs>";
+        fill = "url(#partial-star-" + starCounter + ")";
+      }
       markup +=
-        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' +
-        STAR_PATH +
-        '" fill="' +
-        (i <= count ? "#262320" : "#d7d2c8") +
-        '"/></svg>';
+        '<svg viewBox="0 0 24 24" aria-hidden="true">' +
+        defs +
+        '<path d="' + STAR_PATH + '" fill="' + fill + '"/></svg>';
     }
     return markup;
   }
