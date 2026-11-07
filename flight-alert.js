@@ -220,9 +220,9 @@
   /* ---------- test mode ghost plane ---------- */
 
   function fakeAircraft() {
-    const cycle = 80;                                    // seconds per loop
+    const cycle = 45;                                    // seconds per loop
     const t = (Date.now() / 1000) % cycle;
-    const mph = 420, startMi = 4.5, offsetMi = 0.15;     // flies west to east, 0.15 mi north of you
+    const mph = 420, startMi = 3.4, offsetMi = 0.15;     // flies west to east, 0.15 mi north of you
     const xMi = -startMi + (mph / 3600) * t;
     return {
       hex: 'test01', flight: 'FFT1234 ', t: 'A20N', alt_baro: 12400,
@@ -267,10 +267,9 @@
       '#fa-banner{position:fixed;top:0;left:0;right:0;z-index:2147483000;display:flex;align-items:center;gap:28px;',
       'padding:calc(env(safe-area-inset-top,0px) + 18px) 32px 18px;',
       'background:#d70f1a;color:#fff;border-bottom:6px solid #fff;',
-      'box-shadow:0 10px 40px rgba(215,15,26,.55),0 0 0 4px #d70f1a;',
       'font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;',
       'transform:translateY(-110%);transition:transform .45s cubic-bezier(.2,.9,.25,1);box-sizing:border-box}',
-      '#fa-banner.fa-on{transform:translateY(0)}',
+      '#fa-banner.fa-on{transform:translateY(0);box-shadow:0 10px 40px rgba(215,15,26,.55),0 0 0 4px #d70f1a}',
       '#fa-banner .fa-icon{font-size:64px;line-height:1;flex:none;display:inline-block;transform:rotate(-20deg)}',
       '#fa-banner .fa-main{flex:1;min-width:0}',
       '#fa-banner .fa-l1{font-size:38px;font-weight:800;line-height:1.1;letter-spacing:-.01em}',
