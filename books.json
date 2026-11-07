@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-07T17:36:31Z",
+ "updated": "2026-11-07T17:51:00Z",
  "count": 174,
  "books": [
   {
@@ -9,7 +9,7 @@
    "subtitle": "",
    "series": "",
    "author": "Denis Johnson",
-   "rating": 3,
+   "rating": 3.75,
    "date": "Vince read October 2026",
    "pages": "116 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1747752588l/12991188.jpg"
@@ -45,7 +45,7 @@
    "subtitle": "",
    "series": "",
    "author": "George Orwell",
-   "rating": 2,
+   "rating": 2.25,
    "date": "Vince read October 2026",
    "pages": "141 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1325861570l/170448.jpg"
@@ -57,7 +57,7 @@
    "subtitle": "",
    "series": "",
    "author": "Tim O'Brien",
-   "rating": 4,
+   "rating": 4.25,
    "date": "Vince read October 2026",
    "pages": "246 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1424663847l/133518.jpg"
@@ -81,7 +81,7 @@
    "subtitle": "",
    "series": "Dungeon Crawler Carl, #3",
    "author": "Matt Dinniman",
-   "rating": 4,
+   "rating": 4.25,
    "date": "Vince read September 2026",
    "pages": "532 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1719949594l/211721809._SY475_.jpg"
@@ -93,7 +93,7 @@
    "subtitle": "",
    "series": "",
    "author": "Stephen Graham Jones",
-   "rating": 4,
+   "rating": 4.5,
    "date": "Vince read September 2026",
    "pages": "448 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1779114576l/214565614._SY475_.jpg"
@@ -105,7 +105,7 @@
    "subtitle": "",
    "series": "Dungeon Crawler Carl, #2",
    "author": "Matt Dinniman",
-   "rating": 4,
+   "rating": 4.5,
    "date": "Vince read September 2026",
    "pages": "371 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1719949673l/212393364._SY475_.jpg"
@@ -129,7 +129,7 @@
    "subtitle": "",
    "series": "Dungeon Crawler Carl, #1",
    "author": "Matt Dinniman",
-   "rating": 4,
+   "rating": 4.5,
    "date": "Vince read August 2026",
    "pages": "464 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1734203042l/56791389._SY475_.jpg"
@@ -465,7 +465,7 @@
    "subtitle": "",
    "series": "",
    "author": "Beverly Daniel Tatum",
-   "rating": 1,
+   "rating": 1.5,
    "date": "Vince read July 2024",
    "pages": "464 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1404866456l/16280.jpg"
