@@ -4,14 +4,19 @@
 Goodreads retired its RSS feeds in October 2026, so this reads each person's
 public shelf widget instead (the embeddable shelf Goodreads still serves).
 
-The widget has no read dates and no page counts, so books already in
-books.json keep the date and page count they had. New books get a read date
-from Goodreads' public "recent updates" widget when it has one, and an
-honest "added <month>" label when it doesn't.
+The widget has no read dates and no page counts, so:
+  * Books already in books.json keep the date and page count they had.
+  * New books get a read date from Goodreads' public "recent updates" widget
+    when it has one, and an honest "added <month>" label when it doesn't.
+  * Missing page counts are looked up on Open Library (free, no key).
+  * Optional monthly boost: drop a Goodreads export into the exports/ folder
+    (exports/vince.csv, exports/missy.csv) and exact read dates, page counts
+    and ratings from the export win over everything above.
 
 Standard library only. No dependencies to install.
 """
 
+import csv
 import json
 import os
 import re
@@ -34,9 +39,14 @@ KEEP_OLD_BOOKS = True    # keep books that are in books.json but past the widget
 
 WIDGET_URL = "https://www.goodreads.com/review/custom_widget/{}"
 UPDATES_URL = "https://www.goodreads.com/widgets/user_update_widget"
-OUTPUT_PATH = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "books.json"
-)
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUTPUT_PATH = os.path.join(REPO_ROOT, "books.json")
+EXPORT_DIR = os.path.join(REPO_ROOT, "exports")
+
+OPEN_LIBRARY_SEARCH = "https://openlibrary.org/search.json"
+OPEN_LIBRARY_AGENT = "shelf-display/1.0 (personal book display; github.com/vmparent555/shelf)"
+MAX_PAGE_LOOKUPS = 40    # per run, so a big backlog fills in over a few days
+LOOKUP_PAUSE_SECONDS = 1.0
 
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 "
@@ -124,8 +134,8 @@ def parse_update_date(text, now):
 
 # ---------------------------------------------------------------- network
 
-def fetch(url):
-    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+def fetch(url, agent=USER_AGENT):
+    request = urllib.request.Request(url, headers={"User-Agent": agent})
     with urllib.request.urlopen(request, timeout=45) as response:
         return response.read().decode("utf-8", "replace")
 
@@ -363,6 +373,123 @@ def books_for(reader, old_books, now):
     return result
 
 
+# ---------------------------------------------------------------- Goodreads export (CSV)
+
+def load_export(reader):
+    """Rows from exports/<name>.csv, or [] if there isn't one."""
+    if not os.path.isdir(EXPORT_DIR):
+        return [], ""
+    name = reader["name"].lower()
+    files = sorted(
+        f for f in os.listdir(EXPORT_DIR)
+        if f.lower().endswith(".csv") and name in f.lower()
+    )
+    if not files:
+        return [], ""
+    path = os.path.join(EXPORT_DIR, files[-1])
+    try:
+        with open(path, newline="", encoding="utf-8-sig") as handle:
+            return list(csv.DictReader(handle)), files[-1]
+    except (OSError, csv.Error) as error:
+        print("Could not read {}: {}".format(path, error), file=sys.stderr)
+        return [], ""
+
+
+def read_month(value):
+    """'2026/03/14' (Goodreads export style) -> (3, 2026), or None."""
+    match = re.search(r"(\d{4})[/-](\d{1,2})[/-](\d{1,2})", value or "")
+    if not match:
+        return None
+    year, month = int(match.group(1)), int(match.group(2))
+    return (month, year) if 1 <= month <= 12 else None
+
+
+def apply_export(books, rows, reader):
+    """Exact dates, pages and ratings from a Goodreads export win."""
+    name, user_id = reader["name"], reader["user_id"]
+    by_id, by_key = {}, {}
+    for row in rows:
+        if (row.get("Exclusive Shelf") or "").strip().lower() != SHELF:
+            continue
+        title, _, _ = split_title(row.get("Title") or "")
+        if not title:
+            continue
+        pages = (row.get("Number of Pages") or "").strip()
+        rating = (row.get("My Rating") or "").strip()
+        record = {
+            "pages": int(pages) if pages.isdigit() else 0,
+            "rating": int(rating) if rating.isdigit() else 0,
+            "read": read_month(row.get("Date Read")),
+        }
+        book_id = (row.get("Book Id") or "").strip()
+        if book_id:
+            by_id["{}-{}".format(user_id, book_id)] = record
+        by_key[norm_key(title, row.get("Author") or "")] = record
+
+    changed = 0
+    for book in books:
+        record = by_id.get(book["id"]) or by_key.get(
+            norm_key(book["title"], book["author"])
+        )
+        if not record:
+            continue
+        if record["pages"]:
+            book["pages"] = "{} pages".format(record["pages"])
+        if record["rating"]:
+            book["rating"] = record["rating"]
+        if record["read"]:
+            month, year = record["read"]
+            book["date"] = month_label(name, "read", month, year)
+        changed += 1
+    return changed
+
+
+# ---------------------------------------------------------------- page counts (Open Library)
+
+def _words(text):
+    return set(re.findall(r"[a-z0-9]+", text.lower()))
+
+
+def lookup_pages(title, author):
+    """Typical page count for a book from Open Library, or 0 if unsure."""
+    query = urllib.parse.urlencode({
+        "title": title,
+        "author": author,
+        "limit": 5,
+        "fields": "title,author_name,number_of_pages_median",
+    })
+    data = json.loads(fetch(OPEN_LIBRARY_SEARCH + "?" + query, agent=OPEN_LIBRARY_AGENT))
+    wanted = _words(title)
+    for doc in data.get("docs", []):
+        pages = doc.get("number_of_pages_median")
+        found = _words(doc.get("title") or "")
+        # the match must really be this book, not just a similar search hit
+        if pages and found and (wanted <= found or found <= wanted):
+            return int(pages)
+    return 0
+
+
+def fill_missing_pages(books):
+    """Look up page counts for books that have none, a few per run."""
+    looked = filled = 0
+    for book in books:
+        if book.get("pages") or looked >= MAX_PAGE_LOOKUPS:
+            continue
+        looked += 1
+        try:
+            pages = lookup_pages(book["title"], book.get("author", ""))
+        except Exception as error:
+            print("  (page lookup failed for {}: {})".format(book["title"], error),
+                  file=sys.stderr)
+            pages = 0
+        if pages:
+            book["pages"] = "{} pages".format(pages)
+            filled += 1
+        time.sleep(LOOKUP_PAUSE_SECONDS)
+    if looked:
+        print("Page lookup: tried {}, found {}.".format(looked, filled))
+
+
 # ---------------------------------------------------------------- main
 
 def load_old_books():
@@ -389,7 +516,15 @@ def main():
             # Bail out rather than publish half a shelf.
             print("Leaving books.json alone.", file=sys.stderr)
             return 1
+
+        rows, filename = load_export(reader)
+        if rows:
+            changed = apply_export(found, rows, reader)
+            print("{}: {} books updated from exports/{}".format(
+                reader["name"], changed, filename))
         books.extend(found)
+
+    fill_missing_pages(books)
 
     payload = {
         "updated": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
