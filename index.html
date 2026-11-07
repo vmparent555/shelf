@@ -543,7 +543,48 @@ body.dimmed {
     load(false);
   }, REFETCH_MS);
 
+  // Swipe left to go back to the previous book. Tapping still moves forward.
+  var touchStartX = 0;
+  var touchStartY = 0;
+  var touchStartTime = 0;
+  var lastSwipe = 0;
+
+  function goBack() {
+    if (!deck.length) {
+      return;
+    }
+    // current points at the next book, so the one on screen is current - 1
+    // and the one before it is current - 2. From the first book, wrap to the last.
+    var target = current - 2;
+    if (target < 0) {
+      target = deck.length - 1;
+    }
+    current = target;
+    start();
+  }
+
+  document.addEventListener("touchstart", function (event) {
+    var touch = event.changedTouches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+    touchStartTime = new Date().getTime();
+  }, false);
+
+  document.addEventListener("touchend", function (event) {
+    var touch = event.changedTouches[0];
+    var dx = touch.clientX - touchStartX;
+    var dy = touch.clientY - touchStartY;
+    var elapsed = new Date().getTime() - touchStartTime;
+    if (elapsed < 900 && dx < -60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      lastSwipe = new Date().getTime();
+      goBack();
+    }
+  }, false);
+
   document.addEventListener("click", function () {
+    if (new Date().getTime() - lastSwipe < 600) {
+      return;
+    }
     start();
   }, false);
 })();
