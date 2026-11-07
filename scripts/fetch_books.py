@@ -334,7 +334,10 @@ def books_for(reader, old_books, now):
         if old:
             matched += 1
             book = dict(old)
-            if item["stars"] > 0:
+            # The widget may show only whole stars, so don't let it flatten a
+            # quarter-star rating (say 3.25) back to 3. A change of a full
+            # star or more still wins.
+            if item["stars"] > 0 and abs((book.get("rating") or 0) - item["stars"]) >= 1:
                 book["rating"] = item["stars"]
         else:
             if bid in rating_dates:
@@ -395,6 +398,16 @@ def load_export(reader):
         return [], ""
 
 
+def parse_rating(value):
+    """'3.25' -> 3.25, '4' -> 4, junk -> 0. Goodreads uses quarter stars now."""
+    try:
+        number = float((value or "").strip())
+    except ValueError:
+        return 0
+    number = round(min(max(number, 0), 5) * 4) / 4
+    return int(number) if number == int(number) else number
+
+
 def read_month(value):
     """'2026/03/14' (Goodreads export style) -> (3, 2026), or None."""
     match = re.search(r"(\d{4})[/-](\d{1,2})[/-](\d{1,2})", value or "")
@@ -415,10 +428,9 @@ def apply_export(books, rows, reader):
         if not title:
             continue
         pages = (row.get("Number of Pages") or "").strip()
-        rating = (row.get("My Rating") or "").strip()
         record = {
             "pages": int(pages) if pages.isdigit() else 0,
-            "rating": int(rating) if rating.isdigit() else 0,
+            "rating": parse_rating(row.get("My Rating")),
             "read": read_month(row.get("Date Read")),
         }
         book_id = (row.get("Book Id") or "").strip()
