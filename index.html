@@ -543,7 +543,7 @@ body.dimmed {
     load(false);
   }, REFETCH_MS);
 
-  // Swipe left to go back to the previous book. Tapping still moves forward.
+  // Swipe right to go back to the previous book. Tapping still moves forward.
   var touchStartX = 0;
   var touchStartY = 0;
   var touchStartTime = 0;
@@ -575,7 +575,7 @@ body.dimmed {
     var dx = touch.clientX - touchStartX;
     var dy = touch.clientY - touchStartY;
     var elapsed = new Date().getTime() - touchStartTime;
-    if (elapsed < 900 && dx < -60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+    if (elapsed < 900 && dx > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
       lastSwipe = new Date().getTime();
       goBack();
     }
