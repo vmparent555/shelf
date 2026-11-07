@@ -4,6 +4,8 @@
  * Drop-in: add <script src="flight-alert.js"></script> before </body>.
  *
  * Test mode: add ?flighttest to the page URL, or triple-tap the top-left corner.
+ * Debug panel: add ?flightdebug, or triple-tap the bottom-left corner. It shows what
+ * the flight feed is returning, so a silent failure is visible.
  * Override any setting before this script loads:
  *   window.FLIGHT_ALERT_CONFIG = { leadSec: 20, maxAltFt: 40000 };
  */
@@ -16,8 +18,10 @@
     radiusMi: 0.5,      // alert if predicted closest approach is inside this
     leadSec: 30,        // show banner this many seconds before flyover
     holdSec: 6,         // keep banner up this long after flyover
-    pollSec: 5,         // how often to check the feed
+    pollSec: 12,        // how often to check the feed (free key allows 300,000 a month)
     searchNm: 10,       // feed search radius (nautical miles)
+    apiKey: 'fia_VxmxxyDXgd4q9t-TODA-TC89-h1o09fuOCPCLLu_LWA',   // free FlyItalyADSB key
+    debug: false,
     maxAltFt: null,     // e.g. 40000 to ignore high overflights
     minAltFt: null,     // e.g. 500 to ignore ground-level noise
     minSpeedKt: 40,     // ignore helicopters hovering / slow stuff
@@ -165,31 +169,62 @@
 
   /* ---------- data fetching ---------- */
 
-  async function fetchJson(url, timeoutMs) {
+  async function fetchJson(url, timeoutMs, headers) {
     const ctl = new AbortController();
-    const to = setTimeout(() => ctl.abort(), timeoutMs || 6000);
+    const to = setTimeout(() => ctl.abort(), timeoutMs || 8000);
     try {
-      const r = await fetch(url, { signal: ctl.signal, cache: 'no-store' });
+      const r = await fetch(url, { signal: ctl.signal, cache: 'no-store', headers: headers || {} });
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return await r.json();
     } finally { clearTimeout(to); }
   }
 
-  const FEEDS = [
-    (lat, lon, nm) => 'https://api.adsb.lol/v2/point/' + lat + '/' + lon + '/' + nm,
-    (lat, lon, nm) => 'https://api.airplanes.live/v2/point/' + lat + '/' + lon + '/' + nm
-  ];
+  // The free no-key feeds (adsb.lol, adsb.fi, airplanes.live) don't allow web pages to read
+  // them, so the keyed FlyItalyADSB feed is the main source. adsb.lol is a last resort.
+  function feedList() {
+    const feeds = [];
+    if (CFG.apiKey) {
+      feeds.push({
+        name: 'FlyItalyADSB',
+        url: 'https://api.flyitalyadsb.com/api/aircraft/v2/lat/' + CFG.lat + '/lon/' + CFG.lon +
+          '/dist/' + CFG.searchNm + '/',
+        headers: { 'X-Api-Key': CFG.apiKey }
+      });
+    }
+    feeds.push({
+      name: 'adsb.lol',
+      url: 'https://api.adsb.lol/v2/point/' + CFG.lat + '/' + CFG.lon + '/' + CFG.searchNm,
+      headers: {}
+    });
+    return feeds;
+  }
+
+  function explainError(e) {
+    const msg = (e && e.message) || String(e);
+    if (e && e.name === 'AbortError') return 'timed out';
+    if (/Failed to fetch|NetworkError|Load failed/i.test(msg)) return 'blocked or offline (' + msg + ')';
+    return msg;
+  }
+
+  const dbg = { polls: 0, lastAt: 0, feed: '-', status: 'not polled yet', count: 0, nearest: '-',
+    pass: '-', route: '-', tries: [] };
 
   async function fetchAircraft() {
-    if (CFG.test) return [fakeAircraft()];
-    let lastErr;
-    for (const mk of FEEDS) {
+    if (CFG.test) { dbg.feed = 'test'; dbg.status = 'ghost plane'; return [fakeAircraft()]; }
+    dbg.tries = [];
+    for (const f of feedList()) {
       try {
-        const j = await fetchJson(mk(CFG.lat, CFG.lon, CFG.searchNm));
-        if (j && Array.isArray(j.ac || j.aircraft)) return j.ac || j.aircraft;
-      } catch (e) { lastErr = e; }
+        const j = await fetchJson(f.url, 8000, f.headers);
+        const list = j && (j.ac || j.aircraft);
+        if (!Array.isArray(list)) throw new Error('unexpected reply');
+        dbg.feed = f.name; dbg.status = 'ok';
+        return list;
+      } catch (e) {
+        dbg.tries.push(f.name + ': ' + explainError(e));
+      }
     }
-    throw lastErr || new Error('no feed');
+    dbg.feed = 'none'; dbg.status = 'FAILED';
+    throw new Error(dbg.tries.join(' | '));
   }
 
   const routeCache = new Map();   // callsign -> {airline, origin, destination} | null | 'pending'
@@ -213,8 +248,9 @@
           origin: placeName(fr.origin),
           destination: placeName(fr.destination)
         } : null);
+        dbg.route = cs + (fr ? ': route found' : ': no route on file');
       })
-      .catch(() => routeCache.delete(cs));   // allow retry later
+      .catch((e) => { dbg.route = cs + ': lookup failed (' + explainError(e) + ')'; routeCache.delete(cs); });
   }
 
   /* ---------- test mode ghost plane ---------- */
@@ -237,13 +273,19 @@
   const active = new Map();   // hex -> {ac, arriveAt, updatedAt}
 
   async function poll() {
+    if (typeof document !== 'undefined' && document.hidden && !CFG.test) return;      // a hidden tab isn't watching the sky
+    dbg.polls++;
     try {
       const list = await fetchAircraft();
       const now = Date.now();
+      dbg.lastAt = now; dbg.count = list.length;
+      let nearest = null, soonest = null;
       for (const ac of list) {
         if (ac.lat == null || ac.lon == null || ac.gs == null || ac.track == null) continue;
         const proj = projectApproach(ac);
         const was = active.has(ac.hex);
+        if (!nearest || proj.distMi < nearest.proj.distMi) nearest = { ac, proj };
+        if (proj.rawEta > 0 && proj.missMi < 2 && (!soonest || proj.rawEta < soonest.proj.rawEta)) soonest = { ac, proj };
         if (proj.missMi <= CFG.radiusMi * 1.6 && proj.etaSec <= 120) lookupRoute(callsignOf(ac));
         if (qualifies(ac, proj, was) && proj.etaSec <= CFG.leadSec) {
           const prev = active.get(ac.hex);
@@ -254,12 +296,23 @@
           active.delete(ac.hex);   // turned away or went out of range
         }
       }
-    } catch (e) { /* feed down; keep what we have, tick() times stale entries out */ }
+      dbg.nearest = nearest
+        ? (callsignOf(nearest.ac) || nearest.ac.hex) + ' ' + nearest.proj.distMi.toFixed(1) + ' mi away'
+        : 'none in range';
+      dbg.pass = soonest
+        ? (callsignOf(soonest.ac) || soonest.ac.hex) + ' passes ' + soonest.proj.missMi.toFixed(2) +
+          ' mi away in ' + Math.round(soonest.proj.rawEta) + 's'
+        : 'nothing heading this way';
+    } catch (e) {
+      dbg.lastAt = Date.now(); dbg.count = 0;
+      dbg.nearest = '-'; dbg.pass = '-';
+      dbg.status = 'FAILED: ' + explainError(e);
+    }
   }
 
   /* ---------- UI ---------- */
 
-  let el = null, baseHtmlPad = '', shown = false;
+  let el = null, dbgEl = null, baseHtmlPad = '', shown = false;
 
   function buildUi() {
     const css = document.createElement('style');
@@ -276,6 +329,10 @@
       '#fa-banner .fa-l2{font-size:26px;font-weight:600;line-height:1.25;margin-top:6px}',
       '#fa-banner .fa-l3{font-size:24px;font-weight:500;line-height:1.25;margin-top:8px;opacity:.95}',
       '#fa-banner .fa-l3 b{font-weight:800}',
+      '#fa-banner .fa-credit{font-size:13px;font-weight:500;margin-top:8px;opacity:.7}',
+      '#fa-debug{position:fixed;left:8px;bottom:8px;z-index:2147483100;max-width:92vw;padding:8px 10px;',
+      'background:rgba(0,0,0,.78);color:#9dff9d;font:12px/1.35 ui-monospace,Menlo,monospace;border-radius:6px;',
+      'white-space:pre-wrap;pointer-events:none}',
       '#fa-banner .fa-l3 span+span{margin-left:28px}',
       '#fa-banner .fa-count{flex:none;text-align:right;font-variant-numeric:tabular-nums}',
       '#fa-banner .fa-count .fa-num{font-size:84px;font-weight:900;line-height:.95;letter-spacing:-.02em}',
@@ -299,9 +356,15 @@
     el.setAttribute('role', 'alert');
     el.innerHTML =
       '<div class="fa-icon" aria-hidden="true">\u2708\uFE0E</div>' +
-      '<div class="fa-main"><div class="fa-l1"></div><div class="fa-l2"></div><div class="fa-l3"></div></div>' +
+      '<div class="fa-main"><div class="fa-l1"></div><div class="fa-l2"></div><div class="fa-l3"></div>' +
+      '<div class="fa-credit">Flight data: FlyItalyADSB (flyitalyadsb.com), CC BY-SA 4.0</div></div>' +
       '<div class="fa-count"><div class="fa-num"></div><div class="fa-sub"></div></div>';
     document.body.appendChild(el);
+
+    dbgEl = document.createElement('div');
+    dbgEl.id = 'fa-debug';
+    dbgEl.style.display = 'none';
+    document.body.appendChild(dbgEl);
 
     baseHtmlPad = document.documentElement.style.paddingTop || '';
     document.documentElement.style.transition = 'padding-top .45s cubic-bezier(.2,.9,.25,1)';
@@ -362,8 +425,25 @@
     document.documentElement.style.paddingTop = on ? h + 'px' : baseHtmlPad;
   }
 
+  function renderDebug(now) {
+    if (!dbgEl) return;
+    dbgEl.style.display = CFG.debug ? '' : 'none';
+    if (!CFG.debug) return;
+    const age = dbg.lastAt ? Math.round((now - dbg.lastAt) / 1000) + 's ago' : 'never';
+    dbgEl.textContent =
+      'FLIGHT DEBUG  poll #' + dbg.polls + ', last ' + age + '\n' +
+      'feed: ' + dbg.feed + '  ' + dbg.status + '\n' +
+      (dbg.tries.length ? 'tried: ' + dbg.tries.join(' | ') + '\n' : '') +
+      'aircraft within ' + CFG.searchNm + ' nm: ' + dbg.count + '\n' +
+      'nearest: ' + dbg.nearest + '\n' +
+      'next pass: ' + dbg.pass + '\n' +
+      'alerts active: ' + active.size + '  banner ' + (shown ? 'ON' : 'off') + '\n' +
+      'route lookup: ' + dbg.route;
+  }
+
   function tick() {
     const now = Date.now();
+    renderDebug(now);
     for (const [hex, a] of active) {
       if (now > a.arriveAt + CFG.holdSec * 1000 || now - a.updatedAt > 20000) active.delete(hex);
     }
@@ -378,23 +458,23 @@
 
   function setupTestTriggers() {
     if (/[?&]flighttest/.test(location.search)) CFG.test = true;
-    let taps = [];
+    if (/[?&]flightdebug/.test(location.search)) CFG.debug = true;
+    let topTaps = [], bottomTaps = [];
     document.addEventListener('pointerdown', (e) => {
-      if (e.clientX > 90 || e.clientY > 90) return;
       const now = Date.now();
-      taps = taps.filter((t) => now - t < 1500).concat(now);
-      if (taps.length >= 3) {
-        taps = [];
-        CFG.test = !CFG.test;
-        active.clear();
-        poll();
+      if (e.clientX < 90 && e.clientY < 90) {                       // top-left x3: test mode
+        topTaps = topTaps.filter((t) => now - t < 1500).concat(now);
+        if (topTaps.length >= 3) { topTaps = []; CFG.test = !CFG.test; active.clear(); poll(); }
+      } else if (e.clientX < 90 && e.clientY > window.innerHeight - 90) {   // bottom-left x3: debug panel
+        bottomTaps = bottomTaps.filter((t) => now - t < 1500).concat(now);
+        if (bottomTaps.length >= 3) { bottomTaps = []; CFG.debug = !CFG.debug; }
       }
     }, { passive: true });
   }
 
   /* ---------- boot ---------- */
 
-  const api = { CFG, projectApproach, qualifies, aircraftName, airlineFromCallsign, fakeAircraft };
+  const api = { CFG, projectApproach, qualifies, aircraftName, airlineFromCallsign, fakeAircraft, poll, dbg, active };
 
   if (typeof document === 'undefined') {            // node: export for tests
     if (typeof module !== 'undefined') module.exports = api;
@@ -413,4 +493,3 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();
 })();
-
