@@ -1,7 +1,31 @@
 {
- "updated": "2026-10-27T17:23:04Z",
- "count": 168,
+ "updated": "2026-11-07T17:06:02Z",
+ "count": 174,
  "books": [
+  {
+   "id": "166663242-12991188",
+   "reader": "Vince",
+   "title": "Train Dreams",
+   "subtitle": "",
+   "series": "",
+   "author": "Denis Johnson",
+   "rating": 3,
+   "date": "Vince read October 2026",
+   "pages": "",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1747752588l/12991188.jpg"
+  },
+  {
+   "id": "166663242-6288",
+   "reader": "Vince",
+   "title": "The Road",
+   "subtitle": "",
+   "series": "",
+   "author": "Cormac McCarthy",
+   "rating": 4,
+   "date": "Vince read October 2026",
+   "pages": "241 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1600241424l/6288.jpg"
+  },
   {
    "id": "166663242-58662236",
    "reader": "Vince",
@@ -13,18 +37,6 @@
    "date": "Vince read October 2026",
    "pages": "118 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1734631773l/58662236._SX318_.jpg"
-  },
-  {
-   "id": "166663242-6288",
-   "reader": "Vince",
-   "title": "The Road",
-   "subtitle": "",
-   "series": "",
-   "author": "Cormac McCarthy",
-   "rating": 3,
-   "date": "Vince read October 2026",
-   "pages": "241 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1600241424l/6288.jpg"
   },
   {
    "id": "166663242-170448",
@@ -51,52 +63,16 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1424663847l/133518.jpg"
   },
   {
-   "id": "166663242-56791389",
+   "id": "166663242-905",
    "reader": "Vince",
-   "title": "Dungeon Crawler Carl",
-   "subtitle": "",
-   "series": "Dungeon Crawler Carl, #1",
-   "author": "Matt Dinniman",
-   "rating": 4,
-   "date": "Vince read August 2026",
-   "pages": "464 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1734203042l/56791389._SY475_.jpg"
-  },
-  {
-   "id": "166663242-212393364",
-   "reader": "Vince",
-   "title": "Carl's Doomsday Scenario",
-   "subtitle": "",
-   "series": "Dungeon Crawler Carl, #2",
-   "author": "Matt Dinniman",
-   "rating": 4,
-   "date": "Vince read September 2026",
-   "pages": "371 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1719949673l/212393364._SY475_.jpg"
-  },
-  {
-   "id": "166663242-16280",
-   "reader": "Vince",
-   "title": "Why Are All The Black Kids Sitting Together in the Cafeteria?",
-   "subtitle": "",
+   "title": "The Inner Game of Tennis",
+   "subtitle": "The Classic Guide to the Mental Side of Peak Performance",
    "series": "",
-   "author": "Beverly Daniel Tatum",
-   "rating": 1,
-   "date": "Vince read July 2024",
-   "pages": "464 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1404866456l/16280.jpg"
-  },
-  {
-   "id": "166663242-214565614",
-   "reader": "Vince",
-   "title": "The Buffalo Hunter Hunter",
-   "subtitle": "",
-   "series": "",
-   "author": "Stephen Graham Jones",
+   "author": "W. Timothy Gallwey",
    "rating": 4,
-   "date": "Vince read September 2026",
-   "pages": "448 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1779114576l/214565614._SY475_.jpg"
+   "date": "Vince read October 2026",
+   "pages": "134 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1750018611l/905._SY475_.jpg"
   },
   {
    "id": "166663242-211721809",
@@ -111,28 +87,28 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1719949594l/211721809._SY475_.jpg"
   },
   {
-   "id": "166663242-905",
+   "id": "166663242-214565614",
    "reader": "Vince",
-   "title": "The Inner Game of Tennis",
-   "subtitle": "The Classic Guide to the Mental Side of Peak Performance",
+   "title": "The Buffalo Hunter Hunter",
+   "subtitle": "",
    "series": "",
-   "author": "W. Timothy Gallwey",
+   "author": "Stephen Graham Jones",
    "rating": 4,
-   "date": "Vince read October 2026",
-   "pages": "134 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1750018611l/905._SY475_.jpg"
+   "date": "Vince read September 2026",
+   "pages": "448 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1779114576l/214565614._SY475_.jpg"
   },
   {
-   "id": "166663242-55660422",
+   "id": "166663242-212393364",
    "reader": "Vince",
-   "title": "Out of the Shadows",
+   "title": "Carl's Doomsday Scenario",
    "subtitle": "",
-   "series": "Star Wars: The High Republic",
-   "author": "Justina Ireland",
-   "rating": 2,
-   "date": "Vince read August 2023",
-   "pages": "432 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1623669656l/55660422.jpg"
+   "series": "Dungeon Crawler Carl, #2",
+   "author": "Matt Dinniman",
+   "rating": 4,
+   "date": "Vince read September 2026",
+   "pages": "371 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1719949673l/212393364._SY475_.jpg"
   },
   {
    "id": "166663242-8143909",
@@ -145,6 +121,18 @@
    "date": "Vince read August 2026",
    "pages": "101 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1328146652l/8143909.jpg"
+  },
+  {
+   "id": "166663242-56791389",
+   "reader": "Vince",
+   "title": "Dungeon Crawler Carl",
+   "subtitle": "",
+   "series": "Dungeon Crawler Carl, #1",
+   "author": "Matt Dinniman",
+   "rating": 4,
+   "date": "Vince read August 2026",
+   "pages": "464 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1734203042l/56791389._SY475_.jpg"
   },
   {
    "id": "166663242-4406",
@@ -255,18 +243,6 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1592234429l/45064996._SY475_.jpg"
   },
   {
-   "id": "166663242-24490481",
-   "reader": "Vince",
-   "title": "Harry Potter and the Sorcerer's Stone",
-   "subtitle": "",
-   "series": "Harry Potter, #1",
-   "author": "J.K. Rowling",
-   "rating": 5,
-   "date": "Vince read May 2025",
-   "pages": "248 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1427663334l/24490481.jpg"
-  },
-  {
    "id": "166663242-29241319",
    "reader": "Vince",
    "title": "Harry Potter and the Chamber of Secrets",
@@ -301,6 +277,18 @@
    "date": "Vince read June 2025",
    "pages": "410 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1485379708l/32617148._SY475_.jpg"
+  },
+  {
+   "id": "166663242-24490481",
+   "reader": "Vince",
+   "title": "Harry Potter and the Sorcerer's Stone",
+   "subtitle": "",
+   "series": "Harry Potter, #1",
+   "author": "J.K. Rowling",
+   "rating": 5,
+   "date": "Vince read May 2025",
+   "pages": "248 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1427663334l/24490481.jpg"
   },
   {
    "id": "166663242-44073124",
@@ -351,18 +339,6 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1576956100l/5043.jpg"
   },
   {
-   "id": "166663242-205213487",
-   "reader": "Vince",
-   "title": "Learning Evolution",
-   "subtitle": "The New Era of AI in the Classroom",
-   "series": "",
-   "author": "Carl Hooker",
-   "rating": 3,
-   "date": "Vince read October 2024",
-   "pages": "273 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1705001189l/205213487._SY475_.jpg"
-  },
-  {
    "id": "166663242-171681821",
    "reader": "Vince",
    "title": "The Anxious Generation",
@@ -373,6 +349,18 @@
    "date": "Vince read October 2024",
    "pages": "385 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1711573377l/171681821._SY475_.jpg"
+  },
+  {
+   "id": "166663242-205213487",
+   "reader": "Vince",
+   "title": "Learning Evolution",
+   "subtitle": "The New Era of AI in the Classroom",
+   "series": "",
+   "author": "Carl Hooker",
+   "rating": 3,
+   "date": "Vince read October 2024",
+   "pages": "273 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1705001189l/205213487._SY475_.jpg"
   },
   {
    "id": "166663242-124019528",
@@ -447,6 +435,18 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1618269830l/38709._SX318_.jpg"
   },
   {
+   "id": "166663242-21787",
+   "reader": "Vince",
+   "title": "The Princess Bride",
+   "subtitle": "",
+   "series": "",
+   "author": "William Goldman",
+   "rating": 5,
+   "date": "Vince read July 2024",
+   "pages": "429 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1327903636l/21787.jpg"
+  },
+  {
    "id": "166663242-65154375",
    "reader": "Vince",
    "title": "Edna St. Vincent Millay Poetry Collection, Early Poems 1912-1923",
@@ -459,16 +459,16 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1670752215l/65154375._SY475_.jpg"
   },
   {
-   "id": "166663242-21787",
+   "id": "166663242-16280",
    "reader": "Vince",
-   "title": "The Princess Bride",
+   "title": "Why Are All The Black Kids Sitting Together in the Cafeteria?",
    "subtitle": "",
    "series": "",
-   "author": "William Goldman",
-   "rating": 5,
+   "author": "Beverly Daniel Tatum",
+   "rating": 1,
    "date": "Vince read July 2024",
-   "pages": "429 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1327903636l/21787.jpg"
+   "pages": "464 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1404866456l/16280.jpg"
   },
   {
    "id": "166663242-54493401",
@@ -567,18 +567,6 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1411218313l/43369.jpg"
   },
   {
-   "id": "166663242-32191710",
-   "reader": "Vince",
-   "title": "Astrophysics for People in a Hurry",
-   "subtitle": "",
-   "series": "",
-   "author": "Neil deGrasse Tyson",
-   "rating": 5,
-   "date": "Vince added November 2023",
-   "pages": "223 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562761669l/32191710._SY475_.jpg"
-  },
-  {
    "id": "166663242-58640333",
    "reader": "Vince",
    "title": "Midnight Horizon",
@@ -627,6 +615,18 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1406525749l/111209.jpg"
   },
   {
+   "id": "166663242-55660422",
+   "reader": "Vince",
+   "title": "Out of the Shadows",
+   "subtitle": "",
+   "series": "Star Wars: The High Republic",
+   "author": "Justina Ireland",
+   "rating": 2,
+   "date": "Vince read August 2023",
+   "pages": "432 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1623669656l/55660422.jpg"
+  },
+  {
    "id": "166663242-55644027",
    "reader": "Vince",
    "title": "The Rising Storm",
@@ -639,18 +639,6 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1607094743l/55644027.jpg"
   },
   {
-   "id": "166663242-51734016",
-   "reader": "Vince",
-   "title": "A Test of Courage",
-   "subtitle": "",
-   "series": "Star Wars: The High Republic",
-   "author": "Justina Ireland",
-   "rating": 3,
-   "date": "Vince added July 2023",
-   "pages": "230 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1582737315l/51734016.jpg"
-  },
-  {
    "id": "166663242-51733546",
    "reader": "Vince",
    "title": "Into the Dark",
@@ -661,54 +649,6 @@
    "date": "Vince read July 2023",
    "pages": "425 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1582663291l/51733546.jpg"
-  },
-  {
-   "id": "166663242-53112442",
-   "reader": "Vince",
-   "title": "Chaos Rising",
-   "subtitle": "",
-   "series": "Star Wars: Thrawn Ascendancy, #1",
-   "author": "Timothy Zahn",
-   "rating": 5,
-   "date": "Vince added June 2023",
-   "pages": "400 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1574793053l/53112442._SX318_SY475_.jpg"
-  },
-  {
-   "id": "166663242-1617",
-   "reader": "Vince",
-   "title": "Night",
-   "subtitle": "",
-   "series": "",
-   "author": "Elie Wiesel",
-   "rating": 5,
-   "date": "Vince added June 2023",
-   "pages": "120 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1709507006l/1617._SY475_.jpg"
-  },
-  {
-   "id": "166663242-21",
-   "reader": "Vince",
-   "title": "A Short History of Nearly Everything",
-   "subtitle": "",
-   "series": "",
-   "author": "Bill  Bryson",
-   "rating": 5,
-   "date": "Vince added June 2023",
-   "pages": "544 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1433086293l/21._SY475_.jpg"
-  },
-  {
-   "id": "166663242-541132",
-   "reader": "Vince",
-   "title": "Punished by Rewards",
-   "subtitle": "The Trouble with Gold Stars, Incentive Plans, A's, Praise and Other Bribes",
-   "series": "",
-   "author": "Alfie Kohn",
-   "rating": 5,
-   "date": "Vince added June 2023",
-   "pages": "398 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1422456630l/541132.jpg"
   },
   {
    "id": "166663242-51637946",
@@ -735,6 +675,18 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1347516491l/51853.jpg"
   },
   {
+   "id": "166663242-1617",
+   "reader": "Vince",
+   "title": "Night",
+   "subtitle": "",
+   "series": "",
+   "author": "Elie Wiesel",
+   "rating": 5,
+   "date": "Vince added June 2023",
+   "pages": "120 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1709507006l/1617._SY475_.jpg"
+  },
+  {
    "id": "166663242-111210",
    "reader": "Vince",
    "title": "The Homework Myth",
@@ -747,52 +699,52 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1387736354l/111210.jpg"
   },
   {
-   "id": "166663242-58539346",
+   "id": "166663242-541132",
    "reader": "Vince",
-   "title": "Blood in the Garden",
-   "subtitle": "The Flagrant History of the 1990s New York Knicks",
+   "title": "Punished by Rewards",
+   "subtitle": "The Trouble with Gold Stars, Incentive Plans, A's, Praise and Other Bribes",
    "series": "",
-   "author": "Chris  Herring",
+   "author": "Alfie Kohn",
    "rating": 5,
    "date": "Vince added June 2023",
-   "pages": "368 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1633370523l/58539346.jpg"
+   "pages": "398 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1422456630l/541132.jpg"
   },
   {
-   "id": "166663242-55213763",
+   "id": "166663242-21",
    "reader": "Vince",
-   "title": "Lesser Evil",
+   "title": "A Short History of Nearly Everything",
    "subtitle": "",
-   "series": "Star Wars: Thrawn Ascendancy, #3",
+   "series": "",
+   "author": "Bill  Bryson",
+   "rating": 5,
+   "date": "Vince added June 2023",
+   "pages": "544 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1433086293l/21._SY475_.jpg"
+  },
+  {
+   "id": "166663242-31140332",
+   "reader": "Vince",
+   "title": "Thrawn",
+   "subtitle": "",
+   "series": "Star Wars: Thrawn, #1",
    "author": "Timothy Zahn",
    "rating": 5,
    "date": "Vince added June 2023",
-   "pages": "416 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1617449776l/55213763._SX318_.jpg"
+   "pages": "427 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1468787895l/31140332._SY475_.jpg"
   },
   {
-   "id": "166663242-55213748",
+   "id": "166663242-32191710",
    "reader": "Vince",
-   "title": "Greater Good",
+   "title": "Astrophysics for People in a Hurry",
    "subtitle": "",
-   "series": "Star Wars: Thrawn Ascendancy, #2",
-   "author": "Timothy Zahn",
+   "series": "",
+   "author": "Neil deGrasse Tyson",
    "rating": 5,
-   "date": "Vince added June 2023",
-   "pages": "432 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1603988845l/55213748._SY475_.jpg"
-  },
-  {
-   "id": "166663242-43160651",
-   "reader": "Vince",
-   "title": "Thrawn: Treason",
-   "subtitle": "",
-   "series": "Star Wars: Thrawn, #3",
-   "author": "Timothy Zahn",
-   "rating": 5,
-   "date": "Vince added June 2023",
-   "pages": "333 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1545447248l/43160651.jpg"
+   "date": "Vince added November 2023",
+   "pages": "223 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562761669l/32191710._SY475_.jpg"
   },
   {
    "id": "166663242-36385830",
@@ -807,16 +759,136 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1511385584l/36385830.jpg"
   },
   {
-   "id": "166663242-31140332",
+   "id": "166663242-43160651",
    "reader": "Vince",
-   "title": "Thrawn",
+   "title": "Thrawn: Treason",
    "subtitle": "",
-   "series": "Star Wars: Thrawn, #1",
+   "series": "Star Wars: Thrawn, #3",
    "author": "Timothy Zahn",
    "rating": 5,
    "date": "Vince added June 2023",
-   "pages": "427 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1468787895l/31140332._SY475_.jpg"
+   "pages": "333 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1545447248l/43160651.jpg"
+  },
+  {
+   "id": "166663242-53112442",
+   "reader": "Vince",
+   "title": "Chaos Rising",
+   "subtitle": "",
+   "series": "Star Wars: Thrawn Ascendancy, #1",
+   "author": "Timothy Zahn",
+   "rating": 5,
+   "date": "Vince added June 2023",
+   "pages": "400 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1574793053l/53112442._SX318_SY475_.jpg"
+  },
+  {
+   "id": "166663242-51734016",
+   "reader": "Vince",
+   "title": "A Test of Courage",
+   "subtitle": "",
+   "series": "Star Wars: The High Republic",
+   "author": "Justina Ireland",
+   "rating": 3,
+   "date": "Vince added July 2023",
+   "pages": "230 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1582737315l/51734016.jpg"
+  },
+  {
+   "id": "166663242-55213748",
+   "reader": "Vince",
+   "title": "Greater Good",
+   "subtitle": "",
+   "series": "Star Wars: Thrawn Ascendancy, #2",
+   "author": "Timothy Zahn",
+   "rating": 5,
+   "date": "Vince added June 2023",
+   "pages": "432 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1603988845l/55213748._SY475_.jpg"
+  },
+  {
+   "id": "166663242-55213763",
+   "reader": "Vince",
+   "title": "Lesser Evil",
+   "subtitle": "",
+   "series": "Star Wars: Thrawn Ascendancy, #3",
+   "author": "Timothy Zahn",
+   "rating": 5,
+   "date": "Vince added June 2023",
+   "pages": "416 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1617449776l/55213763._SX318_.jpg"
+  },
+  {
+   "id": "166663242-58539346",
+   "reader": "Vince",
+   "title": "Blood in the Garden",
+   "subtitle": "The Flagrant History of the 1990s New York Knicks",
+   "series": "",
+   "author": "Chris  Herring",
+   "rating": 5,
+   "date": "Vince added June 2023",
+   "pages": "368 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1633370523l/58539346.jpg"
+  },
+  {
+   "id": "78748822-240113697",
+   "reader": "Missy",
+   "title": "Nobody's Girl",
+   "subtitle": "A Memoir of Surviving Abuse and Fighting for Justice",
+   "series": "",
+   "author": "Virginia Roberts Giuffre",
+   "rating": 5,
+   "date": "Missy read November 2026",
+   "pages": "",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1756130481l/240113697.jpg"
+  },
+  {
+   "id": "78748822-231126811",
+   "reader": "Missy",
+   "title": "Best Offer Wins",
+   "subtitle": "",
+   "series": "",
+   "author": "Marisa Kashino",
+   "rating": 4,
+   "date": "Missy read October 2026",
+   "pages": "",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1763994008l/231126811.jpg"
+  },
+  {
+   "id": "78748822-246185075",
+   "reader": "Missy",
+   "title": "The Butcher Legacy",
+   "subtitle": "",
+   "series": "Dr. Wren Muller, #3",
+   "author": "Alaina Urquhart",
+   "rating": 4,
+   "date": "Missy read October 2026",
+   "pages": "",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1767775446l/246185075.jpg"
+  },
+  {
+   "id": "78748822-905",
+   "reader": "Missy",
+   "title": "The Inner Game of Tennis",
+   "subtitle": "The Classic Guide to the Mental Side of Peak Performance",
+   "series": "",
+   "author": "W. Timothy Gallwey",
+   "rating": 3,
+   "date": "Missy read October 2026",
+   "pages": "",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1750018611l/905.jpg"
+  },
+  {
+   "id": "78748822-244967300",
+   "reader": "Missy",
+   "title": "Mother Daughter Sister Stranger",
+   "subtitle": "",
+   "series": "",
+   "author": "Hank Phillippi Ryan",
+   "rating": 4,
+   "date": "Missy read October 2026",
+   "pages": "",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1770227647l/244967300.jpg"
   },
   {
    "id": "78748822-233013304",
@@ -1167,18 +1239,6 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1740541747l/223227206._SY475_.jpg"
   },
   {
-   "id": "78748822-90202302",
-   "reader": "Missy",
-   "title": "Iron Flame",
-   "subtitle": "",
-   "series": "The Empyrean, #2",
-   "author": "Rebecca Yarros",
-   "rating": 3,
-   "date": "Missy read May 2026",
-   "pages": "623 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1706724269l/90202302._SY475_.jpg"
-  },
-  {
    "id": "78748822-209439446",
    "reader": "Missy",
    "title": "Onyx Storm",
@@ -1189,18 +1249,6 @@
    "date": "Missy read July 2026",
    "pages": "544 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1766329694l/209439446._SY475_.jpg"
-  },
-  {
-   "id": "78748822-219385951",
-   "reader": "Missy",
-   "title": "Gone Before Goodbye",
-   "subtitle": "",
-   "series": "",
-   "author": "Reese Witherspoon",
-   "rating": 3,
-   "date": "Missy read July 2026",
-   "pages": "340 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1761313344l/219385951._SY475_.jpg"
   },
   {
    "id": "78748822-217927640",
@@ -1215,16 +1263,16 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1750868963l/217927640._SY475_.jpg"
   },
   {
-   "id": "78748822-223665360",
+   "id": "78748822-219385951",
    "reader": "Missy",
-   "title": "The Mad Wife",
+   "title": "Gone Before Goodbye",
    "subtitle": "",
    "series": "",
-   "author": "Meagan Church",
-   "rating": 5,
-   "date": "Missy read June 2026",
-   "pages": "352 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1738185392l/223665360._SY475_.jpg"
+   "author": "Reese Witherspoon",
+   "rating": 3,
+   "date": "Missy read July 2026",
+   "pages": "340 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1761313344l/219385951._SY475_.jpg"
   },
   {
    "id": "78748822-74872758",
@@ -1239,6 +1287,18 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1677904475l/74872758._SY475_.jpg"
   },
   {
+   "id": "78748822-223665360",
+   "reader": "Missy",
+   "title": "The Mad Wife",
+   "subtitle": "",
+   "series": "",
+   "author": "Meagan Church",
+   "rating": 5,
+   "date": "Missy read June 2026",
+   "pages": "352 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1738185392l/223665360._SY475_.jpg"
+  },
+  {
    "id": "78748822-222615937",
    "reader": "Missy",
    "title": "The Irish Goodbye",
@@ -1249,18 +1309,6 @@
    "date": "Missy read June 2026",
    "pages": "275 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1752895120l/222615937._SY475_.jpg"
-  },
-  {
-   "id": "78748822-244403162",
-   "reader": "Missy",
-   "title": "The Divorce",
-   "subtitle": "",
-   "series": "",
-   "author": "Freida McFadden",
-   "rating": 5,
-   "date": "Missy read June 2026",
-   "pages": "368 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1769708783l/244403162._SY475_.jpg"
   },
   {
    "id": "78748822-218644981",
@@ -1275,16 +1323,16 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1728064211l/218644981._SY475_.jpg"
   },
   {
-   "id": "78748822-136470356",
+   "id": "78748822-244403162",
    "reader": "Missy",
-   "title": "Nocticadia",
+   "title": "The Divorce",
    "subtitle": "",
-   "series": "Nocticadia, #1",
-   "author": "Keri Lake",
-   "rating": 0,
-   "date": "Missy added June 2026",
-   "pages": "682 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1682369367l/136470356._SY475_.jpg"
+   "series": "",
+   "author": "Freida McFadden",
+   "rating": 5,
+   "date": "Missy read June 2026",
+   "pages": "368 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1769708783l/244403162._SY475_.jpg"
   },
   {
    "id": "78748822-40033006",
@@ -1299,16 +1347,16 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1525400069l/40033006._SY475_.jpg"
   },
   {
-   "id": "78748822-55556786",
+   "id": "78748822-90202302",
    "reader": "Missy",
-   "title": "The Personal Librarian",
+   "title": "Iron Flame",
    "subtitle": "",
-   "series": "",
-   "author": "Marie Benedict",
-   "rating": 5,
+   "series": "The Empyrean, #2",
+   "author": "Rebecca Yarros",
+   "rating": 3,
    "date": "Missy read May 2026",
-   "pages": "347 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1610650428l/55556786._SY475_.jpg"
+   "pages": "623 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1706724269l/90202302._SY475_.jpg"
   },
   {
    "id": "78748822-28257707",
@@ -1321,6 +1369,18 @@
    "date": "Missy read May 2026",
    "pages": "212 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1465761302l/28257707.jpg"
+  },
+  {
+   "id": "78748822-55556786",
+   "reader": "Missy",
+   "title": "The Personal Librarian",
+   "subtitle": "",
+   "series": "",
+   "author": "Marie Benedict",
+   "rating": 5,
+   "date": "Missy read May 2026",
+   "pages": "347 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1610650428l/55556786._SY475_.jpg"
   },
   {
    "id": "78748822-61431922",
@@ -1455,6 +1515,18 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1755209416l/220999092._SY475_.jpg"
   },
   {
+   "id": "78748822-54386622",
+   "reader": "Missy",
+   "title": "A Court of Thorns and Roses",
+   "subtitle": "",
+   "series": "A Court of Thorns and Roses, #1",
+   "author": "Sarah J. Maas",
+   "rating": 5,
+   "date": "Missy read March 2026",
+   "pages": "441 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1593873603l/54386622._SY475_.jpg"
+  },
+  {
    "id": "78748822-200028726",
    "reader": "Missy",
    "title": "Sandwich",
@@ -1477,18 +1549,6 @@
    "date": "Missy read March 2026",
    "pages": "352 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1738124119l/220999770._SY475_.jpg"
-  },
-  {
-   "id": "78748822-54386622",
-   "reader": "Missy",
-   "title": "A Court of Thorns and Roses",
-   "subtitle": "",
-   "series": "A Court of Thorns and Roses, #1",
-   "author": "Sarah J. Maas",
-   "rating": 5,
-   "date": "Missy read March 2026",
-   "pages": "441 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1593873603l/54386622._SY475_.jpg"
   },
   {
    "id": "78748822-211003802",
@@ -1623,18 +1683,6 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1638835838l/56898742.jpg"
   },
   {
-   "id": "78748822-216437557",
-   "reader": "Missy",
-   "title": "Say You'll Remember Me",
-   "subtitle": "",
-   "series": "Say You'll Remember Me, #1",
-   "author": "Abby Jimenez",
-   "rating": 4,
-   "date": "Missy read January 2026",
-   "pages": "358 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1743281317l/216437557._SY475_.jpg"
-  },
-  {
    "id": "78748822-59202062",
    "reader": "Missy",
    "title": "The Girl Who Survived",
@@ -1645,6 +1693,18 @@
    "date": "Missy read January 2026",
    "pages": "444 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1635774917l/59202062._SY475_.jpg"
+  },
+  {
+   "id": "78748822-216437557",
+   "reader": "Missy",
+   "title": "Say You'll Remember Me",
+   "subtitle": "",
+   "series": "Say You'll Remember Me, #1",
+   "author": "Abby Jimenez",
+   "rating": 4,
+   "date": "Missy read January 2026",
+   "pages": "358 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1743281317l/216437557._SY475_.jpg"
   },
   {
    "id": "78748822-57693172",
@@ -1779,18 +1839,6 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1728476850l/203579177._SY475_.jpg"
   },
   {
-   "id": "78748822-221326127",
-   "reader": "Missy",
-   "title": "The Unraveling of Julia",
-   "subtitle": "",
-   "series": "",
-   "author": "Lisa Scottoline",
-   "rating": 5,
-   "date": "Missy read December 2025",
-   "pages": "396 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1734461207l/221326127._SY475_.jpg"
-  },
-  {
    "id": "78748822-56047352",
    "reader": "Missy",
    "title": "Want to Know a Secret?",
@@ -1801,6 +1849,18 @@
    "date": "Missy read December 2025",
    "pages": "398 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1609705729l/56047352._SY475_.jpg"
+  },
+  {
+   "id": "78748822-221326127",
+   "reader": "Missy",
+   "title": "The Unraveling of Julia",
+   "subtitle": "",
+   "series": "",
+   "author": "Lisa Scottoline",
+   "rating": 5,
+   "date": "Missy read December 2025",
+   "pages": "396 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1734461207l/221326127._SY475_.jpg"
   },
   {
    "id": "78748822-198701985",
@@ -1899,18 +1959,6 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1377915943l/18400112.jpg"
   },
   {
-   "id": "78748822-43531101",
-   "reader": "Missy",
-   "title": "The Ex",
-   "subtitle": "",
-   "series": "",
-   "author": "Freida McFadden",
-   "rating": 5,
-   "date": "Missy read November 2025",
-   "pages": "347 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1547146409l/43531101._SY475_.jpg"
-  },
-  {
    "id": "78748822-62060532",
    "reader": "Missy",
    "title": "Yellowface",
@@ -1923,28 +1971,16 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1671336740l/62060532._SY475_.jpg"
   },
   {
-   "id": "78748822-177059532",
+   "id": "78748822-43531101",
    "reader": "Missy",
-   "title": "Sociopath",
-   "subtitle": "",
-   "series": "",
-   "author": "Patric Gagne",
-   "rating": 5,
-   "date": "Missy read October 2025",
-   "pages": "368 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1686592135l/177059532._SY475_.jpg"
-  },
-  {
-   "id": "78748822-30108909",
-   "reader": "Missy",
-   "title": "Brain Damage",
+   "title": "The Ex",
    "subtitle": "",
    "series": "",
    "author": "Freida McFadden",
    "rating": 5,
-   "date": "Missy read October 2025",
-   "pages": "394 pages",
-   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1462368675l/30108909._SX318_.jpg"
+   "date": "Missy read November 2025",
+   "pages": "347 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1547146409l/43531101._SY475_.jpg"
   },
   {
    "id": "78748822-29044",
@@ -1959,6 +1995,30 @@
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1751820530l/29044._SY475_.jpg"
   },
   {
+   "id": "78748822-30108909",
+   "reader": "Missy",
+   "title": "Brain Damage",
+   "subtitle": "",
+   "series": "",
+   "author": "Freida McFadden",
+   "rating": 5,
+   "date": "Missy read October 2025",
+   "pages": "394 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1462368675l/30108909._SX318_.jpg"
+  },
+  {
+   "id": "78748822-177059532",
+   "reader": "Missy",
+   "title": "Sociopath",
+   "subtitle": "",
+   "series": "",
+   "author": "Patric Gagne",
+   "rating": 5,
+   "date": "Missy read October 2025",
+   "pages": "368 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1686592135l/177059532._SY475_.jpg"
+  },
+  {
    "id": "78748822-40976643",
    "reader": "Missy",
    "title": "The Hunting Party",
@@ -1969,6 +2029,18 @@
    "date": "Missy read October 2025",
    "pages": "349 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1551035521l/40976643._SY475_.jpg"
+  },
+  {
+   "id": "78748822-136470356",
+   "reader": "Missy",
+   "title": "Nocticadia",
+   "subtitle": "",
+   "series": "Nocticadia, #1",
+   "author": "Keri Lake",
+   "rating": 0,
+   "date": "Missy added June 2026",
+   "pages": "682 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1682369367l/136470356._SY475_.jpg"
   },
   {
    "id": "78748822-58960219",
