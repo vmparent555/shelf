@@ -392,7 +392,18 @@ def load_export(reader):
     path = os.path.join(EXPORT_DIR, files[-1])
     try:
         with open(path, newline="", encoding="utf-8-sig") as handle:
-            return list(csv.DictReader(handle)), files[-1]
+            header = handle.readline()
+            handle.seek(0)
+            # Copying a file through a phone can turn its commas into tabs, so accept
+            # tab- or semicolon-separated files as well as the usual commas.
+            if header.count("\t") > header.count(","):
+                reader = csv.DictReader(handle, delimiter="\t", quoting=csv.QUOTE_NONE)
+            elif header.count(";") > header.count(","):
+                reader = csv.DictReader(handle, delimiter=";")
+            else:
+                reader = csv.DictReader(handle)
+            rows = [{(k or "").strip(): (v or "").strip() for k, v in row.items()} for row in reader]
+            return rows, files[-1]
     except (OSError, csv.Error) as error:
         print("Could not read {}: {}".format(path, error), file=sys.stderr)
         return [], ""
@@ -531,6 +542,9 @@ def main():
 
         rows, filename = load_export(reader)
         if rows:
+            if "Exclusive Shelf" not in rows[0] or "Book Id" not in rows[0]:
+                print("exports/{} doesn't look like a Goodreads export (columns: {})".format(
+                    filename, ", ".join(list(rows[0])[:6])), file=sys.stderr)
             changed = apply_export(found, rows, reader)
             print("{}: {} books updated from exports/{}".format(
                 reader["name"], changed, filename))
