@@ -42,6 +42,8 @@ body.dimmed {
 }
 
 .slide {
+  --s: 2.1;
+  --m: calc(1 + (var(--s) - 1) * 0.4);
   position: absolute;
   top: 0;
   left: 0;
@@ -70,8 +72,8 @@ body.dimmed {
 
 .cover {
   display: block;
-  max-height: 74vh;
-  max-width: 32vw;
+  max-height: 85.1vh;
+  max-width: 36.8vw;
   width: auto;
   height: auto;
   border: 1px solid #dcd8d0;
@@ -96,7 +98,7 @@ body.dimmed {
 }
 
 .title {
-  font-size: 6.8vmin;
+  font-size: calc(6.8vmin * var(--s));
   font-weight: 400;
   line-height: 1.08;
   letter-spacing: -0.008em;
@@ -108,11 +110,11 @@ body.dimmed {
 }
 
 .subtitle {
-  font-size: 2.7vmin;
+  font-size: calc(2.7vmin * var(--s));
   font-weight: 300;
   line-height: 1.35;
   color: #6d675f;
-  margin: 1.6vmin 0 0;
+  margin: calc(1.6vmin * var(--m)) 0 0;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -120,31 +122,31 @@ body.dimmed {
 }
 
 .author {
-  font-size: 3.3vmin;
+  font-size: calc(3.3vmin * var(--s));
   font-style: italic;
   font-weight: 400;
-  margin: 2.6vmin 0 0;
+  margin: calc(2.6vmin * var(--m)) 0 0;
   color: #3d3a35;
 }
 
 .series {
-  font-size: 2.4vmin;
+  font-size: calc(2.4vmin * var(--s));
   font-style: italic;
   font-weight: 300;
   color: #8a847b;
-  margin: 1.6vmin 0 0;
+  margin: calc(1.6vmin * var(--m)) 0 0;
 }
 
 .rating {
-  margin: 4.4vmin 0 0;
-  height: 4.4vmin;
+  margin: calc(4.4vmin * var(--m)) 0 0;
+  height: calc(4.4vmin * var(--s));
   line-height: 0;
 }
 
 .rating svg {
-  height: 4.4vmin;
-  width: 4.4vmin;
-  margin-right: 1.1vmin;
+  height: calc(4.4vmin * var(--s));
+  width: calc(4.4vmin * var(--s));
+  margin-right: calc(1.1vmin * var(--s));
   vertical-align: top;
 }
 
@@ -153,18 +155,18 @@ body.dimmed {
 }
 
 .date {
-  font-size: 3.1vmin;
+  font-size: calc(3.1vmin * var(--s));
   font-weight: 400;
   color: #46423c;
-  margin: 4vmin 0 0;
+  margin: calc(4vmin * var(--m)) 0 0;
   letter-spacing: 0.02em;
 }
 
 .pages {
-  font-size: 2.3vmin;
+  font-size: calc(2.3vmin * var(--s));
   font-weight: 300;
   color: #8a847b;
-  margin: 2.4vmin 0 0;
+  margin: calc(2.4vmin * var(--m)) 0 0;
 }
 
 .notice {
@@ -184,6 +186,18 @@ body.dimmed {
   display: none;
 }
 
+/* Overnight: a plain black screen. The page can't switch the iPad's backlight off. */
+#night {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000;
+  z-index: 2147483600;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .slide {
     -webkit-transition: none;
@@ -196,6 +210,7 @@ body.dimmed {
 
 <div class="stage" id="stage"></div>
 <p class="notice" id="notice">Loading the shelf</p>
+<div id="night"></div>
 
 <script>
 (function () {
@@ -205,6 +220,14 @@ body.dimmed {
   var STORAGE_KEY = "shelf-progress-v1";
   var DIM_START_HOUR = 21;
   var DIM_END_HOUR = 6;
+
+  // From 11:00 PM to 6:30 AM the screen goes black: no slides, no plane alerts.
+  var NIGHT_START = 23 * 60;
+  var NIGHT_END = 6 * 60 + 30;
+
+  // Text starts at 2.1x its original size and shrinks only as far as a long title needs.
+  var SCALE_MAX = 2.1;
+  var SCALE_MIN = 1.2;
 
   var STAR_PATH = "M12 2.2l3.05 6.18 6.82 1-4.94 4.81 1.17 6.79L12 17.77 5.9 20.98l1.17-6.79L2.13 9.38l6.82-1z";
 
@@ -216,10 +239,78 @@ body.dimmed {
   var current = 0;
   var layers = [];
   var timer = null;
+  var nightOn = false;
+  var nightEl = document.getElementById("night");
+
+  function isNight() {
+    // ?nightoff or ?flighttest on the address lets you test the page at night
+    if (/[?&](nightoff|flighttest)/.test(window.location.search)) {
+      return false;
+    }
+    var now = new Date();
+    var minutes = now.getHours() * 60 + now.getMinutes();
+    return minutes >= NIGHT_START || minutes < NIGHT_END;
+  }
+  window.shelfIsNight = isNight;
+
+  function checkNight() {
+    var night = isNight();
+    if (night && !nightOn) {
+      nightOn = true;
+      nightEl.style.display = "block";
+      if (timer) {
+        window.clearInterval(timer);
+        timer = null;
+      }
+    } else if (!night && nightOn) {
+      nightOn = false;
+      nightEl.style.display = "none";
+      if (deck.length) {
+        start();
+      }
+    }
+  }
+
+  function clipped(node) {
+    if (!node) {
+      return false;
+    }
+    var style = window.getComputedStyle(node);
+    var lineHeight = parseFloat(style.lineHeight);
+    if (!lineHeight) {
+      lineHeight = parseFloat(style.fontSize) * 1.2;
+    }
+    // the box is allowed a little spill for descenders, but not a whole hidden line
+    return node.scrollHeight - node.clientHeight > lineHeight * 0.6;
+  }
+
+  function fitLayer(layer) {
+    var slide = layer.slide;
+    var scale = SCALE_MAX;
+    var guard = 0;
+    slide.style.setProperty("--s", scale);
+
+    var style = window.getComputedStyle(slide);
+    var room = slide.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+
+    while (
+      scale > SCALE_MIN &&
+      guard < 30 &&
+      (layer.detail.getBoundingClientRect().height > room + 1 ||
+        clipped(layer.title) ||
+        clipped(layer.subtitle))
+    ) {
+      scale = Math.round((scale - 0.05) * 100) / 100;
+      slide.style.setProperty("--s", scale);
+      guard++;
+    }
+  }
 
   function makeLayer() {
     var slide = document.createElement("div");
     slide.className = "slide";
+
+    var self = null;
 
     var cover = document.createElement("img");
     cover.className = "cover";
@@ -227,6 +318,14 @@ body.dimmed {
     cover.onerror = function () {
       cover.className = "cover hidden";
       detail.className = "detail wide";
+      if (self) {
+        fitLayer(self);
+      }
+    };
+    cover.onload = function () {
+      if (self) {
+        fitLayer(self);
+      }
     };
 
     var detail = document.createElement("div");
@@ -266,7 +365,7 @@ body.dimmed {
     slide.appendChild(detail);
     stage.appendChild(slide);
 
-    return {
+    self = {
       slide: slide,
       cover: cover,
       detail: detail,
@@ -278,6 +377,7 @@ body.dimmed {
       date: date,
       pages: pages
     };
+    return self;
   }
 
   var starCounter = 0;
@@ -344,6 +444,8 @@ body.dimmed {
       layer.cover.removeAttribute("src");
       layer.detail.className = "detail wide";
     }
+
+    fitLayer(layer);
   }
 
   function saveProgress() {
@@ -448,7 +550,7 @@ body.dimmed {
   }
 
   function advance() {
-    if (!deck.length) {
+    if (!deck.length || nightOn) {
       return;
     }
 
@@ -482,6 +584,10 @@ body.dimmed {
   }
 
   function start() {
+    checkNight();
+    if (nightOn) {
+      return;
+    }
     if (timer) {
       window.clearInterval(timer);
     }
@@ -538,6 +644,20 @@ body.dimmed {
   checkDimming();
   window.setInterval(checkDimming, 5 * 60 * 1000);
 
+  checkNight();
+  window.setInterval(checkNight, 15 * 1000);
+
+  function refitAll() {
+    var i;
+    for (i = 0; i < layers.length; i++) {
+      fitLayer(layers[i]);
+    }
+  }
+  window.addEventListener("resize", refitAll, false);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(refitAll);
+  }
+
   load(true);
   window.setInterval(function () {
     load(false);
@@ -550,7 +670,7 @@ body.dimmed {
   var lastSwipe = 0;
 
   function goBack() {
-    if (!deck.length) {
+    if (!deck.length || nightOn) {
       return;
     }
     // current points at the next book, so the one on screen is current - 1
