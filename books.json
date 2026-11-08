@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T04:40:48Z",
+ "updated": "2026-11-08T04:46:07Z",
  "count": 297,
  "books": [
   {
@@ -2217,8 +2217,9 @@
    "rating": 5,
    "date": "Missy read July 2025",
    "pages": "352 pages",
-   "cover": "",
-   "ol_checked": true
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1718971111i/211867349.jpg",
+   "ol_checked": true,
+   "gr_checked": true
   },
   {
    "id": "78748822-56269064",
@@ -2374,7 +2375,8 @@
    "date": "Missy read June 2025",
    "pages": "189 pages",
    "cover": "",
-   "ol_checked": true
+   "ol_checked": true,
+   "gr_checked": true
   },
   {
    "id": "78748822-63120925",
@@ -2413,7 +2415,8 @@
    "date": "Missy read June 2025",
    "pages": "288 pages",
    "cover": "",
-   "ol_checked": true
+   "ol_checked": true,
+   "gr_checked": true
   },
   {
    "id": "78748822-59967967",
@@ -2543,7 +2546,8 @@
    "date": "Missy read April 2025",
    "pages": "328 pages",
    "cover": "",
-   "ol_checked": true
+   "ol_checked": true,
+   "gr_checked": true
   },
   {
    "id": "78748822-198112104",
@@ -2673,7 +2677,8 @@
    "date": "Missy read February 2025",
    "pages": "159 pages",
    "cover": "",
-   "ol_checked": true
+   "ol_checked": true,
+   "gr_checked": true
   },
   {
    "id": "78748822-203019749",
@@ -2699,7 +2704,8 @@
    "date": "Missy read November 2024",
    "pages": "432 pages",
    "cover": "",
-   "ol_checked": true
+   "ol_checked": true,
+   "gr_checked": true
   },
   {
    "id": "78748822-59947696",
@@ -2959,7 +2965,8 @@
    "date": "Missy read September 2024",
    "pages": "398 pages",
    "cover": "",
-   "ol_checked": true
+   "ol_checked": true,
+   "gr_checked": true
   },
   {
    "id": "78748822-123193218",
@@ -3081,7 +3088,7 @@
   {
    "id": "78748822-25111004",
    "reader": "Missy",
-   "title": "2026-11-09 00:00:00",
+   "title": "November 9",
    "subtitle": "",
    "series": "",
    "author": "Colleen Hoover",
@@ -3089,7 +3096,8 @@
    "date": "Missy added December 2023",
    "pages": "310 pages",
    "cover": "",
-   "ol_checked": true
+   "ol_checked": true,
+   "gr_checked": true
   },
   {
    "id": "78748822-55196813",
@@ -3206,7 +3214,8 @@
    "date": "Missy added May 2024",
    "pages": "320 pages",
    "cover": "",
-   "ol_checked": true
+   "ol_checked": true,
+   "gr_checked": true
   },
   {
    "id": "78748822-40604658",
@@ -3323,7 +3332,8 @@
    "date": "Missy read May 2024",
    "pages": "415 pages",
    "cover": "",
-   "ol_checked": true
+   "ol_checked": true,
+   "gr_checked": true
   },
   {
    "id": "78748822-42616304",
@@ -3336,7 +3346,8 @@
    "date": "Missy read May 2024",
    "pages": "231 pages",
    "cover": "",
-   "ol_checked": true
+   "ol_checked": true,
+   "gr_checked": true
   },
   {
    "id": "78748822-44020979",
@@ -3349,7 +3360,8 @@
    "date": "Missy read May 2024",
    "pages": "216 pages",
    "cover": "",
-   "ol_checked": true
+   "ol_checked": true,
+   "gr_checked": true
   },
   {
    "id": "78748822-50880609",
@@ -3375,7 +3387,8 @@
    "date": "Missy read May 2024",
    "pages": "487 pages",
    "cover": "",
-   "ol_checked": true
+   "ol_checked": true,
+   "gr_checked": true
   },
   {
    "id": "78748822-53447741",
@@ -3388,7 +3401,8 @@
    "date": "Missy read May 2024",
    "pages": "218 pages",
    "cover": "",
-   "ol_checked": true
+   "ol_checked": true,
+   "gr_checked": true
   },
   {
    "id": "78748822-53710758",
@@ -3414,7 +3428,8 @@
    "date": "Missy read May 2024",
    "pages": "230 pages",
    "cover": "",
-   "ol_checked": true
+   "ol_checked": true,
+   "gr_checked": true
   },
   {
    "id": "78748822-17788401",
@@ -3466,7 +3481,8 @@
    "date": "Missy added December 2023",
    "pages": "319 pages",
    "cover": "",
-   "ol_checked": true
+   "ol_checked": true,
+   "gr_checked": true
   },
   {
    "id": "78748822-52578297",
@@ -3570,7 +3586,8 @@
    "date": "Missy added December 2023",
    "pages": "372 pages",
    "cover": "",
-   "ol_checked": true
+   "ol_checked": true,
+   "gr_checked": true
   },
   {
    "id": "78748822-52652923",
@@ -3622,7 +3639,8 @@
    "date": "Missy added December 2023",
    "pages": "416 pages",
    "cover": "",
-   "ol_checked": true
+   "ol_checked": true,
+   "gr_checked": true
   },
   {
    "id": "78748822-27362503",
@@ -3660,7 +3678,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "356 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/10139078-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-59912428",
@@ -3672,7 +3691,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "464 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/12553217-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-62558732",
@@ -3684,7 +3704,8 @@
    "rating": 5,
    "date": "Missy read November 2023",
    "pages": "384 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/13300169-L.jpg",
+   "ol_checked": true
   }
  ]
 }
