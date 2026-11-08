@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T04:26:29Z",
+ "updated": "2026-11-08T04:40:48Z",
  "count": 297,
  "books": [
   {
@@ -2880,7 +2880,8 @@
    "rating": 0,
    "date": "Missy added October 2024",
    "pages": "379 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/14570911-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-208503280",
@@ -2892,7 +2893,8 @@
    "rating": 0,
    "date": "Missy added October 2024",
    "pages": "368 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/14820506-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-40893132",
@@ -2904,7 +2906,8 @@
    "rating": 0,
    "date": "Missy read October 2024",
    "pages": "298 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/15115699-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-127463663",
@@ -2916,7 +2919,8 @@
    "rating": 0,
    "date": "Missy read October 2024",
    "pages": "384 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/14588269-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-58804928",
@@ -2928,7 +2932,8 @@
    "rating": 5,
    "date": "Missy read October 2024",
    "pages": "288 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/12773970-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-157067546",
@@ -2940,7 +2945,8 @@
    "rating": 0,
    "date": "Missy read October 2024",
    "pages": "417 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/15126331-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-126058992",
@@ -2952,7 +2958,8 @@
    "rating": 0,
    "date": "Missy read September 2024",
    "pages": "398 pages",
-   "cover": ""
+   "cover": "",
+   "ol_checked": true
   },
   {
    "id": "78748822-123193218",
@@ -2964,7 +2971,8 @@
    "rating": 3,
    "date": "Missy added September 2024",
    "pages": "348 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/15125127-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-199235727",
@@ -2976,7 +2984,8 @@
    "rating": 0,
    "date": "Missy added September 2024",
    "pages": "400 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/14633291-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-62848145",
@@ -2988,7 +2997,8 @@
    "rating": 0,
    "date": "Missy added September 2024",
    "pages": "311 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/13439869-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-61272658",
@@ -3000,7 +3010,8 @@
    "rating": 0,
    "date": "Missy read September 2024",
    "pages": "400 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/13183114-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-60556912",
@@ -3012,7 +3023,8 @@
    "rating": 5,
    "date": "Missy read September 2024",
    "pages": "338 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/15105883-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-123423832",
@@ -3024,7 +3036,8 @@
    "rating": 5,
    "date": "Missy read August 2024",
    "pages": "362 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/15125038-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-61149872",
@@ -3036,7 +3049,8 @@
    "rating": 5,
    "date": "Missy added August 2024",
    "pages": "388 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/15125020-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-54197718",
@@ -3048,7 +3062,8 @@
    "rating": 0,
    "date": "Missy added August 2024",
    "pages": "295 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/14603852-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-54981009",
@@ -3060,7 +3075,8 @@
    "rating": 0,
    "date": "Missy added August 2024",
    "pages": "307 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/10571017-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-25111004",
@@ -3072,7 +3088,8 @@
    "rating": 4,
    "date": "Missy added December 2023",
    "pages": "310 pages",
-   "cover": ""
+   "cover": "",
+   "ol_checked": true
   },
   {
    "id": "78748822-55196813",
@@ -3084,7 +3101,8 @@
    "rating": 4,
    "date": "Missy read December 2023",
    "pages": "289 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/11199954-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-57645345",
@@ -3096,7 +3114,8 @@
    "rating": 4,
    "date": "Missy added December 2023",
    "pages": "357 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/12524317-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-18293427",
@@ -3108,7 +3127,8 @@
    "rating": 5,
    "date": "Missy added May 2024",
    "pages": "260 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/7281141-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-65137920",
@@ -3120,7 +3140,8 @@
    "rating": 5,
    "date": "Missy added May 2024",
    "pages": "444 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/15105886-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-53288434",
@@ -3132,7 +3153,8 @@
    "rating": 5,
    "date": "Missy added May 2024",
    "pages": "301 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/10713533-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-44575063",
@@ -3144,7 +3166,8 @@
    "rating": 5,
    "date": "Missy added May 2024",
    "pages": "400 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/9315136-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-53799686",
@@ -3156,7 +3179,8 @@
    "rating": 5,
    "date": "Missy added December 2023",
    "pages": "336 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/10087939-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-86103927",
@@ -3168,7 +3192,8 @@
    "rating": 4,
    "date": "Missy added May 2024",
    "pages": "350 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/14425355-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-60666855",
@@ -3180,7 +3205,8 @@
    "rating": 4,
    "date": "Missy added May 2024",
    "pages": "320 pages",
-   "cover": ""
+   "cover": "",
+   "ol_checked": true
   },
   {
    "id": "78748822-40604658",
@@ -3192,7 +3218,8 @@
    "rating": 4,
    "date": "Missy added August 2024",
    "pages": "466 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/12882940-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-57795665",
@@ -3204,7 +3231,8 @@
    "rating": 5,
    "date": "Missy added August 2024",
    "pages": "313 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/13156268-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-52636419",
@@ -3216,7 +3244,8 @@
    "rating": 5,
    "date": "Missy added August 2024",
    "pages": "382 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/12070655-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-62080187",
@@ -3228,7 +3257,8 @@
    "rating": 5,
    "date": "Missy added August 2024",
    "pages": "286 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/13198561-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-194802722",
@@ -3240,7 +3270,8 @@
    "rating": 5,
    "date": "Missy read August 2024",
    "pages": "395 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/14625690-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-52195137",
@@ -3252,7 +3283,8 @@
    "rating": 5,
    "date": "Missy read August 2024",
    "pages": "400 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/9426296-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-61407623",
@@ -3264,7 +3296,8 @@
    "rating": 5,
    "date": "Missy read August 2024",
    "pages": "384 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/13299661-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-61771675",
@@ -3276,7 +3309,8 @@
    "rating": 4,
    "date": "Missy read August 2024",
    "pages": "594 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/14359793-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-61053468",
@@ -3288,7 +3322,8 @@
    "rating": 4,
    "date": "Missy read May 2024",
    "pages": "415 pages",
-   "cover": ""
+   "cover": "",
+   "ol_checked": true
   },
   {
    "id": "78748822-42616304",
@@ -3300,7 +3335,8 @@
    "rating": 3,
    "date": "Missy read May 2024",
    "pages": "231 pages",
-   "cover": ""
+   "cover": "",
+   "ol_checked": true
   },
   {
    "id": "78748822-44020979",
@@ -3312,7 +3348,8 @@
    "rating": 3,
    "date": "Missy read May 2024",
    "pages": "216 pages",
-   "cover": ""
+   "cover": "",
+   "ol_checked": true
   },
   {
    "id": "78748822-50880609",
@@ -3324,7 +3361,8 @@
    "rating": 3,
    "date": "Missy read May 2024",
    "pages": "193 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/14635318-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-57768991",
@@ -3336,7 +3374,8 @@
    "rating": 3,
    "date": "Missy read May 2024",
    "pages": "487 pages",
-   "cover": ""
+   "cover": "",
+   "ol_checked": true
   },
   {
    "id": "78748822-53447741",
@@ -3348,7 +3387,8 @@
    "rating": 3,
    "date": "Missy read May 2024",
    "pages": "218 pages",
-   "cover": ""
+   "cover": "",
+   "ol_checked": true
   },
   {
    "id": "78748822-53710758",
@@ -3360,7 +3400,8 @@
    "rating": 3,
    "date": "Missy read May 2024",
    "pages": "204 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/10840090-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-53710606",
@@ -3372,7 +3413,8 @@
    "rating": 3,
    "date": "Missy read May 2024",
    "pages": "230 pages",
-   "cover": ""
+   "cover": "",
+   "ol_checked": true
   },
   {
    "id": "78748822-17788401",
@@ -3384,7 +3426,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "330 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/12856728-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-59344312",
@@ -3396,7 +3439,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "336 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/8747160-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-40097951",
@@ -3408,7 +3452,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "336 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/9407338-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-52656911",
@@ -3420,7 +3465,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "319 pages",
-   "cover": ""
+   "cover": "",
+   "ol_checked": true
   },
   {
    "id": "78748822-52578297",
@@ -3432,7 +3478,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "288 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/10313767-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-37570546",
@@ -3444,7 +3491,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "415 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/8596019-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-35959740",
@@ -3456,7 +3504,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "393 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/8739376-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-54798430",
@@ -3468,7 +3517,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "320 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/10551711-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-49189494",
@@ -3480,7 +3530,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "352 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/10255476-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-56084054",
@@ -3492,7 +3543,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "304 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/10550754-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-58482465",
@@ -3504,7 +3556,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "320 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/13107047-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-58492104",
@@ -3516,7 +3569,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "372 pages",
-   "cover": ""
+   "cover": "",
+   "ol_checked": true
   },
   {
    "id": "78748822-52652923",
@@ -3528,7 +3582,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "320 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/10207105-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-58065033",
@@ -3540,7 +3595,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "390 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/12725772-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-58784475",
@@ -3552,7 +3608,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "399 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/12859975-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-61492446",
@@ -3564,7 +3621,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "416 pages",
-   "cover": ""
+   "cover": "",
+   "ol_checked": true
   },
   {
    "id": "78748822-27362503",
@@ -3576,7 +3634,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "386 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/10473609-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-60393672",
@@ -3588,7 +3647,8 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "320 pages",
-   "cover": ""
+   "cover": "https://covers.openlibrary.org/b/id/12749873-L.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-35297426",
