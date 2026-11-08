@@ -8,7 +8,8 @@ The widget has no read dates and no page counts, so:
   * Books already in books.json keep the date and page count they had.
   * New books get a read date from Goodreads' public "recent updates" widget
     when it has one, and an honest "added <month>" label when it doesn't.
-  * Missing page counts and covers are looked up on Open Library (free, no key).
+  * Missing page counts and covers are looked up on Open Library (free, no key). Covers
+    Open Library doesn't have are taken from the book's own Goodreads page.
   * Books in an export that the widget can't see (it stops at about 100) are added
     from the export, so a long shelf isn't cut off.
   * Optional monthly boost: drop a Goodreads export into the exports/ folder
@@ -19,11 +20,13 @@ Standard library only. No dependencies to install.
 """
 
 import csv
+import html as htmllib
 import json
 import os
 import re
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -49,6 +52,9 @@ OPEN_LIBRARY_SEARCH = "https://openlibrary.org/search.json"
 OPEN_LIBRARY_AGENT = "shelf-display/1.0 (personal book display; github.com/vmparent555/shelf)"
 MAX_LOOKUPS = 60         # Open Library searches per run; a big backlog fills in over a few runs
 LOOKUP_PAUSE_SECONDS = 1.0
+MAX_GOODREADS_COVERS = 30   # Goodreads book-page fetches per run
+GOODREADS_PAUSE_SECONDS = 1.5
+GOODREADS_BOOK_URL = "https://www.goodreads.com/book/show/{}"
 
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 "
@@ -99,6 +105,14 @@ def tidy_author(name):
     if match:
         return "{} {}".format(match.group(2).strip(), match.group(1).strip())
     return name
+
+
+def repair_title(title):
+    """A spreadsheet can turn a title like 'November 9' into a date. Turn it back."""
+    match = re.match(r"^(\d{4})-(\d{2})-(\d{2})(?: 00:00:00)?$", (title or "").strip())
+    if match and 1 <= int(match.group(2)) <= 12:
+        return "{} {}".format(MONTHS[int(match.group(2)) - 1], int(match.group(3)))
+    return title
 
 
 def norm_key(title, author):
@@ -405,6 +419,8 @@ def load_export(reader):
             else:
                 reader = csv.DictReader(handle)
             rows = [{(k or "").strip(): (v or "").strip() for k, v in row.items()} for row in reader]
+            for row in rows:
+                row["Title"] = repair_title(row.get("Title", ""))
             return rows, files[-1]
     except (OSError, csv.Error) as error:
         print("Could not read {}: {}".format(path, error), file=sys.stderr)
@@ -498,6 +514,54 @@ def lookup_book(title, author):
     return result
 
 
+def goodreads_cover(book_id):
+    """The cover URL on a book's own Goodreads page (its social-sharing image), or ''."""
+    page = fetch(GOODREADS_BOOK_URL.format(book_id))
+    for pattern in (
+        r'<meta[^>]+property=["\']og:image["\'][^>]*content=["\']([^"\']+)["\']',
+        r'<meta[^>]+content=["\']([^"\']+)["\'][^>]*property=["\']og:image["\']',
+    ):
+        match = re.search(pattern, page)
+        if match:
+            url = htmllib.unescape(match.group(1))
+            return "" if "nophoto" in url else url
+    return ""
+
+
+def fill_goodreads_covers(books):
+    """For books Open Library couldn't cover, use the cover on the Goodreads book page."""
+    looked = found = 0
+    for book in books:
+        if book.get("cover") or book.get("gr_checked") or looked >= MAX_GOODREADS_COVERS:
+            continue
+        book_id = str(book.get("id", "")).split("-", 1)[-1]
+        if not book_id.isdigit():
+            continue
+        looked += 1
+        try:
+            url = goodreads_cover(book_id)
+        except urllib.error.HTTPError as error:
+            if error.code == 404:
+                book["gr_checked"] = True     # the page is gone; don't ask again
+            else:
+                print("  (Goodreads page for {} gave HTTP {})".format(book["title"], error.code),
+                      file=sys.stderr)
+            time.sleep(GOODREADS_PAUSE_SECONDS)
+            continue
+        except Exception as error:
+            print("  (Goodreads cover lookup failed for {}: {})".format(book["title"], error),
+                  file=sys.stderr)
+            time.sleep(GOODREADS_PAUSE_SECONDS)
+            continue
+        book["gr_checked"] = True
+        if url:
+            book["cover"] = full_cover(url)
+            found += 1
+        time.sleep(GOODREADS_PAUSE_SECONDS)
+    if looked:
+        print("Goodreads covers: tried {}, found {}.".format(looked, found))
+
+
 def enrich_books(books):
     """Fill in missing page counts and covers from Open Library, a batch per run.
 
@@ -529,6 +593,7 @@ def enrich_books(books):
     if looked:
         print("Open Library: searched {}, found {} page counts and {} covers.".format(
             looked, pages_found, covers_found))
+    fill_goodreads_covers(books)
 
 
 def add_unseen_from_export(books, rows, reader, now):
@@ -618,6 +683,8 @@ def main():
                 print("{}: {} older books added from the export".format(reader["name"], added))
         books.extend(found)
 
+    for book in books:
+        book["title"] = repair_title(book.get("title", ""))
     enrich_books(books)
 
     payload = {
