@@ -54,6 +54,8 @@ MAX_LOOKUPS = 60         # Open Library searches per run; a big backlog fills in
 LOOKUP_PAUSE_SECONDS = 1.0
 MAX_GOODREADS_COVERS = 30   # Goodreads book-page fetches per run
 GOODREADS_PAUSE_SECONDS = 3.0
+MAX_COVER_CHECKS = 150     # Open Library cover images verified per run
+MIN_COVER_BYTES = 3000     # a real cover is bigger than this; the 'no cover' stand-in is tiny
 GOODREADS_BOOK_URL = "https://www.goodreads.com/book/show/{}"
 
 USER_AGENT = (
@@ -154,6 +156,12 @@ def fetch(url, agent=USER_AGENT):
     request = urllib.request.Request(url, headers={"User-Agent": agent})
     with urllib.request.urlopen(request, timeout=45) as response:
         return response.read().decode("utf-8", "replace")
+
+
+def fetch_bytes(url, agent=USER_AGENT):
+    request = urllib.request.Request(url, headers={"User-Agent": agent})
+    with urllib.request.urlopen(request, timeout=45) as response:
+        return response.read()
 
 
 def widget_html(script):
@@ -514,6 +522,37 @@ def lookup_book(title, author):
     return result
 
 
+def verify_covers(books):
+    """Open Library sometimes lists a cover that doesn't actually load. Check each one once;
+    a dud is removed so the Goodreads fallback can supply the real cover."""
+    checked = removed = 0
+    for book in books:
+        url = book.get("cover") or ""
+        if not url.startswith("https://covers.openlibrary.org") or book.get("cover_verified"):
+            continue
+        if checked >= MAX_COVER_CHECKS:
+            break
+        checked += 1
+        probe = url + ("&" if "?" in url else "?") + "default=false"
+        try:
+            size = len(fetch_bytes(probe))
+        except urllib.error.HTTPError:
+            size = 0                           # 404: Open Library has no image for it
+        except Exception as error:
+            print("  (couldn't check the cover for {}: {})".format(book["title"], error),
+                  file=sys.stderr)
+            continue                           # a network hiccup: check again next run
+        if size >= MIN_COVER_BYTES:
+            book["cover_verified"] = True
+        else:
+            book["cover"] = ""
+            book.pop("gr_cover_checked", None)
+            removed += 1
+            print("  (removed a cover that doesn't load: {})".format(book["title"]))
+    if checked:
+        print("Cover check: looked at {}, removed {} that don't load.".format(checked, removed))
+
+
 def goodreads_cover(book_id):
     """The cover URL on a book's own Goodreads page (its social-sharing image), or ''."""
     page = fetch(GOODREADS_BOOK_URL.format(book_id))
@@ -596,6 +635,7 @@ def enrich_books(books):
     if looked:
         print("Open Library: searched {}, found {} page counts and {} covers.".format(
             looked, pages_found, covers_found))
+    verify_covers(books)
     fill_goodreads_covers(books)
 
 
