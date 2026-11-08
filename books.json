@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-08T03:41:58Z",
- "count": 174,
+ "updated": "2026-11-08T04:08:18Z",
+ "count": 175,
  "books": [
   {
    "id": "166663242-12991188",
@@ -829,6 +829,18 @@
    "date": "Vince added June 2023",
    "pages": "368 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1633370523l/58539346.jpg"
+  },
+  {
+   "id": "78748822-249334199",
+   "reader": "Missy",
+   "title": "The Witch",
+   "subtitle": "",
+   "series": "",
+   "author": "Freida McFadden",
+   "rating": 5,
+   "date": "Missy read November 2026",
+   "pages": "352 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1781189968l/249334199.jpg"
   },
   {
    "id": "78748822-240113697",
