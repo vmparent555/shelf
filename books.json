@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T04:49:26Z",
+ "updated": "2026-11-08T04:52:54Z",
  "count": 297,
  "books": [
   {
@@ -2374,9 +2374,10 @@
    "rating": 5,
    "date": "Missy read June 2025",
    "pages": "189 pages",
-   "cover": "",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1689400041i/39686915.jpg",
    "ol_checked": true,
-   "gr_checked": true
+   "gr_checked": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-63120925",
@@ -2414,9 +2415,10 @@
    "rating": 4,
    "date": "Missy read June 2025",
    "pages": "288 pages",
-   "cover": "",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1737698473i/219240806.jpg",
    "ol_checked": true,
-   "gr_checked": true
+   "gr_checked": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-59967967",
@@ -2545,9 +2547,10 @@
    "rating": 0,
    "date": "Missy read April 2025",
    "pages": "328 pages",
-   "cover": "",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1741458771i/171793386.jpg",
    "ol_checked": true,
-   "gr_checked": true
+   "gr_checked": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-198112104",
@@ -2676,9 +2679,10 @@
    "rating": 0,
    "date": "Missy read February 2025",
    "pages": "159 pages",
-   "cover": "",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1708373092i/208814908.jpg",
    "ol_checked": true,
-   "gr_checked": true
+   "gr_checked": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-203019749",
@@ -2703,9 +2707,10 @@
    "rating": 0,
    "date": "Missy read November 2024",
    "pages": "432 pages",
-   "cover": "",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1707765975i/202204691.jpg",
    "ol_checked": true,
-   "gr_checked": true
+   "gr_checked": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-59947696",
@@ -2964,9 +2969,10 @@
    "rating": 0,
    "date": "Missy read September 2024",
    "pages": "398 pages",
-   "cover": "",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1689472074i/126058992.jpg",
    "ol_checked": true,
-   "gr_checked": true
+   "gr_checked": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-123193218",
@@ -3095,9 +3101,10 @@
    "rating": 4,
    "date": "Missy added December 2023",
    "pages": "310 pages",
-   "cover": "",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1447138036i/25111004.jpg",
    "ol_checked": true,
-   "gr_checked": true
+   "gr_checked": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-55196813",
@@ -3213,9 +3220,10 @@
    "rating": 4,
    "date": "Missy added May 2024",
    "pages": "320 pages",
-   "cover": "",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1666028889i/60666855.jpg",
    "ol_checked": true,
-   "gr_checked": true
+   "gr_checked": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-40604658",
@@ -3331,9 +3339,10 @@
    "rating": 4,
    "date": "Missy read May 2024",
    "pages": "415 pages",
-   "cover": "",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1657326914i/61053468.jpg",
    "ol_checked": true,
-   "gr_checked": true
+   "gr_checked": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-42616304",
@@ -3345,9 +3354,10 @@
    "rating": 3,
    "date": "Missy read May 2024",
    "pages": "231 pages",
-   "cover": "",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1541209481i/42616304.jpg",
    "ol_checked": true,
-   "gr_checked": true
+   "gr_checked": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-44020979",
@@ -3359,9 +3369,10 @@
    "rating": 3,
    "date": "Missy read May 2024",
    "pages": "216 pages",
-   "cover": "",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1550289371i/44020979.jpg",
    "ol_checked": true,
-   "gr_checked": true
+   "gr_checked": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-50880609",
@@ -3386,9 +3397,10 @@
    "rating": 3,
    "date": "Missy read May 2024",
    "pages": "487 pages",
-   "cover": "",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1618720188i/57768991.jpg",
    "ol_checked": true,
-   "gr_checked": true
+   "gr_checked": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-53447741",
@@ -3400,9 +3412,10 @@
    "rating": 3,
    "date": "Missy read May 2024",
    "pages": "218 pages",
-   "cover": "",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1589947336i/53447741.jpg",
    "ol_checked": true,
-   "gr_checked": true
+   "gr_checked": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-53710758",
@@ -3427,9 +3440,10 @@
    "rating": 3,
    "date": "Missy read May 2024",
    "pages": "230 pages",
-   "cover": "",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1590955463i/53710606.jpg",
    "ol_checked": true,
-   "gr_checked": true
+   "gr_checked": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-17788401",
@@ -3480,9 +3494,10 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "319 pages",
-   "cover": "",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1591461181i/52656911.jpg",
    "ol_checked": true,
-   "gr_checked": true
+   "gr_checked": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-52578297",
@@ -3585,9 +3600,10 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "372 pages",
-   "cover": "",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1639379887i/58492104.jpg",
    "ol_checked": true,
-   "gr_checked": true
+   "gr_checked": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-52652923",
@@ -3638,9 +3654,10 @@
    "rating": 0,
    "date": "Missy added December 2023",
    "pages": "416 pages",
-   "cover": "",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1673267198i/61492446.jpg",
    "ol_checked": true,
-   "gr_checked": true
+   "gr_checked": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-27362503",
