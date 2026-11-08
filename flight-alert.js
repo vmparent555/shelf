@@ -124,6 +124,44 @@
     return a;
   }
 
+  /* ---------- does the looked-up route fit where the plane really is? ---------- */
+
+  const EARTH_MI = 3958.8;
+  const toRad = (d) => d * Math.PI / 180;
+
+  function milesBetween(a, b) {
+    const dLat = toRad(b.lat - a.lat), dLon = toRad(b.lon - a.lon);
+    const h = Math.sin(dLat / 2) ** 2 +
+      Math.cos(toRad(a.lat)) * Math.cos(toRad(b.lat)) * Math.sin(dLon / 2) ** 2;
+    return 2 * EARTH_MI * Math.asin(Math.sqrt(h));
+  }
+
+  function bearingDeg(a, b) {
+    const dLon = toRad(b.lon - a.lon);
+    const y = Math.sin(dLon) * Math.cos(toRad(b.lat));
+    const x = Math.cos(toRad(a.lat)) * Math.sin(toRad(b.lat)) -
+      Math.sin(toRad(a.lat)) * Math.cos(toRad(b.lat)) * Math.cos(dLon);
+    return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
+  }
+
+  // Route databases match on flight number, which airlines reuse. So only trust a route
+  // if the plane is actually near the line between its two airports and, when it is
+  // clearly en route, flying toward the destination rather than away from it.
+  function routeFits(route, ac) {
+    if (!route || !route.o || !route.d) return false;            // can't verify, so don't show it
+    const plane = { lat: ac.lat, lon: ac.lon };
+    const total = milesBetween(route.o, route.d);
+    if (total < 30) return true;                                  // too short to judge
+    const fromO = milesBetween(route.o, plane);
+    const fromD = milesBetween(route.d, plane);
+    const detour = fromO + fromD - total;                         // ~0 when the plane is on the line
+    if (detour > Math.max(40, 0.08 * total)) return false;
+    if (fromO < 40 || fromD < 40) return true;                    // near an airport planes turn every which way
+    let diff = Math.abs(bearingDeg(plane, route.d) - ac.track) % 360;
+    if (diff > 180) diff = 360 - diff;
+    return diff <= 100;
+  }
+
   function qualifies(ac, proj, alreadyActive) {
     if (ac.lat == null || ac.lon == null || ac.gs == null || ac.track == null) return false;
     if (ac.gs < CFG.minSpeedKt) return false;
@@ -238,7 +276,9 @@
       routeCache.set(cs, {
         airline: 'Frontier Airlines',
         origin: 'Denver (Denver International Airport)',
-        destination: 'Las Vegas (Harry Reid International Airport)'
+        destination: 'Las Vegas (Harry Reid International Airport)',
+        o: { lat: 39.8561, lon: -104.6737 },
+        d: { lat: 36.0840, lon: -115.1537 }
       });
       return;
     }
@@ -246,10 +286,14 @@
     fetchJson('https://api.adsbdb.com/v0/callsign/' + encodeURIComponent(cs))
       .then((j) => {
         const fr = j && j.response && j.response.flightroute;
+        const point = (a) => (a && isFinite(parseFloat(a.latitude)) && isFinite(parseFloat(a.longitude)))
+          ? { lat: parseFloat(a.latitude), lon: parseFloat(a.longitude) } : null;
         routeCache.set(cs, fr ? {
           airline: fr.airline && fr.airline.name || null,
           origin: placeName(fr.origin),
-          destination: placeName(fr.destination)
+          destination: placeName(fr.destination),
+          o: point(fr.origin),
+          d: point(fr.destination)
         } : null);
         dbg.route = cs + (fr ? ': route found' : ': no route on file');
       })
@@ -450,8 +494,11 @@
     const ac = top.ac;
     const cs = callsignOf(ac);
     const route = routeCache.get(cs);
-    const r = route && route !== 'pending' ? route : null;
-    const airline = (r && r.airline) || airlineFromCallsign(cs);
+    const found = route && route !== 'pending' ? route : null;
+    const fits = found ? routeFits(found, ac) : false;
+    const r = fits ? found : null;
+    if (found && !fits) dbg.route = cs + ': route did not match the plane\'s position, hidden';
+    const airline = (found && found.airline) || airlineFromCallsign(cs);
 
     const l1 = (CFG.test ? '<span class="fa-test">TEST</span>' : '') +
       esc([airline, cs].filter(Boolean).join(' ') || 'Unidentified aircraft') +
@@ -538,7 +585,7 @@
 
   /* ---------- boot ---------- */
 
-  const api = { CFG, projectApproach, qualifies, aircraftName, airlineFromCallsign, fakeAircraft, poll, dbg, active, chime, inQuietHours,
+  const api = { CFG, projectApproach, qualifies, aircraftName, airlineFromCallsign, fakeAircraft, poll, dbg, active, chime, inQuietHours, routeFits,
     _setAudio(ctx) { audioCtx = ctx; } };
 
   if (typeof document === 'undefined') {            // node: export for tests
