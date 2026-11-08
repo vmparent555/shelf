@@ -8,7 +8,9 @@ The widget has no read dates and no page counts, so:
   * Books already in books.json keep the date and page count they had.
   * New books get a read date from Goodreads' public "recent updates" widget
     when it has one, and an honest "added <month>" label when it doesn't.
-  * Missing page counts are looked up on Open Library (free, no key).
+  * Missing page counts and covers are looked up on Open Library (free, no key).
+  * Books in an export that the widget can't see (it stops at about 100) are added
+    from the export, so a long shelf isn't cut off.
   * Optional monthly boost: drop a Goodreads export into the exports/ folder
     (exports/vince.csv, exports/missy.csv) and exact read dates, page counts
     and ratings from the export win over everything above.
@@ -45,7 +47,7 @@ EXPORT_DIR = os.path.join(REPO_ROOT, "exports")
 
 OPEN_LIBRARY_SEARCH = "https://openlibrary.org/search.json"
 OPEN_LIBRARY_AGENT = "shelf-display/1.0 (personal book display; github.com/vmparent555/shelf)"
-MAX_PAGE_LOOKUPS = 40    # per run, so a big backlog fills in over a few days
+MAX_LOOKUPS = 60         # Open Library searches per run; a big backlog fills in over a few runs
 LOOKUP_PAUSE_SECONDS = 1.0
 
 USER_AGENT = (
@@ -473,44 +475,107 @@ def _words(text):
     return set(re.findall(r"[a-z0-9]+", text.lower()))
 
 
-def lookup_pages(title, author):
-    """Typical page count for a book from Open Library, or 0 if unsure."""
+def lookup_book(title, author):
+    """Page count and cover for a book from Open Library: {"pages": n, "cover": url}."""
     query = urllib.parse.urlencode({
         "title": title,
         "author": author,
         "limit": 5,
-        "fields": "title,author_name,number_of_pages_median",
+        "fields": "title,author_name,number_of_pages_median,cover_i",
     })
     data = json.loads(fetch(OPEN_LIBRARY_SEARCH + "?" + query, agent=OPEN_LIBRARY_AGENT))
     wanted = _words(title)
+    result = {"pages": 0, "cover": ""}
     for doc in data.get("docs", []):
-        pages = doc.get("number_of_pages_median")
         found = _words(doc.get("title") or "")
         # the match must really be this book, not just a similar search hit
-        if pages and found and (wanted <= found or found <= wanted):
-            return int(pages)
-    return 0
+        if not found or not (wanted <= found or found <= wanted):
+            continue
+        if not result["pages"] and doc.get("number_of_pages_median"):
+            result["pages"] = int(doc["number_of_pages_median"])
+        if not result["cover"] and doc.get("cover_i"):
+            result["cover"] = "https://covers.openlibrary.org/b/id/{}-L.jpg".format(doc["cover_i"])
+    return result
 
 
-def fill_missing_pages(books):
-    """Look up page counts for books that have none, a few per run."""
-    looked = filled = 0
+def enrich_books(books):
+    """Fill in missing page counts and covers from Open Library, a batch per run.
+
+    Each book is only searched once ("ol_checked"), so books Open Library doesn't
+    know don't get retried forever.
+    """
+    looked = pages_found = covers_found = 0
     for book in books:
-        if book.get("pages") or looked >= MAX_PAGE_LOOKUPS:
+        needs_pages = not book.get("pages")
+        needs_cover = not book.get("cover")
+        if not (needs_pages or needs_cover) or book.get("ol_checked") or looked >= MAX_LOOKUPS:
             continue
         looked += 1
         try:
-            pages = lookup_pages(book["title"], book.get("author", ""))
+            found = lookup_book(book["title"], book.get("author", ""))
         except Exception as error:
-            print("  (page lookup failed for {}: {})".format(book["title"], error),
+            print("  (Open Library lookup failed for {}: {})".format(book["title"], error),
                   file=sys.stderr)
-            pages = 0
-        if pages:
-            book["pages"] = "{} pages".format(pages)
-            filled += 1
+            time.sleep(LOOKUP_PAUSE_SECONDS)
+            continue                       # a network hiccup: try again next run
+        if needs_pages and found["pages"]:
+            book["pages"] = "{} pages".format(found["pages"])
+            pages_found += 1
+        if needs_cover and found["cover"]:
+            book["cover"] = found["cover"]
+            covers_found += 1
+        book["ol_checked"] = True
         time.sleep(LOOKUP_PAUSE_SECONDS)
     if looked:
-        print("Page lookup: tried {}, found {}.".format(looked, filled))
+        print("Open Library: searched {}, found {} page counts and {} covers.".format(
+            looked, pages_found, covers_found))
+
+
+def add_unseen_from_export(books, rows, reader, now):
+    """Add books that are in the export but not on the page yet (older than the widget's reach)."""
+    name, user_id = reader["name"], reader["user_id"]
+    have_ids = {b.get("id") for b in books}
+    have_keys = {norm_key(b.get("title", ""), b.get("author", "")) for b in books}
+    added = 0
+    for row in rows:
+        if (row.get("Exclusive Shelf") or "").strip().lower() != SHELF:
+            continue
+        title, subtitle, series = split_title(row.get("Title") or "")
+        if not title:
+            continue
+        author = (row.get("Author") or "").strip()
+        book_id = (row.get("Book Id") or "").strip()
+        new_id = "{}-{}".format(user_id, book_id)
+        key = norm_key(title, author)
+        if (book_id and new_id in have_ids) or key in have_keys:
+            continue
+
+        read = read_month(row.get("Date Read"))
+        on_shelf_since = read_month(row.get("Date Added"))
+        if read:
+            date = month_label(name, "read", read[0], read[1])
+        elif on_shelf_since:
+            date = month_label(name, "added", on_shelf_since[0], on_shelf_since[1])
+        else:
+            date = name
+        pages = (row.get("Number of Pages") or "").strip()
+
+        books.append({
+            "id": new_id,
+            "reader": name,
+            "title": title,
+            "subtitle": subtitle,
+            "series": series,
+            "author": author,
+            "rating": parse_rating(row.get("My Rating")),
+            "date": date,
+            "pages": "{} pages".format(int(pages)) if pages.isdigit() and int(pages) else "",
+            "cover": "",
+        })
+        have_ids.add(new_id)
+        have_keys.add(key)
+        added += 1
+    return added
 
 
 # ---------------------------------------------------------------- main
@@ -548,9 +613,12 @@ def main():
             changed = apply_export(found, rows, reader)
             print("{}: {} books updated from exports/{}".format(
                 reader["name"], changed, filename))
+            added = add_unseen_from_export(found, rows, reader, now)
+            if added:
+                print("{}: {} older books added from the export".format(reader["name"], added))
         books.extend(found)
 
-    fill_missing_pages(books)
+    enrich_books(books)
 
     payload = {
         "updated": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
