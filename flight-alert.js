@@ -4,6 +4,7 @@
  * Drop-in: add <script src="flight-alert.js"></script> before </body>.
  *
  * Test mode: add ?flighttest to the page URL, or triple-tap the top-left corner.
+ * Flight data: FlyItalyADSB (flyitalyadsb.com), licensed CC BY-SA 4.0. Route lookup: adsbdb.com.
  * Debug panel: add ?flightdebug, or triple-tap the bottom-left corner. It shows what
  * the flight feed is returning, so a silent failure is visible.
  * Override any setting before this script loads:
@@ -277,6 +278,8 @@
         airline: 'Frontier Airlines',
         origin: 'Denver (Denver International Airport)',
         destination: 'Las Vegas (Harry Reid International Airport)',
+        originCity: 'Denver', originAirport: 'Denver International Airport',
+        destCity: 'Las Vegas', destAirport: 'Harry Reid International Airport',
         o: { lat: 39.8561, lon: -104.6737 },
         d: { lat: 36.0840, lon: -115.1537 }
       });
@@ -292,6 +295,10 @@
           airline: fr.airline && fr.airline.name || null,
           origin: placeName(fr.origin),
           destination: placeName(fr.destination),
+          originCity: fr.origin && fr.origin.municipality || null,
+          originAirport: fr.origin && fr.origin.name || null,
+          destCity: fr.destination && fr.destination.municipality || null,
+          destAirport: fr.destination && fr.destination.name || null,
           o: point(fr.origin),
           d: point(fr.destination)
         } : null);
@@ -313,6 +320,13 @@
       lat: CFG.lat + offsetMi / MI_PER_DEG,
       lon: CFG.lon + xMi / (MI_PER_DEG * Math.cos(CFG.lat * Math.PI / 180))
     };
+  }
+
+  /* ---------- night mode: index.html decides when it is night ---------- */
+
+  function isNight() {
+    try { return typeof window !== 'undefined' && typeof window.shelfIsNight === 'function' && window.shelfIsNight(); }
+    catch (e) { return false; }
   }
 
   /* ---------- sound ---------- */
@@ -380,6 +394,7 @@
 
   async function poll() {
     if (typeof document !== 'undefined' && document.hidden && !CFG.test) return;      // a hidden tab isn't watching the sky
+    if (isNight()) { active.clear(); dbg.status = 'paused for the night'; return; }
     dbg.polls++;
     try {
       const list = await fetchAircraft();
@@ -417,77 +432,110 @@
     }
   }
 
-  /* ---------- UI ---------- */
+  /* ---------- UI: full-screen red alert ---------- */
 
-  let el = null, dbgEl = null, baseHtmlPad = '', shown = false;
+  let el = null, dbgEl = null, shown = false, lastSig = '';
 
   function buildUi() {
     const css = document.createElement('style');
     css.textContent = [
-      '#fa-banner{position:fixed;top:0;left:0;right:0;z-index:2147483000;display:flex;align-items:center;gap:28px;',
-      'padding:calc(env(safe-area-inset-top,0px) + 18px) 32px 18px;',
-      'background:#d70f1a;color:#fff;border-bottom:6px solid #fff;',
-      'font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;',
-      'transform:translateY(-110%);transition:transform .45s cubic-bezier(.2,.9,.25,1);box-sizing:border-box}',
-      '#fa-banner.fa-on{transform:translateY(0);box-shadow:0 10px 40px rgba(215,15,26,.55),0 0 0 4px #d70f1a}',
-      '#fa-banner .fa-icon{font-size:64px;line-height:1;flex:none;display:inline-block;transform:rotate(-20deg)}',
-      '#fa-banner .fa-main{flex:1;min-width:0}',
-      '#fa-banner .fa-l1{font-size:38px;font-weight:800;line-height:1.1;letter-spacing:-.01em}',
-      '#fa-banner .fa-l2{font-size:26px;font-weight:600;line-height:1.25;margin-top:6px}',
-      '#fa-banner .fa-l3{font-size:24px;font-weight:500;line-height:1.25;margin-top:8px;opacity:.95}',
-      '#fa-banner .fa-l3 b{font-weight:800}',
-      '#fa-banner .fa-credit{font-size:13px;font-weight:500;margin-top:8px;opacity:.7}',
+      '#fa-alert{--k:1;position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483000;box-sizing:border-box;',
+      'display:none;flex-direction:column;background:#cf0a14;color:#fff;',
+      'padding:calc(17vmin + env(safe-area-inset-top,0px)) 7vmin calc(6vmin + env(safe-area-inset-bottom,0px));',
+      'font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif}',
+      '#fa-alert .fa-tag{position:absolute;top:calc(5vmin + env(safe-area-inset-top,0px));left:7vmin;',
+      'font-size:3.2vmin;font-weight:800;letter-spacing:.16em;opacity:.92}',
+      '#fa-alert .fa-chip{display:inline-block;margin-left:2vmin;padding:.4vmin 1.8vmin;border-radius:99px;',
+      'background:#fff;color:#cf0a14;letter-spacing:.04em;font-size:3vmin}',
+      '#fa-alert .fa-test{display:inline-block;margin-right:2vmin;padding:.4vmin 1.8vmin;border-radius:1vmin;',
+      'background:#111;color:#fff;letter-spacing:.06em;font-size:3vmin}',
+      '#fa-alert .fa-count{position:absolute;top:calc(4vmin + env(safe-area-inset-top,0px));right:5vmin;',
+      'text-align:right;font-variant-numeric:tabular-nums}',
+      '#fa-alert .fa-num{font-size:84px;font-weight:900;line-height:.95;letter-spacing:-.02em}',
+      '#fa-alert .fa-sub{font-size:20px;font-weight:600;opacity:.9;margin-top:4px}',
+      '#fa-alert .fa-content{flex:1;min-height:0;display:flex;flex-direction:column}',
+      '#fa-alert .fa-content>:first-child{margin-top:auto}',
+      '#fa-alert .fa-content>:last-child{margin-bottom:auto}',
+      '#fa-alert .fa-content>*+*{margin-top:calc(4vmin*var(--k))}',
+      '#fa-alert .fa-airline{font-size:calc(15vmin*var(--k));font-weight:800;line-height:1.05;letter-spacing:-.015em}',
+      '#fa-alert .fa-flight{font-size:calc(8.4vmin*var(--k));font-weight:600;line-height:1.15}',
+      '#fa-alert .fa-flight span+span{margin-left:4vmin}',
+      '#fa-alert .fa-route{display:flex;flex-wrap:nowrap;align-items:flex-start}',
+      '#fa-alert .fa-place{flex:0 1 auto;min-width:0}',
+      '#fa-alert .fa-route.fa-stack{flex-direction:column}',
+      '#fa-alert .fa-stack .fa-arrow{font-size:0;line-height:0;margin:0}',
+      '#fa-alert .fa-stack .fa-arrow:after{content:"\\2193";display:block;font-size:calc(8vmin*var(--k));line-height:1.1}',
+      '#fa-alert .fa-route:empty{display:none}',
+      '#fa-alert .fa-place b{display:block;font-size:calc(13vmin*var(--k));font-weight:800;line-height:1.05}',
+      '#fa-alert .fa-place small{display:block;font-size:calc(4.4vmin*var(--k));font-weight:500;opacity:.92;margin-top:.6vmin}',
+      '#fa-alert .fa-arrow{flex:none;font-size:calc(11vmin*var(--k));font-weight:300;line-height:1.1;margin:0 3vmin}',
+      '#fa-alert .fa-stats{display:flex;flex-wrap:wrap;font-size:calc(6.4vmin*var(--k));font-weight:600}',
+      '#fa-alert .fa-stats:empty{display:none}',
+      '#fa-alert .fa-stats b{font-size:calc(12vmin*var(--k));font-weight:800}',
+      '#fa-alert .fa-stats span+span{margin-left:7vmin}',
       '#fa-debug{position:fixed;left:8px;bottom:8px;z-index:2147483100;max-width:92vw;padding:8px 10px;',
       'background:rgba(0,0,0,.78);color:#9dff9d;font:12px/1.35 ui-monospace,Menlo,monospace;border-radius:6px;',
-      'white-space:pre-wrap;pointer-events:none}',
-      '#fa-banner .fa-l3 span+span{margin-left:28px}',
-      '#fa-banner .fa-count{flex:none;text-align:right;font-variant-numeric:tabular-nums}',
-      '#fa-banner .fa-count .fa-num{font-size:84px;font-weight:900;line-height:.95;letter-spacing:-.02em}',
-      '#fa-banner .fa-count .fa-sub{font-size:20px;font-weight:600;opacity:.9;margin-top:4px}',
-      '#fa-banner .fa-more{display:inline-block;margin-left:14px;padding:2px 12px;border-radius:999px;',
-      'background:#fff;color:#d70f1a;font-size:20px;font-weight:800;vertical-align:middle}',
-      '#fa-banner .fa-test{display:inline-block;margin-right:14px;padding:2px 12px;border-radius:6px;',
-      'background:#111;color:#fff;font-size:20px;font-weight:800;vertical-align:middle}',
-      '@keyframes fa-pulse{0%,100%{box-shadow:0 10px 40px rgba(215,15,26,.55),0 0 0 4px #d70f1a}',
-      '50%{box-shadow:0 10px 60px rgba(255,40,40,.95),0 0 0 4px #ff3b3b}}',
-      '#fa-banner.fa-on{animation:fa-pulse 1.4s ease-in-out infinite}',
-      '@media (prefers-reduced-motion:reduce){#fa-banner.fa-on{animation:none}}',
-      '@media (max-width:820px){#fa-banner{gap:16px;padding-left:18px;padding-right:18px}',
-      '#fa-banner .fa-icon{display:none}#fa-banner .fa-l1{font-size:26px}#fa-banner .fa-l2{font-size:19px}',
-      '#fa-banner .fa-l3{font-size:17px}#fa-banner .fa-count .fa-num{font-size:52px}}'
+      'white-space:pre-wrap;pointer-events:none}'
     ].join('');
     document.head.appendChild(css);
 
     el = document.createElement('div');
-    el.id = 'fa-banner';
+    el.id = 'fa-alert';
     el.setAttribute('role', 'alert');
     el.innerHTML =
-      '<div class="fa-icon" aria-hidden="true">\u2708\uFE0E</div>' +
-      '<div class="fa-main"><div class="fa-l1"></div><div class="fa-l2"></div><div class="fa-l3"></div>' +
-      '<div class="fa-credit">Flight data: FlyItalyADSB (flyitalyadsb.com), CC BY-SA 4.0</div></div>' +
-      '<div class="fa-count"><div class="fa-num"></div><div class="fa-sub"></div></div>';
+      '<div class="fa-tag"><span class="fa-test" style="display:none">TEST</span>PLANE OVERHEAD' +
+      '<span class="fa-chip" style="display:none"></span></div>' +
+      '<div class="fa-count"><div class="fa-num"></div><div class="fa-sub"></div></div>' +
+      '<div class="fa-content"><div class="fa-airline"></div><div class="fa-flight"></div>' +
+      '<div class="fa-route"></div><div class="fa-stats"></div></div>';
     document.body.appendChild(el);
 
     dbgEl = document.createElement('div');
     dbgEl.id = 'fa-debug';
     dbgEl.style.display = 'none';
     document.body.appendChild(dbgEl);
-
-    baseHtmlPad = document.documentElement.style.paddingTop || '';
-    document.documentElement.style.transition = 'padding-top .45s cubic-bezier(.2,.9,.25,1)';
   }
 
   function esc(s) {
     return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   }
 
-  function fmtClock(ms) {
-    return new Date(ms).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', second: '2-digit' });
-  }
-
   function fmtCountdown(sec) {
     const s = Math.max(0, Math.round(sec));
     return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+  }
+
+  // Shrink the big text just enough that everything fits on the screen. Cities sit side by
+  // side; if long names would force tiny text, they stack one above the other instead.
+  function shrinkToFit(content) {
+    let k = 1, guard = 0;
+    el.style.setProperty('--k', k);
+    while ((content.scrollHeight > content.clientHeight + 1 || content.scrollWidth > content.clientWidth + 1) &&
+           k > 0.45 && guard++ < 40) {
+      k = Math.round((k - 0.04) * 100) / 100;
+      el.style.setProperty('--k', k);
+    }
+    return k;
+  }
+
+  function fit() {
+    const content = el.querySelector('.fa-content');
+    const route = el.querySelector('.fa-route');
+    route.classList.remove('fa-stack');
+    const sideBySide = shrinkToFit(content);
+    if (sideBySide >= 0.7 || !route.firstChild) return;
+    route.classList.add('fa-stack');
+    const stacked = shrinkToFit(content);
+    if (stacked <= sideBySide) {
+      route.classList.remove('fa-stack');
+      shrinkToFit(content);
+    }
+  }
+
+  function placeHtml(city, airport) {
+    const big = city || airport || '';
+    const small = city && airport ? airport : '';
+    return '<div class="fa-place"><b>' + esc(big) + '</b>' + (small ? '<small>' + esc(small) + '</small>' : '') + '</div>';
   }
 
   function render(top, extra, now) {
@@ -500,29 +548,39 @@
     if (found && !fits) dbg.route = cs + ': route did not match the plane\'s position, hidden';
     const airline = (found && found.airline) || airlineFromCallsign(cs);
 
-    const l1 = (CFG.test ? '<span class="fa-test">TEST</span>' : '') +
-      esc([airline, cs].filter(Boolean).join(' ') || 'Unidentified aircraft') +
-      (extra > 0 ? '<span class="fa-more">+' + extra + ' more</span>' : '');
-
-    let l2 = esc(aircraftName(ac));
-    if (r && r.origin && r.destination) l2 += '&nbsp;&nbsp;\u2014&nbsp;&nbsp;' + esc(r.origin) + ' to ' + esc(r.destination);
-    else if (r && r.destination) l2 += '&nbsp;&nbsp;\u2014&nbsp;&nbsp;heading to ' + esc(r.destination);
-
     const a = altFt(ac);
     const mph = Math.round(ac.gs * KT_TO_MPH);
-    const l3 = '<span>Overhead at <b>' + fmtClock(top.arriveAt) + '</b></span>' +
-      (a != null ? '<span><b>' + a.toLocaleString() + '</b> ft</span>' : '') +
-      '<span><b>' + mph + '</b> mph</span>';
+    const hasRoute = r && (r.originCity || r.originAirport) && (r.destCity || r.destAirport);
+
+    const parts = {
+      airline: esc(airline || cs || 'Unidentified aircraft'),
+      flight: (airline && cs ? '<span>' + esc(cs) + '</span>' : '') + '<span>' + esc(aircraftName(ac)) + '</span>',
+      route: hasRoute
+        ? placeHtml(r.originCity, r.originAirport) + '<div class="fa-arrow">\u2192</div>' + placeHtml(r.destCity, r.destAirport)
+        : '',
+      stats: (a != null ? '<span><b>' + a.toLocaleString() + '</b> ft</span>' : '') +
+        '<span><b>' + mph + '</b> mph</span>'
+    };
+
+    const sig = [parts.airline, parts.flight, parts.route, parts.stats, extra, CFG.test].join('|');
+    if (sig !== lastSig) {
+      el.querySelector('.fa-airline').innerHTML = parts.airline;
+      el.querySelector('.fa-flight').innerHTML = parts.flight;
+      el.querySelector('.fa-route').innerHTML = parts.route;
+      el.querySelector('.fa-stats').innerHTML = parts.stats;
+      const chip = el.querySelector('.fa-chip');
+      chip.style.display = extra > 0 ? '' : 'none';
+      chip.textContent = '+' + extra + ' more';
+      el.querySelector('.fa-test').style.display = CFG.test ? '' : 'none';
+      lastSig = sig;
+      fit();
+    }
 
     const secs = (top.arriveAt - now) / 1000;
     let num, sub;
     if (secs > 0.5) { num = fmtCountdown(secs); sub = 'until flyover'; }
     else if (secs > -CFG.holdSec) { num = 'NOW'; sub = 'overhead'; }
     else { num = '\u2014'; sub = 'just passed'; }
-
-    el.querySelector('.fa-l1').innerHTML = l1;
-    el.querySelector('.fa-l2').innerHTML = l2;
-    el.querySelector('.fa-l3').innerHTML = l3;
     el.querySelector('.fa-num').textContent = num;
     el.querySelector('.fa-sub').textContent = sub;
   }
@@ -530,9 +588,8 @@
   function setShown(on) {
     if (on === shown) return;
     shown = on;
-    el.classList.toggle('fa-on', on);
-    const h = on ? el.offsetHeight : 0;
-    document.documentElement.style.paddingTop = on ? h + 'px' : baseHtmlPad;
+    el.style.display = on ? 'flex' : 'none';
+    if (!on) lastSig = '';
   }
 
   function renderDebug(now) {
@@ -547,7 +604,7 @@
       'aircraft within ' + CFG.searchNm + ' nm: ' + dbg.count + '\n' +
       'nearest: ' + dbg.nearest + '\n' +
       'next pass: ' + dbg.pass + '\n' +
-      'alerts active: ' + active.size + '  banner ' + (shown ? 'ON' : 'off') + '\n' +
+      'alerts active: ' + active.size + '  red screen ' + (shown ? 'ON' : 'off') + '\n' +
       'route lookup: ' + dbg.route + '\n' +
       'sound: ' + dbg.sound;
   }
@@ -555,14 +612,14 @@
   function tick() {
     const now = Date.now();
     renderDebug(now);
+    if (isNight()) { active.clear(); setShown(false); return; }
     for (const [hex, a] of active) {
       if (now > a.arriveAt + CFG.holdSec * 1000 || now - a.updatedAt > 20000) active.delete(hex);
     }
     if (!active.size) { setShown(false); return; }
     const sorted = [...active.values()].sort((x, y) => x.arriveAt - y.arriveAt);
+    setShown(true);                      // show first: a hidden screen can't be measured for fitting
     render(sorted[0], sorted.length - 1, now);
-    setShown(true);
-    if (shown) document.documentElement.style.paddingTop = el.offsetHeight + 'px'; // text may re-wrap
   }
 
   /* ---------- test-mode triggers ---------- */
@@ -585,7 +642,7 @@
 
   /* ---------- boot ---------- */
 
-  const api = { CFG, projectApproach, qualifies, aircraftName, airlineFromCallsign, fakeAircraft, poll, dbg, active, chime, inQuietHours, routeFits,
+  const api = { CFG, projectApproach, qualifies, aircraftName, airlineFromCallsign, fakeAircraft, poll, dbg, active, chime, inQuietHours, routeFits, routeCache,
     _setAudio(ctx) { audioCtx = ctx; } };
 
   if (typeof document === 'undefined') {            // node: export for tests
