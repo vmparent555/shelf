@@ -53,7 +53,7 @@ OPEN_LIBRARY_AGENT = "shelf-display/1.0 (personal book display; github.com/vmpar
 MAX_LOOKUPS = 60         # Open Library searches per run; a big backlog fills in over a few runs
 LOOKUP_PAUSE_SECONDS = 1.0
 MAX_GOODREADS_COVERS = 30   # Goodreads book-page fetches per run
-GOODREADS_PAUSE_SECONDS = 1.5
+GOODREADS_PAUSE_SECONDS = 3.0
 GOODREADS_BOOK_URL = "https://www.goodreads.com/book/show/{}"
 
 USER_AGENT = (
@@ -517,6 +517,9 @@ def lookup_book(title, author):
 def goodreads_cover(book_id):
     """The cover URL on a book's own Goodreads page (its social-sharing image), or ''."""
     page = fetch(GOODREADS_BOOK_URL.format(book_id))
+    if 'property="og:' not in page and "property='og:" not in page:
+        # not a real book page (blocked, throttled, or a sign-in wall): don't treat it as "no cover"
+        raise RuntimeError("Goodreads didn't return the book page")
     for pattern in (
         r'<meta[^>]+property=["\']og:image["\'][^>]*content=["\']([^"\']+)["\']',
         r'<meta[^>]+content=["\']([^"\']+)["\'][^>]*property=["\']og:image["\']',
@@ -532,7 +535,7 @@ def fill_goodreads_covers(books):
     """For books Open Library couldn't cover, use the cover on the Goodreads book page."""
     looked = found = 0
     for book in books:
-        if book.get("cover") or book.get("gr_checked") or looked >= MAX_GOODREADS_COVERS:
+        if book.get("cover") or book.get("gr_cover_checked") or looked >= MAX_GOODREADS_COVERS:
             continue
         book_id = str(book.get("id", "")).split("-", 1)[-1]
         if not book_id.isdigit():
@@ -542,7 +545,7 @@ def fill_goodreads_covers(books):
             url = goodreads_cover(book_id)
         except urllib.error.HTTPError as error:
             if error.code == 404:
-                book["gr_checked"] = True     # the page is gone; don't ask again
+                book["gr_cover_checked"] = True     # the page is gone; don't ask again
             else:
                 print("  (Goodreads page for {} gave HTTP {})".format(book["title"], error.code),
                       file=sys.stderr)
@@ -553,7 +556,7 @@ def fill_goodreads_covers(books):
                   file=sys.stderr)
             time.sleep(GOODREADS_PAUSE_SECONDS)
             continue
-        book["gr_checked"] = True
+        book["gr_cover_checked"] = True
         if url:
             book["cover"] = full_cover(url)
             found += 1
