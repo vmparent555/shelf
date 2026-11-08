@@ -24,13 +24,6 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-user-select: none;
   user-select: none;
-  -webkit-transition: -webkit-filter 4s linear;
-  transition: filter 4s linear;
-}
-
-body.dimmed {
-  -webkit-filter: brightness(0.42);
-  filter: brightness(0.42);
 }
 
 .stage {
@@ -218,8 +211,6 @@ body.dimmed {
   var SLIDE_MS = 18000;
   var REFETCH_MS = 6 * 60 * 60 * 1000;
   var STORAGE_KEY = "shelf-progress-v1";
-  var DIM_START_HOUR = 21;
-  var DIM_END_HOUR = 6;
 
   // From 11:00 PM to 6:30 AM the screen goes black: no slides, no plane alerts.
   var NIGHT_START = 23 * 60;
@@ -577,12 +568,6 @@ body.dimmed {
     notice.className = "notice gone";
   }
 
-  function checkDimming() {
-    var hour = new Date().getHours();
-    var dim = hour >= DIM_START_HOUR || hour < DIM_END_HOUR;
-    document.body.className = dim ? "dimmed" : "";
-  }
-
   function start() {
     checkNight();
     if (nightOn) {
@@ -640,9 +625,6 @@ body.dimmed {
 
   layers.push(makeLayer());
   layers.push(makeLayer());
-
-  checkDimming();
-  window.setInterval(checkDimming, 5 * 60 * 1000);
 
   checkNight();
   window.setInterval(checkNight, 15 * 1000);
