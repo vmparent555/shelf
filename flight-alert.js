@@ -18,7 +18,7 @@
     lon: -105.04982,
     radiusMi: 0.5,      // alert if predicted closest approach is inside this
     leadSec: 30,        // show banner this many seconds before flyover
-    holdSec: 6,         // keep banner up this long after flyover
+    holdSec: 13,        // keep the red screen up this long after the flyover
     pollSec: 12,        // how often to check the feed (free key allows 300,000 a month)
     searchNm: 10,       // feed search radius (nautical miles)
     apiKey: 'fia_VxmxxyDXgd4q9t-TODA-TC89-h1o09fuOCPCLLu_LWA',   // free FlyItalyADSB key
@@ -414,8 +414,8 @@
           const arriveAt = prev && proj.rawEta < 0 ? prev.arriveAt : now + proj.etaSec * 1000;
           active.set(ac.hex, { ac, arriveAt, updatedAt: now });
           if (!prev) chime();                    // beep once per plane, when its alert starts
-        } else if (was && !qualifies(ac, proj, true)) {
-          active.delete(ac.hex);   // turned away or went out of range
+        } else if (was && proj.rawEta > 0 && !qualifies(ac, proj, true)) {
+          active.delete(ac.hex);   // turned away before reaching you; a plane already past stays up for the hold time
         }
       }
       dbg.nearest = nearest
@@ -578,9 +578,9 @@
 
     const secs = (top.arriveAt - now) / 1000;
     let num, sub;
-    if (secs > 0.5) { num = fmtCountdown(secs); sub = 'until flyover'; }
-    else if (secs > -CFG.holdSec) { num = 'NOW'; sub = 'overhead'; }
-    else { num = '\u2014'; sub = 'just passed'; }
+    if (secs >= 0.5) { num = fmtCountdown(secs); sub = 'until flyover'; }
+    else if (secs > -0.5) { num = '0:00'; sub = 'overhead'; }
+    else { num = '-' + fmtCountdown(-secs); sub = 'since flyover'; }
     el.querySelector('.fa-num').textContent = num;
     el.querySelector('.fa-sub').textContent = sub;
   }
@@ -614,7 +614,9 @@
     renderDebug(now);
     if (isNight()) { active.clear(); setShown(false); return; }
     for (const [hex, a] of active) {
-      if (now > a.arriveAt + CFG.holdSec * 1000 || now - a.updatedAt > 20000) active.delete(hex);
+      const expired = now > a.arriveAt + CFG.holdSec * 1000;
+      const vanished = now < a.arriveAt && now - a.updatedAt > 30000;   // dropped out of the feed before arriving
+      if (expired || vanished) active.delete(hex);
     }
     if (!active.size) { setShown(false); return; }
     const sorted = [...active.values()].sort((x, y) => x.arriveAt - y.arriveAt);
