@@ -20,6 +20,7 @@
     leadSec: 30,        // show banner this many seconds before flyover
     holdSec: 13,        // keep the red screen up this long after the flyover
     pollSec: 12,        // how often to check the feed (free key allows 300,000 a month)
+    nightPollSec: 24,   // overnight the page only counts planes, a bit less often
     searchNm: 10,       // feed search radius (nautical miles)
     apiKey: 'fia_VxmxxyDXgd4q9t-TODA-TC89-h1o09fuOCPCLLu_LWA',   // free FlyItalyADSB key
     debug: false,
@@ -249,7 +250,7 @@
   }
 
   const dbg = { polls: 0, lastAt: 0, feed: '-', status: 'not polled yet', count: 0, nearest: '-',
-    pass: '-', route: '-', sound: '-', tries: [] };
+    pass: '-', route: '-', sound: '-', today: 0, tries: [] };
 
   async function fetchAircraft() {
     if (CFG.test) { dbg.feed = 'test'; dbg.status = 'ghost plane'; return [fakeAircraft()]; }
@@ -388,13 +389,61 @@
     });
   }
 
+  /* ---------- daily plane count: starts again at midnight ---------- */
+
+  const COUNT_KEY = 'fa-plane-count-v1';
+  const REPEAT_MS = 30 * 60 * 1000;   // the same plane circling back within this time keeps its number
+  let memCount = null;
+
+  function dayKey() {
+    const d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+
+  function loadCount() {
+    let c = null;
+    try { c = JSON.parse(localStorage.getItem(COUNT_KEY) || 'null'); } catch (e) { /* no storage: fall back to memory */ }
+    if (!c && memCount) c = memCount;
+    if (!c || c.day !== dayKey()) c = { day: dayKey(), count: 0, recent: {} };
+    return c;
+  }
+
+  function saveCount(c) {
+    memCount = c;
+    try { localStorage.setItem(COUNT_KEY, JSON.stringify(c)); } catch (e) { /* storage unavailable */ }
+  }
+
+  // Gives this plane today's next number (1, 2, 3 ...) the first time it is counted.
+  function countPlane(hex) {
+    const c = loadCount();
+    const now = Date.now();
+    const seen = c.recent[hex];
+    if (seen && now - seen.at < REPEAT_MS) return seen.seq;
+    c.count += 1;
+    c.recent[hex] = { seq: c.count, at: now };
+    Object.keys(c.recent).forEach((h) => { if (now - c.recent[h].at > REPEAT_MS) delete c.recent[h]; });
+    saveCount(c);
+    dbg.today = c.count;
+    return c.count;
+  }
+
+  function ordinal(n) {
+    const r = n % 100;
+    if (r >= 11 && r <= 13) return n + 'th';
+    return n + ({ 1: 'st', 2: 'nd', 3: 'rd' }[n % 10] || 'th');
+  }
+
   /* ---------- state ---------- */
 
-  const active = new Map();   // hex -> {ac, arriveAt, updatedAt}
+  const active = new Map();   // hex -> {ac, arriveAt, updatedAt, seq}
+  let lastPollAt = 0;
 
   async function poll() {
     if (typeof document !== 'undefined' && document.hidden && !CFG.test) return;      // a hidden tab isn't watching the sky
-    if (isNight()) { active.clear(); dbg.status = 'paused for the night'; return; }
+    if (isNight()) {                                  // overnight: count planes quietly, a bit less often
+      if (lastPollAt && Date.now() - lastPollAt < CFG.nightPollSec * 1000 - 500) return;
+    }
+    lastPollAt = Date.now();
     dbg.polls++;
     try {
       const list = await fetchAircraft();
@@ -412,8 +461,9 @@
           const prev = active.get(ac.hex);
           // once it's past closest approach, freeze the flyover time instead of sliding it forward
           const arriveAt = prev && proj.rawEta < 0 ? prev.arriveAt : now + proj.etaSec * 1000;
-          active.set(ac.hex, { ac, arriveAt, updatedAt: now });
-          if (!prev) chime();                    // beep once per plane, when its alert starts
+          const seq = prev ? prev.seq : (CFG.test ? 12 : countPlane(ac.hex));   // the test plane never touches the real count
+          active.set(ac.hex, { ac, arriveAt, updatedAt: now, seq });
+          if (!prev && !isNight()) chime();      // beep once per plane, when its alert starts (never overnight)
         } else if (was && proj.rawEta > 0 && !qualifies(ac, proj, true)) {
           active.delete(ac.hex);   // turned away before reaching you; a plane already past stays up for the hold time
         }
@@ -441,8 +491,10 @@
     css.textContent = [
       '#fa-alert{--k:1;position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483000;box-sizing:border-box;',
       'display:none;flex-direction:column;background:#cf0a14;color:#fff;',
-      'padding:calc(17vmin + env(safe-area-inset-top,0px)) 7vmin calc(6vmin + env(safe-area-inset-bottom,0px));',
+      'padding:calc(21vmin + env(safe-area-inset-top,0px)) 7vmin calc(6vmin + env(safe-area-inset-bottom,0px));',
       'font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif}',
+      '#fa-alert .fa-today{position:absolute;top:calc(9.6vmin + env(safe-area-inset-top,0px));left:7vmin;',
+      'font-size:5.6vmin;font-weight:800;letter-spacing:-.005em}',
       '#fa-alert .fa-tag{position:absolute;top:calc(5vmin + env(safe-area-inset-top,0px));left:7vmin;',
       'font-size:3.2vmin;font-weight:800;letter-spacing:.16em;opacity:.92}',
       '#fa-alert .fa-chip{display:inline-block;margin-left:2vmin;padding:.4vmin 1.8vmin;border-radius:99px;',
@@ -485,6 +537,7 @@
     el.innerHTML =
       '<div class="fa-tag"><span class="fa-test" style="display:none">TEST</span>PLANE OVERHEAD' +
       '<span class="fa-chip" style="display:none"></span></div>' +
+      '<div class="fa-today"></div>' +
       '<div class="fa-count"><div class="fa-num"></div><div class="fa-sub"></div></div>' +
       '<div class="fa-content"><div class="fa-airline"></div><div class="fa-flight"></div>' +
       '<div class="fa-route"></div><div class="fa-stats"></div></div>';
@@ -576,6 +629,8 @@
       fit();
     }
 
+    el.querySelector('.fa-today').textContent = top.seq ? ordinal(top.seq) + ' plane today' : '';
+
     const secs = (top.arriveAt - now) / 1000;
     let num, sub;
     if (secs >= 0.5) { num = fmtCountdown(secs); sub = 'until flyover'; }
@@ -606,19 +661,19 @@
       'next pass: ' + dbg.pass + '\n' +
       'alerts active: ' + active.size + '  red screen ' + (shown ? 'ON' : 'off') + '\n' +
       'route lookup: ' + dbg.route + '\n' +
-      'sound: ' + dbg.sound;
+      'sound: ' + dbg.sound + '\n' +
+      'planes counted today: ' + loadCount().count + (isNight() ? '  (night: counting only)' : '');
   }
 
   function tick() {
     const now = Date.now();
     renderDebug(now);
-    if (isNight()) { active.clear(); setShown(false); return; }
     for (const [hex, a] of active) {
       const expired = now > a.arriveAt + CFG.holdSec * 1000;
       const vanished = now < a.arriveAt && now - a.updatedAt > 30000;   // dropped out of the feed before arriving
       if (expired || vanished) active.delete(hex);
     }
-    if (!active.size) { setShown(false); return; }
+    if (isNight() || !active.size) { setShown(false); return; }         // overnight: no red screen, counting continues
     const sorted = [...active.values()].sort((x, y) => x.arriveAt - y.arriveAt);
     setShown(true);                      // show first: a hidden screen can't be measured for fitting
     render(sorted[0], sorted.length - 1, now);
@@ -644,7 +699,7 @@
 
   /* ---------- boot ---------- */
 
-  const api = { CFG, projectApproach, qualifies, aircraftName, airlineFromCallsign, fakeAircraft, poll, dbg, active, chime, inQuietHours, routeFits, routeCache,
+  const api = { CFG, projectApproach, qualifies, aircraftName, airlineFromCallsign, fakeAircraft, poll, dbg, active, chime, inQuietHours, routeFits, routeCache, countPlane, ordinal, loadCount, dayKey,
     _setAudio(ctx) { audioCtx = ctx; } };
 
   if (typeof document === 'undefined') {            // node: export for tests
