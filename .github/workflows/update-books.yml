@@ -11,12 +11,20 @@ on:
 permissions:
   contents: write
 
+# Only one update runs at a time. A second one waits its turn instead of colliding,
+# which is what made the save step fail before.
+concurrency:
+  group: update-books
+  cancel-in-progress: false
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
       - name: Get the repository
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Fetch the shelf
         run: python3 scripts/fetch_books.py
@@ -30,6 +38,6 @@ jobs:
           else
             git add books.json
             git commit -m "Refresh shelf"
+            git pull --rebase origin main
             git push
           fi
-
