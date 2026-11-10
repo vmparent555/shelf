@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-09T23:18:28Z",
- "count": 297,
+ "updated": "2026-11-10T19:15:13Z",
+ "count": 298,
  "books": [
   {
    "id": "166663242-12991188",
@@ -830,6 +830,19 @@
    "date": "Vince added June 2023",
    "pages": "368 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1633370523l/58539346.jpg"
+  },
+  {
+   "id": "78748822-230824619",
+   "reader": "Missy",
+   "title": "Death Row",
+   "subtitle": "",
+   "series": "",
+   "author": "Freida McFadden",
+   "rating": 2,
+   "date": "Missy read November 2026",
+   "pages": "74 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1743525823l/230824619.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-249334199",
