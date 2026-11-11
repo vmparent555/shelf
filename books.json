@@ -1,7 +1,20 @@
 {
- "updated": "2026-11-10T19:15:13Z",
- "count": 298,
+ "updated": "2026-11-11T19:11:47Z",
+ "count": 299,
  "books": [
+  {
+   "id": "166663242-60811826",
+   "reader": "Vince",
+   "title": "I Who Have Never Known Men",
+   "subtitle": "",
+   "series": "",
+   "author": "Jacqueline Harpman",
+   "rating": 5,
+   "date": "Vince read November 2026",
+   "pages": "",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1649947133l/60811826.jpg",
+   "ol_checked": true
+  },
   {
    "id": "166663242-12991188",
    "reader": "Vince",
