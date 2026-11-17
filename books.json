@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17T04:17:57Z",
+ "updated": "2026-11-17T04:18:43Z",
  "count": 300,
  "books": [
   {
@@ -2154,7 +2154,8 @@
    "pages": "320 pages",
    "cover": "https://covers.openlibrary.org/b/id/14643114-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-59815561",
@@ -2168,7 +2169,8 @@
    "pages": "353 pages",
    "cover": "https://covers.openlibrary.org/b/id/7369961-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-32674134",
@@ -2182,7 +2184,8 @@
    "pages": "433 pages",
    "cover": "https://covers.openlibrary.org/b/id/9216272-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-216351856",
@@ -2196,7 +2199,8 @@
    "pages": "336 pages",
    "cover": "https://covers.openlibrary.org/b/id/15126335-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-199898250",
@@ -2210,7 +2214,8 @@
    "pages": "320 pages",
    "cover": "https://covers.openlibrary.org/b/id/14749242-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-208894791",
@@ -2224,7 +2229,8 @@
    "pages": "505 pages",
    "cover": "https://covers.openlibrary.org/b/id/14816284-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-211004123",
@@ -2238,7 +2244,8 @@
    "pages": "306 pages",
    "cover": "https://covers.openlibrary.org/b/id/14840891-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-217245639",
@@ -2252,7 +2259,8 @@
    "pages": "370 pages",
    "cover": "https://covers.openlibrary.org/b/id/14840895-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-211867349",
@@ -2280,7 +2288,8 @@
    "pages": "294 pages",
    "cover": "https://covers.openlibrary.org/b/id/10826952-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-58724801",
@@ -2292,9 +2301,11 @@
    "rating": 5,
    "date": "Missy read July 2025",
    "pages": "302 pages",
-   "cover": "https://covers.openlibrary.org/b/id/12824309-L.jpg",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1637059607i/58724801.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-112978985",
@@ -2308,7 +2319,8 @@
    "pages": "384 pages",
    "cover": "https://covers.openlibrary.org/b/id/13825996-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-49788058",
@@ -2322,7 +2334,8 @@
    "pages": "331 pages",
    "cover": "https://covers.openlibrary.org/b/id/8415055-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-216476388",
@@ -2336,7 +2349,8 @@
    "pages": "125 pages",
    "cover": "https://covers.openlibrary.org/b/id/15212419-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-41057294",
@@ -2350,7 +2364,8 @@
    "pages": "273 pages",
    "cover": "https://covers.openlibrary.org/b/id/8794265-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-62066104",
@@ -2362,9 +2377,11 @@
    "rating": 5,
    "date": "Missy read July 2025",
    "pages": "349 pages",
-   "cover": "https://covers.openlibrary.org/b/id/14630898-L.jpg",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1699443709i/62066104.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-207724101",
@@ -2376,9 +2393,11 @@
    "rating": 4,
    "date": "Missy read June 2025",
    "pages": "281 pages",
-   "cover": "https://covers.openlibrary.org/b/id/14833068-L.jpg",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1718839958i/207724101.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-158798069",
@@ -2392,7 +2411,8 @@
    "pages": "464 pages",
    "cover": "https://covers.openlibrary.org/b/id/10284724-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-52397",
@@ -2406,7 +2426,8 @@
    "pages": "368 pages",
    "cover": "https://covers.openlibrary.org/b/id/10466266-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-55076069",
@@ -2420,7 +2441,8 @@
    "pages": "382 pages",
    "cover": "https://covers.openlibrary.org/b/id/10476782-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-39686915",
@@ -2449,7 +2471,8 @@
    "pages": "320 pages",
    "cover": "https://covers.openlibrary.org/b/id/14013851-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-221733722",
@@ -2463,7 +2486,8 @@
    "pages": "368 pages",
    "cover": "https://covers.openlibrary.org/b/id/15091484-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-219240806",
@@ -2492,7 +2516,8 @@
    "pages": "320 pages",
    "cover": "https://covers.openlibrary.org/b/id/13613218-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-216223604",
@@ -2506,7 +2531,8 @@
    "pages": "384 pages",
    "cover": "https://covers.openlibrary.org/b/id/15125037-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-200033357",
@@ -2520,7 +2546,8 @@
    "pages": "100 pages",
    "cover": "https://covers.openlibrary.org/b/id/15108169-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-63910262",
@@ -2534,7 +2561,8 @@
    "pages": "437 pages",
    "cover": "https://covers.openlibrary.org/b/id/14431577-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-4016515",
@@ -2548,7 +2576,8 @@
    "pages": "192 pages",
    "cover": "https://covers.openlibrary.org/b/id/6397768-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-53672372",
@@ -2562,7 +2591,8 @@
    "pages": "335 pages",
    "cover": "https://covers.openlibrary.org/b/id/11252354-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-53603292",
@@ -2574,9 +2604,11 @@
    "rating": 4,
    "date": "Missy read May 2025",
    "pages": "287 pages",
-   "cover": "https://covers.openlibrary.org/b/id/12361209-L.jpg",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1590730305i/53603292.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-43822820",
@@ -2588,9 +2620,11 @@
    "rating": 4,
    "date": "Missy read April 2025",
    "pages": "352 pages",
-   "cover": "https://covers.openlibrary.org/b/id/9133194-L.jpg",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1564517337i/43822820.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-65139502",
@@ -2604,7 +2638,8 @@
    "pages": "400 pages",
    "cover": "https://covers.openlibrary.org/b/id/13608427-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-171793386",
@@ -2631,9 +2666,11 @@
    "rating": 5,
    "date": "Missy read April 2025",
    "pages": "352 pages",
-   "cover": "https://covers.openlibrary.org/b/id/14813486-L.jpg",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1698232422i/198112104.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-182513578",
@@ -2645,9 +2682,11 @@
    "rating": 5,
    "date": "Missy read March 2025",
    "pages": "440 pages",
-   "cover": "https://covers.openlibrary.org/b/id/14605870-L.jpg",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1692806882i/182513578.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-125500880",
@@ -2661,7 +2700,8 @@
    "pages": "295 pages",
    "cover": "https://covers.openlibrary.org/b/id/14562409-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-197522426",
@@ -2673,9 +2713,11 @@
    "rating": 5,
    "date": "Missy read March 2025",
    "pages": "344 pages",
-   "cover": "https://covers.openlibrary.org/b/id/14630880-L.jpg",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1699054536i/197522426.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-8145195",
@@ -2689,7 +2731,8 @@
    "pages": "417 pages",
    "cover": "https://covers.openlibrary.org/b/id/10810986-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-58340706",
@@ -2703,7 +2746,8 @@
    "pages": "432 pages",
    "cover": "https://covers.openlibrary.org/b/id/12431959-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-198366737",
@@ -2715,9 +2759,11 @@
    "rating": 4,
    "date": "Missy read March 2025",
    "pages": "410 pages",
-   "cover": "https://covers.openlibrary.org/b/id/14640133-L.jpg",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1702426764i/198366737.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-6569737",
@@ -2731,7 +2777,8 @@
    "pages": "420 pages",
    "cover": "https://covers.openlibrary.org/b/id/6306480-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-58468990",
@@ -2745,7 +2792,8 @@
    "pages": "360 pages",
    "cover": "https://covers.openlibrary.org/b/id/11541298-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-208814908",
@@ -2774,7 +2822,8 @@
    "pages": "259 pages",
    "cover": "https://covers.openlibrary.org/b/id/14644084-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-202204691",
@@ -2803,7 +2852,8 @@
    "pages": "416 pages",
    "cover": "https://covers.openlibrary.org/b/id/12911290-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-62873996",
@@ -2817,7 +2867,8 @@
    "pages": "384 pages",
    "cover": "https://covers.openlibrary.org/b/id/13269210-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-136142444",
@@ -2831,7 +2882,8 @@
    "pages": "343 pages",
    "cover": "https://covers.openlibrary.org/b/id/14602762-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-6192737",
@@ -2845,7 +2897,8 @@
    "pages": "326 pages",
    "cover": "https://covers.openlibrary.org/b/id/10989204-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-55922299",
@@ -2859,7 +2912,8 @@
    "pages": "416 pages",
    "cover": "https://covers.openlibrary.org/b/id/11326455-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-19398259",
@@ -2873,7 +2927,8 @@
    "pages": "304 pages",
    "cover": "https://covers.openlibrary.org/b/id/7383473-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-133286944",
@@ -2887,7 +2942,8 @@
    "pages": "365 pages",
    "cover": "https://covers.openlibrary.org/b/id/14610366-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-29437949",
@@ -2901,7 +2957,8 @@
    "pages": "293 pages",
    "cover": "https://covers.openlibrary.org/b/id/9802299-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-41150382",
@@ -2915,7 +2972,8 @@
    "pages": "320 pages",
    "cover": "https://covers.openlibrary.org/b/id/8754142-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-60784612",
@@ -2929,7 +2987,8 @@
    "pages": "304 pages",
    "cover": "https://covers.openlibrary.org/b/id/13177423-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-57693474",
@@ -2943,7 +3002,8 @@
    "pages": "357 pages",
    "cover": "https://covers.openlibrary.org/b/id/12010033-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-53138099",
@@ -2957,7 +3017,8 @@
    "pages": "368 pages",
    "cover": "https://covers.openlibrary.org/b/id/10596487-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-194020321",
@@ -2971,7 +3032,8 @@
    "pages": "256 pages",
    "cover": "https://covers.openlibrary.org/b/id/15260321-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-195967140",
@@ -2985,7 +3047,8 @@
    "pages": "379 pages",
    "cover": "https://covers.openlibrary.org/b/id/14570911-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-208503280",
@@ -2997,9 +3060,11 @@
    "rating": 0,
    "date": "Missy added October 2024",
    "pages": "368 pages",
-   "cover": "https://covers.openlibrary.org/b/id/14820506-L.jpg",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1711205083i/208503280.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-40893132",
@@ -3011,9 +3076,11 @@
    "rating": 0,
    "date": "Missy read October 2024",
    "pages": "298 pages",
-   "cover": "https://covers.openlibrary.org/b/id/15115699-L.jpg",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1532194658i/40893132.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-127463663",
@@ -3025,9 +3092,11 @@
    "rating": 0,
    "date": "Missy read October 2024",
    "pages": "384 pages",
-   "cover": "https://covers.openlibrary.org/b/id/14588269-L.jpg",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1681257274i/127463663.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-58804928",
@@ -3039,9 +3108,11 @@
    "rating": 5,
    "date": "Missy read October 2024",
    "pages": "288 pages",
-   "cover": "https://covers.openlibrary.org/b/id/12773970-L.jpg",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1629339555i/58804928.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-157067546",
@@ -3055,7 +3126,8 @@
    "pages": "417 pages",
    "cover": "https://covers.openlibrary.org/b/id/15126331-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-126058992",
@@ -3084,7 +3156,8 @@
    "pages": "348 pages",
    "cover": "https://covers.openlibrary.org/b/id/15125127-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-199235727",
@@ -3096,9 +3169,11 @@
    "rating": 0,
    "date": "Missy added September 2024",
    "pages": "400 pages",
-   "cover": "https://covers.openlibrary.org/b/id/14633291-L.jpg",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1710781474i/199235727.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-62848145",
@@ -3110,9 +3185,11 @@
    "rating": 0,
    "date": "Missy added September 2024",
    "pages": "311 pages",
-   "cover": "https://covers.openlibrary.org/b/id/13439869-L.jpg",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1664729357i/62848145.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-61272658",
@@ -3126,7 +3203,8 @@
    "pages": "400 pages",
    "cover": "https://covers.openlibrary.org/b/id/13183114-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-60556912",
@@ -3140,7 +3218,8 @@
    "pages": "338 pages",
    "cover": "https://covers.openlibrary.org/b/id/15105883-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-123423832",
@@ -3154,7 +3233,8 @@
    "pages": "362 pages",
    "cover": "https://covers.openlibrary.org/b/id/15125038-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-61149872",
@@ -3168,7 +3248,8 @@
    "pages": "388 pages",
    "cover": "https://covers.openlibrary.org/b/id/15125020-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-54197718",
@@ -3180,9 +3261,11 @@
    "rating": 0,
    "date": "Missy added August 2024",
    "pages": "295 pages",
-   "cover": "https://covers.openlibrary.org/b/id/14603852-L.jpg",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1592705582i/54197718.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-54981009",
@@ -3196,7 +3279,8 @@
    "pages": "307 pages",
    "cover": "https://covers.openlibrary.org/b/id/10571017-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-25111004",
@@ -3225,7 +3309,8 @@
    "pages": "289 pages",
    "cover": "https://covers.openlibrary.org/b/id/11199954-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-57645345",
@@ -3237,9 +3322,11 @@
    "rating": 4,
    "date": "Missy added December 2023",
    "pages": "357 pages",
-   "cover": "https://covers.openlibrary.org/b/id/12524317-L.jpg",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1632079606i/57645345.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-18293427",
@@ -3251,9 +3338,11 @@
    "rating": 5,
    "date": "Missy added May 2024",
    "pages": "260 pages",
-   "cover": "https://covers.openlibrary.org/b/id/7281141-L.jpg",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1404582137i/18293427.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-65137920",
@@ -3267,7 +3356,8 @@
    "pages": "444 pages",
    "cover": "https://covers.openlibrary.org/b/id/15105886-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-53288434",
@@ -3279,9 +3369,11 @@
    "rating": 5,
    "date": "Missy added May 2024",
    "pages": "301 pages",
-   "cover": "https://covers.openlibrary.org/b/id/10713533-L.jpg",
+   "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1593013000i/53288434.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true,
+   "gr_cover_checked": true
   },
   {
    "id": "78748822-44575063",
@@ -3295,7 +3387,8 @@
    "pages": "400 pages",
    "cover": "https://covers.openlibrary.org/b/id/9315136-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-53799686",
@@ -3309,7 +3402,8 @@
    "pages": "336 pages",
    "cover": "https://covers.openlibrary.org/b/id/10087939-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-86103927",
@@ -3323,7 +3417,8 @@
    "pages": "350 pages",
    "cover": "https://covers.openlibrary.org/b/id/14425355-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-60666855",
@@ -3352,7 +3447,8 @@
    "pages": "466 pages",
    "cover": "https://covers.openlibrary.org/b/id/12882940-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-57795665",
@@ -3366,7 +3462,8 @@
    "pages": "313 pages",
    "cover": "https://covers.openlibrary.org/b/id/13156268-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-52636419",
@@ -3380,7 +3477,8 @@
    "pages": "382 pages",
    "cover": "https://covers.openlibrary.org/b/id/12070655-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-62080187",
@@ -3394,7 +3492,8 @@
    "pages": "286 pages",
    "cover": "https://covers.openlibrary.org/b/id/13198561-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-194802722",
@@ -3408,7 +3507,8 @@
    "pages": "395 pages",
    "cover": "https://covers.openlibrary.org/b/id/14625690-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-52195137",
@@ -3422,7 +3522,8 @@
    "pages": "400 pages",
    "cover": "https://covers.openlibrary.org/b/id/9426296-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-61407623",
@@ -3436,7 +3537,8 @@
    "pages": "384 pages",
    "cover": "https://covers.openlibrary.org/b/id/13299661-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-61771675",
@@ -3450,7 +3552,8 @@
    "pages": "594 pages",
    "cover": "https://covers.openlibrary.org/b/id/14359793-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-61053468",
@@ -3509,7 +3612,8 @@
    "pages": "193 pages",
    "cover": "https://covers.openlibrary.org/b/id/14635318-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-57768991",
@@ -3553,7 +3657,8 @@
    "pages": "204 pages",
    "cover": "https://covers.openlibrary.org/b/id/10840090-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-53710606",
@@ -3582,7 +3687,8 @@
    "pages": "330 pages",
    "cover": "https://covers.openlibrary.org/b/id/12856728-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-59344312",
@@ -3596,7 +3702,8 @@
    "pages": "336 pages",
    "cover": "https://covers.openlibrary.org/b/id/8747160-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-40097951",
@@ -3610,7 +3717,8 @@
    "pages": "336 pages",
    "cover": "https://covers.openlibrary.org/b/id/9407338-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-52656911",
@@ -3639,7 +3747,8 @@
    "pages": "288 pages",
    "cover": "https://covers.openlibrary.org/b/id/10313767-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-37570546",
@@ -3653,7 +3762,8 @@
    "pages": "415 pages",
    "cover": "https://covers.openlibrary.org/b/id/8596019-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-35959740",
@@ -3667,7 +3777,8 @@
    "pages": "393 pages",
    "cover": "https://covers.openlibrary.org/b/id/8739376-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-54798430",
@@ -3681,7 +3792,8 @@
    "pages": "320 pages",
    "cover": "https://covers.openlibrary.org/b/id/10551711-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-49189494",
@@ -3695,7 +3807,8 @@
    "pages": "352 pages",
    "cover": "https://covers.openlibrary.org/b/id/10255476-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-56084054",
@@ -3709,7 +3822,8 @@
    "pages": "304 pages",
    "cover": "https://covers.openlibrary.org/b/id/10550754-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-58482465",
@@ -3723,7 +3837,8 @@
    "pages": "320 pages",
    "cover": "https://covers.openlibrary.org/b/id/13107047-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-58492104",
@@ -3752,7 +3867,8 @@
    "pages": "320 pages",
    "cover": "https://covers.openlibrary.org/b/id/10207105-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-58065033",
@@ -3766,7 +3882,8 @@
    "pages": "390 pages",
    "cover": "https://covers.openlibrary.org/b/id/12725772-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-58784475",
@@ -3780,7 +3897,8 @@
    "pages": "399 pages",
    "cover": "https://covers.openlibrary.org/b/id/12859975-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-61492446",
@@ -3809,7 +3927,8 @@
    "pages": "386 pages",
    "cover": "https://covers.openlibrary.org/b/id/10473609-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-60393672",
@@ -3823,7 +3942,8 @@
    "pages": "320 pages",
    "cover": "https://covers.openlibrary.org/b/id/12749873-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-35297426",
@@ -3837,7 +3957,8 @@
    "pages": "356 pages",
    "cover": "https://covers.openlibrary.org/b/id/10139078-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   },
   {
    "id": "78748822-59912428",
@@ -3865,7 +3986,8 @@
    "pages": "384 pages",
    "cover": "https://covers.openlibrary.org/b/id/13300169-L.jpg",
    "ol_checked": true,
-   "cover_verified": true
+   "cover_verified": true,
+   "cover_res_ok": true
   }
  ]
 }
