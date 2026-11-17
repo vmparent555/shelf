@@ -55,6 +55,7 @@ LOOKUP_PAUSE_SECONDS = 1.0
 MAX_GOODREADS_COVERS = 30   # Goodreads book-page fetches per run
 GOODREADS_PAUSE_SECONDS = 3.0
 MAX_COVER_CHECKS = 150     # Open Library cover images verified per run
+MIN_COVER_HEIGHT = 380     # Open Library covers shorter than this (pixels) look soft on the iPad
 MIN_COVER_BYTES = 3000     # a real cover is bigger than this; the 'no cover' stand-in is tiny
 GOODREADS_BOOK_URL = "https://www.goodreads.com/book/show/{}"
 
@@ -522,35 +523,66 @@ def lookup_book(title, author):
     return result
 
 
+def jpeg_size(data):
+    """(width, height) of a JPEG from its header, or None if it can't be read."""
+    if data[:2] != b"\xff\xd8":
+        return None
+    i = 2
+    while i + 9 < len(data):
+        if data[i] != 0xFF:
+            i += 1
+            continue
+        marker = data[i + 1]
+        if marker in (0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF):
+            return (int.from_bytes(data[i + 7:i + 9], "big"), int.from_bytes(data[i + 5:i + 7], "big"))
+        if marker in (0x01, 0xD8) or 0xD0 <= marker <= 0xD7 or marker == 0xFF:
+            i += 1 if marker == 0xFF else 2
+            continue
+        i += 2 + int.from_bytes(data[i + 2:i + 4], "big")
+    return None
+
+
 def verify_covers(books):
-    """Open Library sometimes lists a cover that doesn't actually load. Check each one once;
-    a dud is removed so the Goodreads fallback can supply the real cover."""
-    checked = removed = 0
+    """Check each Open Library cover once: it must load, and it should be sharp enough.
+
+    - A cover that doesn't load is removed so the Goodreads fallback can supply one.
+    - A low-resolution cover is flagged so Goodreads gets a chance to supply a sharper
+      one; if it can't, the small cover stays (a small cover beats none).
+    """
+    checked = removed = soft = 0
     for book in books:
         url = book.get("cover") or ""
-        if not url.startswith("https://covers.openlibrary.org") or book.get("cover_verified"):
+        if not url.startswith("https://covers.openlibrary.org") or book.get("cover_res_ok"):
             continue
         if checked >= MAX_COVER_CHECKS:
             break
         checked += 1
         probe = url + ("&" if "?" in url else "?") + "default=false"
         try:
-            size = len(fetch_bytes(probe))
+            data = fetch_bytes(probe)
         except urllib.error.HTTPError:
-            size = 0                           # 404: Open Library has no image for it
+            data = b""                         # 404: Open Library has no image for it
         except Exception as error:
             print("  (couldn't check the cover for {}: {})".format(book["title"], error),
                   file=sys.stderr)
             continue                           # a network hiccup: check again next run
-        if size >= MIN_COVER_BYTES:
-            book["cover_verified"] = True
-        else:
+        if len(data) < MIN_COVER_BYTES:
             book["cover"] = ""
             book.pop("gr_cover_checked", None)
             removed += 1
             print("  (removed a cover that doesn't load: {})".format(book["title"]))
+            continue
+        size = jpeg_size(data)
+        if size and size[1] < MIN_COVER_HEIGHT:
+            book["low_res_cover"] = True
+            book.pop("gr_cover_checked", None)
+            soft += 1
+        else:
+            book.pop("low_res_cover", None)
+        book["cover_res_ok"] = True
     if checked:
-        print("Cover check: looked at {}, removed {} that don't load.".format(checked, removed))
+        print("Cover check: looked at {}, removed {} that don't load, {} low-resolution.".format(
+            checked, removed, soft))
 
 
 def goodreads_cover(book_id):
@@ -574,7 +606,8 @@ def fill_goodreads_covers(books):
     """For books Open Library couldn't cover, use the cover on the Goodreads book page."""
     looked = found = 0
     for book in books:
-        if book.get("cover") or book.get("gr_cover_checked") or looked >= MAX_GOODREADS_COVERS:
+        needs = (not book.get("cover")) or book.get("low_res_cover")
+        if not needs or book.get("gr_cover_checked") or looked >= MAX_GOODREADS_COVERS:
             continue
         book_id = str(book.get("id", "")).split("-", 1)[-1]
         if not book_id.isdigit():
@@ -598,6 +631,7 @@ def fill_goodreads_covers(books):
         book["gr_cover_checked"] = True
         if url:
             book["cover"] = full_cover(url)
+            book.pop("low_res_cover", None)
             found += 1
         time.sleep(GOODREADS_PAUSE_SECONDS)
     if looked:
