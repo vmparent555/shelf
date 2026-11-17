@@ -275,6 +275,21 @@ body {
     return node.scrollHeight - node.clientHeight > lineHeight * 0.6;
   }
 
+  // Browsers show a small image at its own size. Scale every cover to fill the space
+  // set aside for it (44% of the width, 88% of the height), keeping its shape.
+  function sizeCover(layer) {
+    var img = layer.cover;
+    if (!img.naturalWidth || !img.naturalHeight || img.className.indexOf("hidden") !== -1) {
+      return;
+    }
+    var scale = Math.min(
+      (window.innerWidth * 0.44) / img.naturalWidth,
+      (window.innerHeight * 0.88) / img.naturalHeight
+    );
+    img.style.width = Math.round(img.naturalWidth * scale) + "px";
+    img.style.height = Math.round(img.naturalHeight * scale) + "px";
+  }
+
   function fitLayer(layer) {
     var slide = layer.slide;
     var scale = SCALE_MAX;
@@ -315,6 +330,7 @@ body {
     };
     cover.onload = function () {
       if (self) {
+        sizeCover(self);
         fitLayer(self);
       }
     };
@@ -428,8 +444,13 @@ body {
 
     if (book.cover) {
       layer.cover.className = "cover";
+      layer.cover.style.width = "";
+      layer.cover.style.height = "";
       layer.cover.src = book.cover;
       layer.detail.className = "detail";
+      if (layer.cover.complete && layer.cover.naturalWidth) {
+        sizeCover(layer);
+      }
     } else {
       layer.cover.className = "cover hidden";
       layer.cover.removeAttribute("src");
@@ -632,6 +653,7 @@ body {
   function refitAll() {
     var i;
     for (i = 0; i < layers.length; i++) {
+      sizeCover(layers[i]);
       fitLayer(layers[i]);
     }
   }
