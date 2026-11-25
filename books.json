@@ -1,7 +1,20 @@
 {
- "updated": "2026-11-24T21:52:49Z",
- "count": 300,
+ "updated": "2026-11-25T20:59:14Z",
+ "count": 305,
  "books": [
+  {
+   "id": "166663242-220772908",
+   "reader": "Vince",
+   "title": "The Gate of the Feral Gods",
+   "subtitle": "",
+   "series": "Dungeon Crawler Carl, #4",
+   "author": "Matt Dinniman",
+   "rating": 3,
+   "date": "Vince read November 2026",
+   "pages": "600 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1734098514l/220772908.jpg",
+   "ol_checked": true
+  },
   {
    "id": "166663242-60811826",
    "reader": "Vince",
@@ -843,6 +856,58 @@
    "date": "Vince added June 2023",
    "pages": "368 pages",
    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1633370523l/58539346.jpg"
+  },
+  {
+   "id": "78748822-35506325",
+   "reader": "Missy",
+   "title": "The Substitute",
+   "subtitle": "",
+   "series": "",
+   "author": "Nicole Lundrigan",
+   "rating": 5,
+   "date": "Missy read November 2026",
+   "pages": "401 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1498276867l/35506325.jpg",
+   "ol_checked": true
+  },
+  {
+   "id": "78748822-45868683",
+   "reader": "Missy",
+   "title": "Intercepts",
+   "subtitle": "",
+   "series": "",
+   "author": "T.J. Payne",
+   "rating": 4,
+   "date": "Missy read November 2026",
+   "pages": "326 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1558137793l/45868683.jpg",
+   "ol_checked": true
+  },
+  {
+   "id": "78748822-59629744",
+   "reader": "Missy",
+   "title": "Diary of a Void",
+   "subtitle": "",
+   "series": "",
+   "author": "Emi Yagi",
+   "rating": 3,
+   "date": "Missy read November 2026",
+   "pages": "213 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1649651425l/59629744.jpg",
+   "ol_checked": true
+  },
+  {
+   "id": "78748822-57773248",
+   "reader": "Missy",
+   "title": "Notes on an Execution",
+   "subtitle": "",
+   "series": "",
+   "author": "Danya Kukafka",
+   "rating": 4,
+   "date": "Missy read November 2026",
+   "pages": "272 pages",
+   "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1631888297l/57773248.jpg",
+   "ol_checked": true
   },
   {
    "id": "78748822-240027565",
